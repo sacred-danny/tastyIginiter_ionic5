@@ -1,0 +1,48 @@
+.btn {
+  border-radius: 25px;
+
+  &.btn-primary {
+    color: white;
+  }
+
+  &.btn-outline-primary {
+    &:focus, &:active, &:hover {
+      color: white !important;
+    }
+  }
+
+  &.btn-outline-burning-organge {
+    color: white;
+    background: $burning-orange;
+    border-radius: 8px;
+
+    &:focus, &:active, &:hover {
+      color: white !important;
+      background: $pomegranate;
+    }
+  }
+
+  &.btn-outline-burning-organge-invert {
+    color: $burning-orange;
+    background: white;
+    border: solid 2px;
+    border-color: $burning-orange;
+    border-radius: 8px;
+
+    &:focus, &:active, &:hover {
+      color: $burning-orange !important;
+      background: $linen;
+    }
+  }
+
+  &.btn-outline-mariner {
+    color: white;
+    background: $mariner;
+    border-radius: 8px;
+
+    &:focus, &:active, &:hover {
+      color: white !important;
+      background: $science-blue;
+    }
+  }
+}

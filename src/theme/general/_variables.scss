@@ -1,0 +1,63 @@
+// Colors
+$emerald: #52BE80;
+$mantis: #69B94F;
+$goblin: #3C7730;
+$jungle-green: #27AE60;
+$celery: #9AC84B;
+$gallery: #F0F0F0;
+$gray-chateau: #9FA8B2;
+$cinder: #151522;
+$cloud-burst: #233A59;
+$mine-shaft: #2F2F2F;
+$torch-red: #FE1D1D;
+$selago: #FAF9FE;
+$burning-orange: #FC6C35;
+$pistachio: #8FD400;
+$white: white;
+$black: black;
+$pomegranate: #F25012;
+$mariner: #2672CB;
+$science-blue: #0461CE;
+$shark: #262628;
+$linen: #FBEBEB;
+
+// Theme colors#9FA8B2
+$theme-colors: (
+        primary: $emerald,
+);
+
+// Spacing
+$pixel-spacer: 5px !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+@for $i from 1 through 50 {
+  $spacers: map-merge($spacers, (
+          $i * 5: ($i * $pixel-spacer)
+  ));
+}
+
+// Buttons
+$btn-font-size: 16px;
+$btn-padding-y: 0.75rem;
+$btn-padding-x: 1.5rem;
+$btn-border-radius: 25px;
+$btn-border-width: 2px;
+
+//// Typography
+//$font-size-base: 0.875rem;
+//$h1-font-size: 2.75rem;
+//$h2-font-size: 1.875rem;
+//$h5-font-size: 1.375rem;
+//$h6-font-size: 1rem;
+
+// Forms
+$form-group-margin-bottom: 0.9375rem;
+$input-padding-x: 1.25rem;
+$input-padding-y: 0.875rem;
+$input-font-size: 0.8125rem;
+$input-border-width: 1px;
+$input-border-radius: 5px;
+$input-border-color: rgba(228, 228, 228, 0.6);
+$input-height: 50px;
+$input-bg: $gallery;
+$input-placeholder-color: $gray-chateau;
+$label-margin-bottom: 0;

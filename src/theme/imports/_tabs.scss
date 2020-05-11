@@ -1,0 +1,17 @@
+ion-tabs.bottom-tab {
+  .tabs-inner {
+    z-index: 2;
+
+    ion-router-outlet {
+      overflow: visible;
+
+      app-exams, app-students {
+        overflow: visible
+      }
+    }
+
+    ion-tab-bar {
+      z-index: 1;
+    }
+  }
+}

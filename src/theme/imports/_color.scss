@@ -1,0 +1,71 @@
+@mixin colors($property) {
+  &-cinder {
+    #{$property}: $cinder;
+  }
+  &-gray-chateau {
+    #{$property}: $gray-chateau;
+  }
+  &-mantis {
+    #{$property}: $mantis;
+  }
+  &-cloud-burst {
+    #{$property}: $cloud-burst;
+  }
+  &-mine-shaft {
+    #{$property}: $mine-shaft;
+  }
+  &-selago {
+    #{$property}: $selago;
+  }
+  &-white {
+    #{$property}: $white;
+  }
+  &-black {
+    #{$property}: $black;
+  }
+  &-shark {
+    #{$property}: $shark;
+  }
+}
+
+.color {
+  @include colors(color);
+}
+
+.bg-color {
+  @include colors(background-color);
+}
+
+.border-color {
+  @include colors(border-color);
+}
+
+.bg-color-blur {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.0428595) 0%, #E2E2E2 100%);
+}
+
+.bg-primary-gradient {
+  background: linear-gradient(97.55deg, #52BE80 10.46%, #0EC55C 89.82%);
+}
+
+.card {
+  &-goblin {
+    background-color: $goblin;
+    box-shadow: 1px 8px 30px rgba(76, 23, 191, 0.2);
+  }
+
+  &-jungle-green {
+    background-color: $jungle-green;
+    box-shadow: 1px 8px 30px rgba(0, 216, 253, 0.1);
+  }
+
+  &-celery {
+    background-color: $celery;
+    box-shadow: 1px 8px 30px rgba(254, 216, 19, 0.2);
+  }
+
+  &-mantis {
+    background-color: $mantis;
+    box-shadow: 1px 8px 30px rgba(25, 238, 194, 0.2);
+  }
+}

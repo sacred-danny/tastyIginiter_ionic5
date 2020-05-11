@@ -1,0 +1,15 @@
+@import "../../../../theme";
+
+.btn-facebook {
+  span {
+    position: absolute;
+    left: 50px;
+    margin-top: -12px;
+  }
+}
+
+ion-label {
+  span {
+    color: $burning-orange;
+  }
+}

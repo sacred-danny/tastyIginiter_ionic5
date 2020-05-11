@@ -1,0 +1,53 @@
+@import "../../../../theme";
+
+.auth-header {
+  height: 27%;
+  width: 100%;
+
+  .main-circle {
+    position: absolute;
+    width: 120%;
+    border-radius: 45%;
+    height: 37%;
+    top: -10%;
+    left: -10%;
+  }
+
+  .assist-circle {
+    position: absolute;
+    width: 95%;
+    border-radius: 50%;
+    height: 37%;
+    top: -14%;
+    right: 38%;
+  }
+
+  .logo {
+    position: absolute;
+    width: 64%;
+    left: 18%;
+    height: 10%;
+    top: 6%;
+    background: url(../../../../assets/images/logo.png) 0 0/100% 100% no-repeat;
+
+    ion-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .signIn {
+    position: absolute;
+    top: 18%;
+    left: 8%;
+    margin: 0px;
+  }
+
+  .signUp {
+    position: absolute;
+    top: 14.2%;
+    left: 2.6%;
+    margin: 0px;
+  }
+}
+

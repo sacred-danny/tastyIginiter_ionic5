@@ -1,0 +1,28 @@
+mat-horizontal-stepper {
+  .mat-horizontal-stepper-header .mat-step-icon {
+    margin-right: 0;
+  }
+
+  .mat-ripple.mat-step-header-ripple {
+    display: none;
+  }
+
+  mat-step-header {
+    padding: 0 !important;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .mat-step-label {
+      display: none;
+    }
+  }
+
+  .mat-horizontal-content-container {
+    padding: 0 5px;
+  }
+
+  .mat-stepper-horizontal-line {
+    top: 22px !important;
+  }
+}

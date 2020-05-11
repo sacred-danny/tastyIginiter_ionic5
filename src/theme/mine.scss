@@ -1,0 +1,47 @@
+/** Ionic CSS Variables **/
+:root {
+  /** primary **/
+  --ion-color-white: white;
+  --ion-color-black: white;
+
+}
+
+app-auth-header {
+  display: contents;
+}
+
+.header-type-1 {
+  width: 100%;
+  height: 17.3%;
+  background: $burning-orange;
+}
+
+.header-type-2 {
+  width: 100%;
+  height: 14%;
+  background: white;
+}
+
+ion-back-button {
+  display: block;
+  position: absolute;
+  --icon-font-size: 24px;
+  --color: var(--ion-color-white);
+  top: 8.2%;
+  left: 2%;
+}
+
+.item-align-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+ion-item {
+  --inner-padding-start: 0px;
+  --inner-padding-end: 0px;
+  --padding-start: 0px;
+  --padding-end: 0px;
+  --border-color: black;
+}
+

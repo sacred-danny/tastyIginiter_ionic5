@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label class="w-100">
+        <span class="mb-15 d-block font-15 color-cinder" *ngIf="label">{{ label }}</span>
+        <input class="form-control" [min]="min" [type]="type" [placeholder]="placeholder" [(ngModel)]="value"
+               (ngModelChange)="change($event)" [readonly]="readonly">
+    </label>
+</div>

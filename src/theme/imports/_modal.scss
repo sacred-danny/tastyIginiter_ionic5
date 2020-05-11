@@ -1,0 +1,20 @@
+.modal-bottom-option {
+  .modal-wrapper {
+    height: auto;
+    overflow: visible;
+    bottom: 0;
+    position: absolute;
+
+    & > * {
+      overflow: visible;
+
+      & > div.option-wrapper {
+        position: absolute;
+        bottom: 0;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        box-shadow: 10px 0 40px rgba(65, 65, 65, 0.2);
+      }
+    }
+  }
+}

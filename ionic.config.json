@@ -1,0 +1,15 @@
+{
+  "name": "grubsup",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "v2": true,
+  "typescript": true,
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://localhost/grub/mobile_api/v1"
+    }
+  ]
+}

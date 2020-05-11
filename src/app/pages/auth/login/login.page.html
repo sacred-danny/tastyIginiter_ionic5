@@ -1,0 +1,25 @@
+<app-auth-header [backGroundColor]="backGroundColor" isLogo="true" isSignIn="true"></app-auth-header>
+<ion-content>
+    <div class="container h-100 d-flex flex-column">
+        <form [formGroup]="form" (ngSubmit)="signin()" class="px-20 mt-50">
+            <app-text-input type="email" placeholder="Email" formControlName="email"></app-text-input>
+            <app-text-input type="password" placeholder="Password" formControlName="password"></app-text-input>
+            <div class="mt-30">
+                <button class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17" [disabled]="!form.valid">Sign in
+                </button>
+                <button class="btn btn-facebook btn-outline-mariner w-100 font-weight-bold font-17">
+                    <span class="font-30 font-weight-extremly-bold">f</span>
+                    Connect with Facebook
+                </button>
+            </div>
+        </form>
+        <div class="mt-25 px-20 item-align-center">
+            <ion-label class="label-forgot" routerLink="/forgot-password" routerDirection="forward">Forgot <span>your password?</span>
+            </ion-label>
+        </div>
+        <div class="mt-45 px-20 item-align-center">
+            <ion-label routerLink="/signup" routerDirection="forward">Don't have an account? <span>Sign up</span>
+            </ion-label>
+        </div>
+    </div>
+</ion-content>

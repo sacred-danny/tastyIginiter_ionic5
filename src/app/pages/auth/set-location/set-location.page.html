@@ -1,0 +1,23 @@
+<div class="header-type-2">
+    <ion-back-button routerLink="/login" routerDirection="back"></ion-back-button>
+</div>
+<ion-content>
+    <div class="container h-100 d-flex flex-column">
+        <div class="location-container">
+            <div class="location">
+                <ion-img src="assets/images/location.png" alt="Location"></ion-img>
+            </div>
+        </div>
+        <div class="px-20">
+            <h2 class="font-34 color-shark font-weight-bold text-center">Enter your address</h2>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="setLocation()" class="px-20 mt-25">
+            <app-text-input type="text" placeholder="House Name/Number" formControlName="houseNumber"></app-text-input>
+            <app-text-input type="text" placeholder="Postcode" formControlName="postCode"></app-text-input>
+            <div class="mt-40 ">
+                <button class="btn btn-outline-burning-organge-invert w-100 mb-10 font-weight-bold font-17" [disabled]="!form.valid">Continue
+                </button>
+            </div>
+        </form>
+    </div>
+</ion-content>

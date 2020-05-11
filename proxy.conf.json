@@ -1,0 +1,10 @@
+{
+  "/api/v1": {
+    "target": "http://localhost/grub/api/v1",
+    "secure": false,
+    "pathRewrite": {
+      "^/api/v1": ""
+    },
+    "changeOrigin": true
+  }
+}

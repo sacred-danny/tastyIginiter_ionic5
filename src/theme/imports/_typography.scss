@@ -1,0 +1,17 @@
+@for $i from 5 through 50 {
+  .font-#{$i} {
+    font-size: #{$i}px;
+  }
+}
+
+.font-weight-medium {
+  font-weight: 500;
+}
+
+.font-weight-bold {
+  font-weight: 700;
+}
+
+.font-weight-extremly-bold {
+  font-weight: 999;
+}
