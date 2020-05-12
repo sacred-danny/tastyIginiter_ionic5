@@ -43,7 +43,7 @@ export class SetLocationPage implements OnInit {
         houseNumber: this.form.value.houseNumber
       };
       await this.authService.setLocation(payload);
-      await this.router.navigate(['/main'], {replaceUrl: true});
+      await this.router.navigate([ '/main' ], { replaceUrl: true });
     } catch (e) {
       console.log(e);
       if (e.status === 500) {
@@ -61,7 +61,7 @@ export class SetLocationPage implements OnInit {
       }
       if (e.error.message.indexOf('expired') >= 0) {
         await this.commonService.presentAlert('Warning', e.error.message);
-        await this.router.navigate(['/login'], {replaceUrl: true});
+        await this.router.navigate([ '/login' ], { replaceUrl: true });
         return;
       }
       await this.commonService.presentAlert('Warning', e.error.message);

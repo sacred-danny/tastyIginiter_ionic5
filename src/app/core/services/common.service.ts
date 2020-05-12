@@ -12,7 +12,8 @@ export class CommonService {
     private alertContoller: AlertController,
     private loadingController: LoadingController,
     private modalController: ModalController
-  ) { }
+  ) {
+  }
 
   printLog(title, text) {
     if (environment.enableLog) {
@@ -21,7 +22,7 @@ export class CommonService {
   }
 
   async showLoading(message: string) {
-    const loading =  await this.loadingController.create({message});
+    const loading = await this.loadingController.create({ message });
     await loading.present();
     return loading;
   }
@@ -38,7 +39,7 @@ export class CommonService {
     const alert = await this.alertContoller.create({
       header: warning,
       message: msg,
-      buttons: ['OK']
+      buttons: [ 'OK' ]
     });
     await alert.present();
   }

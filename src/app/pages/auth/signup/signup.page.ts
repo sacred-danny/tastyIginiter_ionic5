@@ -17,7 +17,7 @@ export class SignupPage implements OnInit {
   form: FormGroup = this.formBuilder.group({
     first_name: [ '', Validators.compose([ Validators.required ]) ],
     last_name: [ '', Validators.compose([ Validators.required ]) ],
-    telephone: [ '', Validators.compose([ Validators.required, Validators.minLength(11)  ]) ],
+    telephone: [ '', Validators.compose([ Validators.required, Validators.minLength(11) ]) ],
     email: [ '', Validators.compose([ Validators.required, Validators.email ]) ],
     password: [ '', Validators.compose([ Validators.required, Validators.minLength(8) ]) ],
     confirmPassword: [ '', Validators.compose([ Validators.required, Validators.minLength(8) ]) ],
@@ -51,7 +51,7 @@ export class SignupPage implements OnInit {
         password: this.form.value.password
       };
       await this.authService.signup(payload);
-      await this.router.navigate(['/set-location'], {replaceUrl: true});
+      await this.router.navigate([ '/set-location' ], { replaceUrl: true });
       await this.commonService.showToast('Thanks for Signing Up.');
     } catch (e) {
       console.log(e);

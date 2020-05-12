@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
     try {
       const payload: LoginRequest = this.form.value;
       await this.authService.signin(payload);
-      await this.router.navigate(['/set-location'], {replaceUrl: true});
+      await this.router.navigate([ '/set-location' ], { replaceUrl: true });
     } catch (e) {
       console.log(e);
       if (e.status === 500) {
