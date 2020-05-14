@@ -1,6 +1,7 @@
 {
   "/api/v1": {
-    "target": "http://localhost/grub/api/v1",
+    "target1": "http://localhost/grubsupdev/api/v1",
+    "target": "http://www.grubsupdev.com/api/v1",
     "secure": false,
     "pathRewrite": {
       "^/api/v1": ""

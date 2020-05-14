@@ -4,29 +4,34 @@ export interface LoginRequest {
 }
 
 export interface SignUpRequest {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   telephone: string;
   email: string;
   password: string;
 }
 
+export interface TokenRequest {
+  user: User;
+}
+
+export interface PrepareLocationRequest {
+  houseName: string;
+  postcode: string;
+}
+
 export interface SetLocationRequest {
-  postCode: string;
-  houseNumber: string;
-  userId: string;
-  token: string;
+  user: User;
   address?: Address;
 }
 
 export interface Address {
-  customer_id: string;
-  address_1: string;
-  address_2: string;
+  address1: string;
+  address2: string;
   postcode: string;
   city: string;
   state: string;
-  country_id: string;
+  countryID: string;
 }
 
 export interface LoginResponse {
@@ -36,15 +41,6 @@ export interface LoginResponse {
 
 export interface User {
   id: string;
-  first_name: string;
-  last_name: string;
-  full_name: string;
-  mobile: string;
-  address_1: string;
-  address_2: string;
-  city: string;
-  state: string;
-  postcode: string;
-  country_id: string;
-  access_token: string;
+  name: string;
+  areaID?: string;
 }

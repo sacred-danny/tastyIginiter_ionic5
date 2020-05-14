@@ -4,7 +4,6 @@
 
 export const config = {
   production: false,
-  api: 'http://localhost/grub/api/v1',
   addressKey: 'h8oJpLQObUWNXeSh4vtDiw25701',
   storage: {
     token: 'token',

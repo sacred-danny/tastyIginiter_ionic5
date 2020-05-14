@@ -2,8 +2,8 @@
 <ion-content>
     <div class="container h-100 d-flex flex-column">
         <form [formGroup]="form" (ngSubmit)="signup()" class="mt-35 px-20">
-            <app-text-input type="text" placeholder="First Name" formControlName="first_name"></app-text-input>
-            <app-text-input type="text" placeholder="Last Name" formControlName="last_name"></app-text-input>
+            <app-text-input type="text" placeholder="First Name" formControlName="firstName"></app-text-input>
+            <app-text-input type="text" placeholder="Last Name" formControlName="lastName"></app-text-input>
             <app-phone-number-input placeholder="Mobile" formControlName="telephone"></app-phone-number-input>
             <app-text-input type="email" placeholder="Email" formControlName="email"></app-text-input>
             <app-text-input type="password" placeholder="Password" formControlName="password"></app-text-input>

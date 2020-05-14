@@ -15,8 +15,8 @@ import { config } from '../../../config/config';
 })
 export class SignupPage implements OnInit {
   form: FormGroup = this.formBuilder.group({
-    first_name: [ '', Validators.compose([ Validators.required ]) ],
-    last_name: [ '', Validators.compose([ Validators.required ]) ],
+    firstName: [ '', Validators.compose([ Validators.required ]) ],
+    lastName: [ '', Validators.compose([ Validators.required ]) ],
     telephone: [ '', Validators.compose([ Validators.required, Validators.minLength(11) ]) ],
     email: [ '', Validators.compose([ Validators.required, Validators.email ]) ],
     password: [ '', Validators.compose([ Validators.required, Validators.minLength(8) ]) ],
@@ -44,8 +44,8 @@ export class SignupPage implements OnInit {
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       const payload: SignUpRequest = {
-        first_name: this.form.value.first_name,
-        last_name: this.form.value.last_name,
+        firstName: this.form.value.firstName,
+        lastName: this.form.value.lastName,
         telephone: this.form.value.telephone,
         email: this.form.value.email,
         password: this.form.value.password

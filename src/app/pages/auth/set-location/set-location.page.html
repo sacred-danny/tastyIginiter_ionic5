@@ -12,8 +12,8 @@
             <h2 class="font-34 color-shark font-weight-bold text-center">Enter your address</h2>
         </div>
         <form [formGroup]="form" (ngSubmit)="setLocation()" class="px-20 mt-25">
-            <app-text-input type="text" placeholder="House Name/Number" formControlName="houseNumber"></app-text-input>
-            <app-text-input type="text" placeholder="Postcode" formControlName="postCode"></app-text-input>
+            <app-text-input type="text" placeholder="House Name/Number" formControlName="houseName"></app-text-input>
+            <app-text-input type="text" placeholder="Postcode" formControlName="postcode"></app-text-input>
             <div class="mt-40 ">
                 <button class="btn btn-outline-burning-organge-invert w-100 mb-10 font-weight-bold font-17"
                         [disabled]="!form.valid">Continue
