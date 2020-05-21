@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonKitModule } from '../../../ui-kit/common-kit/common-kit.module';
 import { IonicModule } from '@ionic/angular';
 
-
+import { CommonKitModule } from '../../../ui-kit/common-kit/common-kit.module';
 import { SignupPageRoutingModule } from './signup-routing.module';
 
 import { SignupPage } from './signup.page';

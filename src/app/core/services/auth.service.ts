@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 import { config } from '../../config/config';
 import { CommonService } from './common.service';
 import { parseToPayload } from '../utils/dto.util';
 import { anonParam } from '../utils/api.util';
 
-import { LoginRequest, LoginResponse, SetLocationRequest, PrepareLocationRequest, SignUpRequest, User } from '../models/auth';
-import { filterErrorsAndWarnings } from '@angular/compiler-cli';
+import { LoginRequest, LoginResponse, PrepareLocationRequest, SignUpRequest, User } from '../models/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +21,7 @@ export class AuthService {
 
   tokenChanged$: Subject<boolean> = new Subject<boolean>();
   userChanged$: BehaviorSubject<User> = new BehaviorSubject<User>(this.user);
+
   constructor(
     private http: HttpClient,
     private storage: Storage,
@@ -45,15 +44,15 @@ export class AuthService {
       user: localUser
     };
     // tslint:disable-next-line:ban-types
-    const res: boolean = await this.http.post<boolean>('api/v1/auth/validateToken', payload).toPromise();
-    return  res;
+    const res: boolean = await this.http.post<boolean>(config.apiURL + '/auth/validateToken', payload).toPromise();
+    return res;
   }
 
   isLocationExist(): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       // tslint:disable-next-line:no-shadowed-variable
       this.getUser().then(user => {
-        if (user.areaID == null || user.areaID === '') {
+        if (user.areaId == null || user.areaId === '') {
           resolve(false);
         } else {
           resolve(true);
@@ -67,7 +66,7 @@ export class AuthService {
   async signin(payload: LoginRequest): Promise<LoginResponse> {
     try {
       // tslint:disable-next-line:max-line-length
-      const res: LoginResponse = await this.http.post<LoginResponse>('api/v1/auth/signIn', parseToPayload(payload), {params: anonParam()}).toPromise();
+      const res: LoginResponse = await this.http.post<LoginResponse>(config.apiURL + '/auth/signIn', parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;
       this.token = res.token;
       // save token to the storage
@@ -82,7 +81,7 @@ export class AuthService {
   async signup(payload: SignUpRequest): Promise<LoginResponse> {
     try {
       // tslint:disable-next-line:max-line-length
-      const res: LoginResponse = await this.http.post<LoginResponse>('api/v1/auth/signUp', parseToPayload(payload), {params: anonParam()}).toPromise();
+      const res: LoginResponse = await this.http.post<LoginResponse>(config.apiURL + '/auth/signUp', parseToPayload(payload), { params: anonParam() }).toPromise();
       console.log(res);
       this.user = res.user;
       this.token = res.token;
@@ -103,15 +102,15 @@ export class AuthService {
       const payload = {
         user: this.user,
         address: {
-            address1: addressInfo.addresses[0].line_1,
-            address2: '',
-            postcode: beforePayload.postcode,
-            city: addressInfo.addresses[0].town_or_city,
-            state: addressInfo.addresses[0].county,
-            countryID: (addressInfo.addresses[0].country === 'England') ? '222' : addressInfo.addresses[0].country
+          address1: addressInfo.addresses[0].line_1,
+          address2: '',
+          postcode: beforePayload.postcode,
+          city: addressInfo.addresses[0].town_or_city,
+          state: addressInfo.addresses[0].county,
+          countryId: (addressInfo.addresses[0].country === 'England') ? '222' : addressInfo.addresses[0].country
         }
       };
-      const res: LoginResponse = await this.http.post<LoginResponse>('api/v1/auth/setLocation', payload).toPromise();
+      const res: LoginResponse = await this.http.post<LoginResponse>(config.apiURL + '/auth/setLocation', payload).toPromise();
       this.user = res.user;
       this.token = res.token;
       // save token to the storage

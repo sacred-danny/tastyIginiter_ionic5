@@ -1,0 +1,22 @@
+@import "../../../../theme";
+
+.tab-header {
+  width: 100%;
+  height: 123px;
+
+  .logo {
+    position: absolute;
+    width: 37%;
+    left: 31.5%;
+    height: 37px;
+    top: 40px;
+    background: url(../../../../assets/images/logo.png) 0 0/100% 100% no-repeat;
+  }
+
+  .title {
+    position: absolute;
+    top: 77px;
+    left: 2.9%;
+    margin: 0px;
+  }
+}

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
 
-import { LoginRequest, SetLocationRequest, SignUpRequest } from '../../../core/models/auth';
+import { SignUpRequest } from '../../../core/models/auth';
 import { config } from '../../../config/config';
 
 @Component({
@@ -56,7 +56,7 @@ export class SignupPage implements OnInit {
     } catch (e) {
       console.log(e);
       if (e.status === 500) {
-        await this.commonService.presentAlert('Warning', 'Internal Server Error');
+        await this.commonService.presentAlert('Warning', 'Internal Server Error.');
         return;
       }
       await this.commonService.presentAlert('Warning', e.error.message);

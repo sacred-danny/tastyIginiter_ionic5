@@ -2,14 +2,10 @@
 // http://ionicframework.com/docs/theming/
 
 /** Ionic CSS Variables **/
-body {
-  font-family: 'SF-UI' !important;
-}
-
 :root {
 
-  --ion-font-family: 'SF-UI' !important;
-  --ion-default-font: 'SF-UI' !important;
+  --ion-font-family: 'SF-UI-Display' !important;
+  --ion-default-font: 'SF-UI-Display' !important;
 
   /** primary **/
   --ion-color-primary: #3880ff;

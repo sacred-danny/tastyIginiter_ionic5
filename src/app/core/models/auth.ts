@@ -20,18 +20,13 @@ export interface PrepareLocationRequest {
   postcode: string;
 }
 
-export interface SetLocationRequest {
-  user: User;
-  address?: Address;
-}
-
 export interface Address {
   address1: string;
   address2: string;
   postcode: string;
   city: string;
   state: string;
-  countryID: string;
+  countryId: string;
 }
 
 export interface LoginResponse {
@@ -41,6 +36,6 @@ export interface LoginResponse {
 
 export interface User {
   id: string;
-  name: string;
-  areaID?: string;
+  name?: string;
+  areaId?: string;
 }

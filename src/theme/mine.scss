@@ -3,7 +3,10 @@
   /** primary **/
   --ion-color-white: white;
   --ion-color-black: white;
+}
 
+* {
+  font-family: 'SF-UI-Display' !important;
 }
 
 app-auth-header {
@@ -27,7 +30,7 @@ ion-back-button {
   position: absolute;
   --icon-font-size: 24px;
   --color: var(--ion-color-white);
-  top: 8.2%;
+  top: 34px;
   left: 2%;
 }
 

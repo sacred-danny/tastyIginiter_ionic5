@@ -1,7 +1,8 @@
 {
   "name": "grubsup",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular",
   "v2": true,
@@ -11,5 +12,6 @@
       "path": "/api",
       "proxyUrl": "http://localhost/grub/mobile_api/v1"
     }
-  ]
+  ],
+  "id": "9b6545b0"
 }

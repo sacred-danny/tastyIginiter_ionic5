@@ -4,17 +4,22 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { AuthHeaderComponent } from './auth-header/auth-header.component';
+import { TabHeaderComponent } from './tab-header/tab-header.component';
 
 
 @NgModule({
-  declarations: [ AuthHeaderComponent ],
+  declarations: [
+    AuthHeaderComponent,
+    TabHeaderComponent
+  ],
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
   ],
   exports: [
-    AuthHeaderComponent
+    AuthHeaderComponent,
+    TabHeaderComponent
   ]
 })
 export class CommonKitModule {

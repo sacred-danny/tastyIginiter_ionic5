@@ -24,9 +24,9 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     let duplicate;
-    if (!req.params.get('anon')) {
+    if ( ! req.params.get('anon')) {
       duplicate = req.clone({
-        headers: req.headers.set('Authorization', `Bearer ${this.authService.token || ''}`)
+        headers: req.headers.set('Authorization', `Bearer ${ this.authService.token || '' }`)
       });
     } else {
       duplicate = req.clone({
@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(duplicate).pipe(
       catchError(error => {
         if (error.status === 401) {
-          this.router.navigate(['/login']);
+          this.router.navigate([ '/login' ]);
         }
         return throwError(error);
       })

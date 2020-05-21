@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoadingController, ModalController, ToastController, AlertController } from '@ionic/angular';
 import { environment } from '../../../environments/environment';
+import { isArray, isObject } from 'util';
 
 @Injectable({
   providedIn: 'root'
@@ -13,12 +14,6 @@ export class CommonService {
     private loadingController: LoadingController,
     private modalController: ModalController
   ) {
-  }
-
-  printLog(title, text) {
-    if (environment.enableLog) {
-      console.log(title + ':', text);
-    }
   }
 
   async showLoading(message: string) {
@@ -42,5 +37,30 @@ export class CommonService {
       buttons: [ 'OK' ]
     });
     await alert.present();
+  }
+
+  toCamel(s) {
+    return s.replace(/([-_][a-z])/ig, ($1) => {
+      return $1.toUpperCase()
+        .replace('-', '')
+        .replace('_', '');
+    });
+  }
+
+  keysToCamel(o: any) {
+    if (isObject(o)) {
+      const n = {};
+
+      Object.keys(o)
+        .forEach((k) => {
+          n[this.toCamel(k)] = this.keysToCamel(o[k]);
+        });
+      return n;
+    } else if (isArray(o)) {
+      return o.map((i) => {
+        return this.keysToCamel(i);
+      });
+    }
+    return o;
   }
 }

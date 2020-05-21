@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './pages/main/main.component';
+
+import { MenuResolver } from './core/resolvers/menu.resolver';
 
 import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'login',
     loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule)
@@ -24,9 +24,15 @@ const routes: Routes = [
   },
   {
     path: '',
-    loadChildren: () => import('./pages/main/main.module').then(m => m.MainPageModule),
+    loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
     canActivate: [ AuthGuard ],
+    resolve: { user: MenuResolver },
   },
+  {
+    path: 'menu-deatil',
+    loadChildren: () => import('./pages/menu-deatil/menu-deatil.module').then(m => m.MenuDeatilPageModule)
+  },
+
 ];
 
 @NgModule({
