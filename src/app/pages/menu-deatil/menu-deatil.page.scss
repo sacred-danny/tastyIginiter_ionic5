@@ -1,0 +1,145 @@
+@import "../../../theme";
+
+.menu-image {
+  width: 100%;
+  height: 180px;
+  ion-img {
+    height: 100%;
+    object-fit: cover;
+  }
+}
+ion-content {
+  --background: #f0f0f0;
+}
+
+.container {
+  background: $gallery;
+  ion-list {
+    background: $gallery;
+    margin-top: -15px;
+    ion-item {
+      --border-color: #c6c6d1;
+      --background: #f0f0f0;
+
+      ion-label {
+        display: inline-flex;
+        p {
+          position: relative;
+          top: 3px;
+          left: 5px
+        }
+        ion-checkbox{
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          --background: transparent;
+          --checkmark-color: #FC6C35;
+          --checkmark-width: 3px;
+          --border-color: transparent;
+          right: 0px;
+          top: 15px;
+        }
+
+        ion-radio {
+          width: 20px;
+          height: 20px;
+          position: absolute;
+          --color-checked: #FC6C35;
+          right: 0px;
+          top: 5px;
+        }
+      }
+    }
+  }
+
+  ion-textarea {
+    background: $gallery;
+    --padding-start: 10px;
+  }
+}
+
+.bottom {
+  width: 100%;
+  height: 135px;
+  background: white;
+
+  .special {
+    display: inline-block;
+  }
+
+  .order-count {
+    display: flex;
+    position: absolute;
+    border: solid 3px $burning-orange;
+    border-radius: 10px;
+    bottom: 81px;
+    right: 19px;
+    .minus {
+      border-radius: 0px;
+      border-top-left-radius: 7px;
+      border-bottom-left-radius: 7px;
+      z-index: 1000;
+      width: 40px;
+      height: 28px;
+      background: white;
+      span {
+        font-size: 40px;
+        color: $burning-orange;
+        height: 100%;
+        position: relative;
+        top: -3px;
+      }
+    }
+
+    .plus {
+      border: solid 2px $burning-orange;
+      border-radius: 0px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      width: 40px;
+      height: 28px;
+
+      background: $burning-orange;
+      span {
+        font-size: 30px;
+        color: white;
+        height: 100%;
+        position: relative;
+        top: -3px;
+      }
+    }
+
+    .value {
+      width: 47px;
+      height: 28px;
+      font-size: 40px;
+      background: white;
+      border-left: solid 2px $burning-orange;
+      border-right: solid 2px $burning-orange;
+      h3 {
+        color: $burning-orange;
+        height: 100%;
+      }
+    }
+  }
+
+  .add {
+    background: $burning-orange;
+    position: relative;
+    top: 17px;
+    border-radius: 10px;
+    height: 45px;
+    font-size: 15px;
+    color: white;
+    font-weight: 700;
+
+    h3 {
+      position: absolute;
+      right: 16px;
+    }
+  }
+}
+
+
+
+

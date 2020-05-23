@@ -3,10 +3,6 @@
 
 /** Ionic CSS Variables **/
 :root {
-
-  --ion-font-family: 'SF-UI-Display' !important;
-  --ion-default-font: 'SF-UI-Display' !important;
-
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -232,8 +228,29 @@
 }
 
 @font-face {
-  font-family: 'SF-UI';
+  font-family: 'SF-UI-Display-Heavy';
   font-weight: normal;
   font-style: normal;
-  src: url('fonts/sf-ui/SF-UI-Display-Light.otf') format('opentype');
+  src: url('fonts/sf-ui/SF-UI-Display-Heavy.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF-UI-Display-Bold';
+  font-weight: normal;
+  font-style: normal;
+  src: url('fonts/sf-ui/SF-UI-Display-Bold.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF-UI-Display-Regular';
+  font-weight: normal;
+  font-style: normal;
+  src: url('fonts/sf-ui/SF-UI-Display-Regular.otf') format('opentype');
+}
+
+@font-face {
+  font-family: 'SF-UI-Display-Semibold';
+  font-weight: normal;
+  font-style: normal;
+  src: url('fonts/sf-ui/SF-UI-Display-Semibold.otf') format('opentype');
 }

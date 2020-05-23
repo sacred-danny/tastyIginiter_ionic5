@@ -37,10 +37,35 @@ export class SignupPage implements OnInit {
   }
 
   async signup() {
-    if (this.form.value.password !== this.form.value.confirmPassword) {
-      this.commonService.presentAlert('Warning', 'Passwrod & Confirm Password does not match.');
+    if (this.form.value.firstName === '') {
+      await this.commonService.presentAlert('Warning', 'Please enter your first name.');
+      return;
+    } else if (this.form.value.lastName === '') {
+      await this.commonService.presentAlert('Warning', 'Please enter your last name.');
+      return;
+    } else if (this.form.value.telephone === '') {
+      await this.commonService.presentAlert('Warning', 'Please enter your phone number.');
+      return;
+    } else if (this.form.value.telephone.length < 11 ) {
+      await this.commonService.presentAlert('Warning', 'Phone number must must be 11 numerics.');
+      return;
+    } else if (this.form.value.email === '') {
+      await this.commonService.presentAlert('Warning', 'Please enter your e-mail address.');
+      return;
+    } else if (!this.commonService.emailIsValid(this.form.value.email)) {
+      await this.commonService.presentAlert('Warning', 'You have entered an invalid e-mail address. Please try again.');
+      return;
+    } else if (this.form.value.password === '') {
+      await this.commonService.presentAlert('Warning', 'Please set a password.');
+      return;
+    } else if (this.form.value.password.length < 8) {
+      await this.commonService.presentAlert('Warning', 'Password must be at least 8 characters.');
+      return;
+    } else if (this.form.value.password !== this.form.value.confirmPassword) {
+      await this.commonService.presentAlert('Warning', 'The passwords you entered do not match. Please re-enter your password.');
       return;
     }
+
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       const payload: SignUpRequest = {

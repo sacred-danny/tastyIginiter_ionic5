@@ -6,8 +6,8 @@
 
   .logo {
     position: absolute;
-    width: 37%;
-    left: 31.5%;
+    width: 140px;
+    left: calc(50% - 70px);
     height: 37px;
     top: 40px;
     background: url(../../../../assets/images/logo.png) 0 0/100% 100% no-repeat;
@@ -17,6 +17,6 @@
     position: absolute;
     top: 77px;
     left: 2.9%;
-    margin: 0px;
+    margin: 0;
   }
 }

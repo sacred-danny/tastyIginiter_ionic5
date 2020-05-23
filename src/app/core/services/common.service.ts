@@ -39,6 +39,10 @@ export class CommonService {
     await alert.present();
   }
 
+  emailIsValid(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
   toCamel(s) {
     return s.replace(/([-_][a-z])/ig, ($1) => {
       return $1.toUpperCase()

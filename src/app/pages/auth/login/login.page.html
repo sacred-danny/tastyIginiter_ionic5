@@ -5,22 +5,21 @@
             <app-text-input type="email" placeholder="Email" formControlName="email"></app-text-input>
             <app-text-input type="password" placeholder="Password" formControlName="password"></app-text-input>
             <div class="mt-30">
-                <button class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17"
-                        [disabled]="!form.valid">Sign in
+                <button class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17">SIGN IN
                 </button>
                 <button class="btn btn-facebook btn-outline-mariner w-100 font-weight-bold font-17">
                     <span class="font-30 font-weight-extremly-bold">f</span>
-                    Connect with Facebook
+                    CONNECT WITH FACEBOOK
                 </button>
             </div>
         </form>
         <div class="mt-25 px-20 item-align-center">
-            <ion-label class="label-forgot" routerLink="/forgot-password" routerDirection="forward">Forgot <span>your password?</span>
-            </ion-label>
+            <p class="label-forgot">Forgot your<span class="font-weight-bold" routerLink="/forgot-password" routerDirection="forward"> password?</span>
+            </p>
         </div>
         <div class="mt-45 px-20 item-align-center">
-            <ion-label routerLink="/signup" routerDirection="forward">Don't have an account? <span>Sign up</span>
-            </ion-label>
+            <p>Don't have an account? <span class="font-weight-bold" routerLink="/signup" routerDirection="forward">Sign up</span>
+            </p>
         </div>
     </div>
 </ion-content>

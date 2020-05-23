@@ -35,6 +35,20 @@ export class LoginPage implements OnInit {
   }
 
   async signin() {
+    if (this.form.value.email === '') {
+      await this.commonService.presentAlert('Warning', 'Please enter your e-mail address.');
+      return;
+    } else if (!this.commonService.emailIsValid(this.form.value.email)) {
+      await this.commonService.presentAlert('Warning', 'You have entered an invalid e-mail address. Please try again.');
+      return;
+    } else if (this.form.value.password === '') {
+      await this.commonService.presentAlert('Warning', 'Please set a password.');
+      return;
+    } else if (this.form.value.password.length < 8) {
+      await this.commonService.presentAlert('Warning', 'Password must be at least 8 characters.');
+      return;
+    }
+
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       const payload: LoginRequest = this.form.value;

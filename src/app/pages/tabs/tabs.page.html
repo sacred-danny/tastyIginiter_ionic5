@@ -1,0 +1,34 @@
+<ion-tabs>
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="menu">
+            <ion-icon name="restaurant"></ion-icon>
+            <p class="m-0">Menu</p>
+        </ion-tab-button>
+
+        <ion-tab-button tab="favourite">
+            <ion-icon name="star"></ion-icon>
+            <p class="m-0">Favourites</p>
+        </ion-tab-button>
+
+        <ion-tab-button>
+        </ion-tab-button>
+
+        <ion-tab-button tab="order">
+            <ion-icon name="document"></ion-icon>
+            <p class="m-0">Orders</p>
+        </ion-tab-button>
+
+        <ion-tab-button tab="profile">
+            <ion-icon name="person"></ion-icon>
+            <p class="m-0">Profile</p>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>
+<ion-fab class="bottom-add-fab" vertical="bottom" horizontal="center" slot="fixed">
+    <ion-badge class="item-align-center" *ngIf="menuService.order.totalCount > 0">
+        <span>{{menuService.order.totalCount}}</span>
+    </ion-badge>
+    <ion-fab-button (click)="goOrder()">
+        <ion-icon name="cart" size="40"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

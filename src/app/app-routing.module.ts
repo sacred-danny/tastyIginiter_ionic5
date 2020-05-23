@@ -29,9 +29,12 @@ const routes: Routes = [
     resolve: { user: MenuResolver },
   },
   {
-    path: 'menu-deatil',
-    loadChildren: () => import('./pages/menu-deatil/menu-deatil.module').then(m => m.MenuDeatilPageModule)
-  },
+    path: 'menu-detail/:id',
+    loadChildren: () => import('./pages/menu-deatil/menu-deatil.module').then(m => m.MenuDeatilPageModule),
+  },  {
+    path: 'your-order',
+    loadChildren: () => import('./pages/your-order/your-order.module').then( m => m.YourOrderPageModule)
+  }
 
 ];
 

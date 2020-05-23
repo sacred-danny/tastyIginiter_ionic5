@@ -5,12 +5,13 @@ import { RouterModule } from '@angular/router';
 
 import { AuthHeaderComponent } from './auth-header/auth-header.component';
 import { TabHeaderComponent } from './tab-header/tab-header.component';
-
+import { OrderHeaderComponent } from './order-header/order-header.component';
 
 @NgModule({
   declarations: [
     AuthHeaderComponent,
-    TabHeaderComponent
+    TabHeaderComponent,
+    OrderHeaderComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +20,8 @@ import { TabHeaderComponent } from './tab-header/tab-header.component';
   ],
   exports: [
     AuthHeaderComponent,
-    TabHeaderComponent
+    TabHeaderComponent,
+    OrderHeaderComponent
   ]
 })
 export class CommonKitModule {

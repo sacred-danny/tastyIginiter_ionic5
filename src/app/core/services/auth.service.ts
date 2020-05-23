@@ -6,6 +6,7 @@ import { BehaviorSubject, Subject } from 'rxjs';
 
 import { config } from '../../config/config';
 import { CommonService } from './common.service';
+import { MenuService } from './menu.service';
 import { parseToPayload } from '../utils/dto.util';
 import { anonParam } from '../utils/api.util';
 
@@ -26,7 +27,8 @@ export class AuthService {
     private http: HttpClient,
     private storage: Storage,
     private router: Router,
-    private  commonService: CommonService
+    private  commonService: CommonService,
+    private menuService: MenuService
   ) {
   }
 
@@ -72,6 +74,13 @@ export class AuthService {
       // save token to the storage
       await this.storage.set(config.storage.token, res.token);
       await this.storage.set(config.storage.user, res.user);
+
+      this.menuService.order = {
+        totalCount: 0,
+        totalPrice: 0,
+        items: new Array(),
+      };
+      await this.storage.set(config.storage.order, this.menuService.order);
       return res;
     } catch (e) {
       throw e;
@@ -88,6 +97,13 @@ export class AuthService {
       // save token to the storage
       await this.storage.set(config.storage.token, res.token);
       await this.storage.set(config.storage.user, res.user);
+
+      this.menuService.order = {
+        totalCount: 0,
+        totalPrice: 0,
+        items: new Array(),
+      };
+      await this.storage.set(config.storage.order, this.menuService.order);
       return res;
     } catch (e) {
       throw e;

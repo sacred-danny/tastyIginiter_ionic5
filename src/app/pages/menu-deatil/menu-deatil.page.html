@@ -1,1 +1,67 @@
-<ion-back-button (click)="navController.pop();"></ion-back-button>
+<ng-container *ngIf="menuDetail != undefined">
+    <div class="menu-image" >
+        <ion-back-button text="Back" (click)="navController.pop();"></ion-back-button>
+        <ion-img [src]="menuDetail.menu.menuPhoto == null ? menuBlankImage : menuDetail.menu.menuPhoto"></ion-img>
+    </div>
+    <ion-content>
+        <div class="container d-flex flex-column">
+            <div class="mt-15">
+                <p class="font-30 color-shark font-weight-light text-left mb-0 text-overflow">{{menuDetail.menu.menuName}}</p>
+            </div>
+            <div class="mt-10">
+                <p class="font-15 color-french-gray font-weight-light text-left mb-0">{{menuDetail.menu.menuDescription}}</p>
+            </div>
+            <ng-container *ngFor="let option of menuDetail.options;">
+                <div class="option-header mt-15 mb-15">
+                    <h2 class="font-20 color-shark font-weight-bold text-left mb-0 text-overflow">{{option.optionName}}</h2>
+                </div>
+                <ng-container *ngIf="option.displayType === 'radio'">
+                    <ion-list>
+                        <ion-item *ngFor="let item of option.optionValues" (click)="radioClick(item, option.optionValues)">
+                            <ion-label class="m-0">
+                                <h2 class="font-15 color-shark font-weight-bold text-left mb-0 text-overflow">{{item.value}}</h2>
+                                <p class="font-15 color-french-gray font-weight-bold text-left mb-0 text-overflow">+{{item.price | currency:'GBP'}}</p>
+                                <ion-checkbox color="light" class="m-0" [checked]="item.isChecked === true"></ion-checkbox>
+                            </ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ng-container>
+                <ng-container *ngIf="option.displayType !== 'radio'">
+                    <ion-list>
+                        <ion-item *ngFor="let item of option.optionValues" (click)="checkboxClick(item)">
+                            <ion-label class="m-0">
+                                <h2 class="font-15 color-shark font-weight-bold text-left mb-0 text-overflow">{{item.value}}</h2>
+                                <p class="font-15 color-french-gray font-weight-bold text-left mb-0 text-overflow">+{{item.price | currency:'GBP'}}</p>
+                                <ion-checkbox color="light" class="m-0" [checked]="item.isChecked === true"></ion-checkbox>
+                            </ion-label>
+                        </ion-item>
+                    </ion-list>
+                </ng-container>
+            </ng-container>
+            <div class="mt-15">
+                <ion-textarea placeholder="Add delivery note" [(ngModel)]="comment" id="comment"></ion-textarea>
+            </div>
+
+        </div>
+    </ion-content>
+    <div class="bottom" >
+        <div class="special" (click)="goComment()">
+            <h2 class="font-15 color-burning-orange font-weight-bold text-left ml-20 mt-30">Special Instructions?</h2>
+        </div>
+        <div class="order-count">
+            <button class="btn minus p-0" (click)="orderCount(-1)">
+                <span class="item-align-center">-</span>
+            </button>
+            <div class="value">
+                <h3 class="font-15 item-align-center m-0 item-align-center">{{count}}</h3>
+            </div>
+            <button class="btn plus p-0" (click)="orderCount(1)">
+                <span class="item-align-center">+</span>
+            </button>
+        </div>
+        <div class="add mx-20 item-align-center" (click)="addOrder()">
+                Add to order
+            <h3 class="font-15 font-weight-bold item-align-center m-0">{{price | currency:'GBP'}}</h3>
+        </div>
+    </div>
+</ng-container>

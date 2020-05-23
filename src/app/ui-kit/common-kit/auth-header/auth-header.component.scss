@@ -15,9 +15,9 @@
 
   .logo {
     position: absolute;
-    width: 64%;
-    left: 18%;
-    height: 66.7px;
+    width: 240px;
+    left: calc(50% - 120px);
+    height: 65px;
     top: 40px;
     background: url(../../../../assets/images/logo.png) 0 0/100% 100% no-repeat;
   }
@@ -26,14 +26,14 @@
     position: absolute;
     top: 120px;
     left: 8%;
-    margin: 0px;
+    margin: 0;
   }
 
   .signUp {
     position: absolute;
     top: 94.7px;
     left: 2.6%;
-    margin: 0px;
+    margin: 0;
   }
 }
 

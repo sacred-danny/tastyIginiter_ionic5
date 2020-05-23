@@ -1,0 +1,49 @@
+<app-order-header [backGroundColor]="backGroundColor" title="Your Order" close="Close"></app-order-header>
+<div class="total mx-15">
+    <div class="sub-total">
+        <p class="font-17 font-weight-light color-shark m-0 left">Subtotal</p>
+        <p class="font-17 color-french-gray m-0 right">{{menuService.order.totalPrice | currency:'GBP'}}</p>
+    </div>
+    <div class="discount">
+        <p class="font-17 font-weight-light color-shark m-0 left">Discount</p>
+        <p class="font-17 color-french-gray m-0 right">{{discountType === 'P' ? discount + '%' : discount | currency:'GBP'}}</p>
+    </div>
+    <div class="delivery">
+        <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
+        <p class="font-17 color-french-gray m-0 right">{{delivery === 0 ? 'free' : delivery | currency: 'GBP'}}</p>
+    </div>
+    <div class="div-total py-10">
+        <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">Total</h3>
+        <h3 class="font-24 font-weight-bold color-shark m-0 right p-0">{{currentPrice | currency:'GBP'}}</h3>
+    </div>
+</div>
+<div class="discount-code mx-15 mt-15 bg-color-white">
+    <ion-input class="p-0" placeholder="Discount Code" [(ngModel)]="discountCode"></ion-input>
+    <button class="btn p-0 bg-color-burning-orange" (click)="couponApply()">
+        <h3 class="font-17 item-align-center m-0 color-white">Apply</h3>
+    </button>
+</div>
+<ion-content>
+    <div class="container d-flex flex-column p-0">
+        <div class="items m-15 bg-color-white">
+            <ion-list class="p-0">
+                <ion-item *ngFor="let item of menuService.order.items; let i = index;">
+                    <ion-avatar slot="start">
+                        <img [src]="item.photo == null ? menuBlankImage : item.photo">
+                    </ion-avatar>
+                    <div class="descripton">
+                        <h2 class="font-15 color-shark font-weight-bold mt-10 mb-0 text-overflow m-0">{{item.count}}  * {{item.name}}</h2>
+                        <p class="font-12 color-french-gray my-5 text-overflow m-0">{{item.extras}}</p>
+                        <h3 class="font-15 color-burning-orange font-weight-bold text-overflow mb-10">{{item.price | currency:'GBP'}}</h3>
+                    </div>
+                    <ion-icon name="trash" [size]="30" (click)="delete(i)"></ion-icon>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>
+<div class="bottom" >
+    <div class="check-out mx-20 my-25 item-align-center bg-color-burning-orange" (click)="checkOut()">
+        <h3 class="font-17 color-white font-weight-bold ion-text-md-capitalize m-0">Checkout</h3>
+    </div>
+</div>

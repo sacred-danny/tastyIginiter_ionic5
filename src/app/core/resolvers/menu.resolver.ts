@@ -20,6 +20,7 @@ export class MenuResolver implements Resolve<Menu> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Menu> | Promise<Menu> | Menu {
+    this.menuService.getOrder();
     if (this.menuService.menu) {
       return this.menuService.menu;
     } else {

@@ -1,0 +1,59 @@
+@import "../../../theme";
+
+ion-tab-bar {
+  height: 60px;
+  --background: #f0f0f0;
+}
+
+ion-tab-button {
+  --color-focused: #FC6C35;
+  --color-selected: #FC6C35;
+
+  ion-label {
+    font-size: 13px;
+  }
+}
+
+ion-fab {
+  bottom: 8px;
+  background-color: $gallery;
+  padding: 7px;
+  border-radius: 50%;
+  margin-left: -36px;
+
+  ion-badge {
+    position: absolute;
+    top: 0;
+    left: 35px;
+    z-index: 200;
+    width: 24px;
+    height: 24px;
+    border-radius: 12px;
+    --background: #00d862;
+  }
+
+  ion-fab-button {
+    ion-icon {
+      font-size: 28px;
+    }
+
+    --background: #FC6C35;
+    border: solid 5px white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    //--color: #999999;
+    //--background: white;
+    //--color-activated: white;
+    //--color-hover: white;
+    //--color-focused: white;
+    //--background-activated: #FC6C35;
+    //--background-hover: #FC6C35;
+    //--background-focused: #FC6C35;
+
+    --background-activated: #F84A08;
+    --background-hover: #F84A08;
+    --background-focused: #F84A08;
+    outline: none;
+  }
+}

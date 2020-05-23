@@ -3,10 +3,43 @@
   /** primary **/
   --ion-color-white: white;
   --ion-color-black: white;
+
 }
 
-* {
-  font-family: 'SF-UI-Display' !important;
+:host(.ion-activatable:hover) ion-item {
+  color: red !important;
+}
+
+:host(.ion-activatable:active) ion-item {
+  color: red !important;
+}
+
+ion-label {
+  font-family: 'SF-UI-Display-Heavy' !important;
+}
+
+h2 {
+  font-family: 'SF-UI-Display-Bold' !important;
+}
+
+p {
+  font-family: 'SF-UI-Display-Regular' !important;
+}
+
+input {
+  font-family: 'SF-UI-Display-Regular' !important;
+}
+
+button {
+  font-family: 'SF-UI-Display-Semibold' !important;
+}
+
+h3 {
+  font-family: 'SF-UI-Display-Semibold' !important;
+}
+
+ion-list-header {
+  font-family: 'SF-UI-Display-Bold' !important;
 }
 
 app-auth-header {
@@ -38,6 +71,12 @@ ion-back-button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.text-overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 ion-item {
