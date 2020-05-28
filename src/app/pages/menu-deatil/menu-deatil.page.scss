@@ -9,17 +9,17 @@
   }
 }
 ion-content {
-  --background: #f0f0f0;
+  --background: white;
 }
 
 .container {
-  background: $gallery;
+  background: white;
   ion-list {
-    background: $gallery;
+    background: white;
     margin-top: -15px;
     ion-item {
       --border-color: #c6c6d1;
-      --background: #f0f0f0;
+      --background: white;
 
       ion-label {
         display: inline-flex;
@@ -53,8 +53,9 @@ ion-content {
   }
 
   ion-textarea {
-    background: $gallery;
+    background: #f0efef;
     --padding-start: 10px;
+    border-radius: 10px;
   }
 }
 
@@ -125,9 +126,10 @@ ion-content {
 
   .add {
     background: $burning-orange;
-    position: relative;
-    top: 17px;
+    position: absolute;
+    bottom: 25px;
     border-radius: 10px;
+    width: calc(100% - 40px);
     height: 45px;
     font-size: 15px;
     color: white;

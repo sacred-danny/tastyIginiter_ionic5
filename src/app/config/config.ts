@@ -5,11 +5,13 @@
 export const config = {
   production: false,
   addressKey: 'h8oJpLQObUWNXeSh4vtDiw25701',
-  serverURL: 'http://www.grubsupdev.com/',
-  apiURL: 'http://www.grubsupdev.com/api/v1',
 
-  // serverURL: 'http://localhost/grubsupdev/',
-  // apiURL: 'http://localhost/grubsupdev/api/v1',
+  // serverURL: 'http://www.grubsupdev.com/',
+  // apiURL: 'http://www.grubsupdev.com/api/v1',
+
+  serverURL: 'http://localhost/grubsupdev/',
+  apiURL: 'http://localhost/grubsupdev/api/v1',
+
   menuBlankImage: 'https://via.placeholder.com/60',
   storage: {
     token: 'token',

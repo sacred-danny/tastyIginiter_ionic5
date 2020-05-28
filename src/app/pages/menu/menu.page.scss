@@ -40,6 +40,7 @@
 
     .active {
       background: $burning-orange;
+
       h3 {
         color: white;
       }
@@ -74,9 +75,11 @@
 
       .descripton {
         width: calc(100% - 75px);
+
         p {
           line-height: 15px;
           height: 45px;
+          white-space: pre-line;
         }
       }
 
@@ -86,6 +89,7 @@
         right: 20px;
         width: 50px;
       }
+
       span {
         position: absolute;
         right: 10px;

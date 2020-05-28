@@ -3,7 +3,11 @@
   /** primary **/
   --ion-color-white: white;
   --ion-color-black: white;
+  --backgroudn: white !important;
+}
 
+:host {
+  background: white !important;
 }
 
 :host(.ion-activatable:hover) ion-item {
@@ -42,20 +46,44 @@ ion-list-header {
   font-family: 'SF-UI-Display-Bold' !important;
 }
 
+.shadow {
+  -webkit-box-shadow: inset 0 0 5px #c6bcc6 !important;
+  -moz-box-shadow: inset 0 0 5px #c6bcc6 !important;
+  box-shadow: inset 0 0 5px #c6bcc6 !important;
+}
+
+.bottom {
+  background: white;
+}
+
 app-auth-header {
   display: contents;
 }
 
 .header-type-1 {
   width: 100%;
-  height: 17.3%;
+  height: 115.3px;
   background: $burning-orange;
 }
 
 .header-type-2 {
   width: 100%;
-  height: 14%;
+  height: 94px;
   background: white;
+}
+
+.header-type-3 {
+  width: 100%;
+  height: 216px;
+  background: $pistachio;
+}
+
+position-absolute {
+  position: absolute;
+}
+
+position-relative {
+  position: relative;
 }
 
 ion-back-button {

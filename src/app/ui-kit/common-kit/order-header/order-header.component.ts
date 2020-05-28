@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-order-header',
@@ -15,7 +16,8 @@ export class OrderHeaderComponent implements OnInit {
   @Input() backUrl: string;
 
   constructor(
-    private navController: NavController
+    private navController: NavController,
+    private authService: AuthService
   ) {
   }
 

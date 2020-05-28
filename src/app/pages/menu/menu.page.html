@@ -3,8 +3,8 @@
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
     <div class="container d-flex flex-column p-0">
         <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
-            <ion-refresher-content>
-            </ion-refresher-content>
+<!--            <ion-refresher-content>-->
+<!--            </ion-refresher-content>-->
         </ion-refresher>
         <div class="deliveryOpen mt-15 px-15">
             <div class="delivery float-left">
@@ -12,7 +12,7 @@
                 <p class="font-15 color-shark text-left">{{this.menuService.menu.delivery}}</p>
             </div>
             <div class="open float-right mx-20">
-                <h2 class="font-15 color-pistachio font-weight-bold text-left mb-0">We're</h2>
+                <h2 class="font-15 color-pistachio font-weight-bold text-left mb-0">We're open</h2>
                 <p class="font-15 color-shark text-left">{{this.menuService.menu.openTime}}</p>
             </div>
         </div>
@@ -46,16 +46,16 @@
                         {{categoryDetail.name}}
                     </ion-list-header>
 
-                    <ion-item *ngFor="let menu of categoryDetail.menus;">
+                    <ion-item *ngFor="let menu of categoryDetail.menus;" (click)="goDetail(menu)">
                         <ion-avatar slot="start">
                             <img [src]="menu.menuPhoto == null ? menuBlankImage : menu.menuPhoto">
                         </ion-avatar>
                         <div class="descripton">
                             <h2 class="font-15 color-shark font-weight-bold mt-5 mb-0 text-overflow">{{menu.menuName}}</h2>
-                            <p class="font-12 color-french-gray mt-5 mb-0">{{menu.menuDescription == '' ? "no" : menu.menuDescription}}</p>
+                            <p class="font-12 color-french-gray mt-5 mb-0">{{menu.menuDescription}}</p>
                         </div>
                         <h2 class="price font-15 color-burning-orange font-weight-bold text-overflow m-0">{{menu.menuPrice | currency:'GBP'}}</h2>
-                        <span class="font-20 color-french-gray font-weight-light" (click)="goDetail(menu)"> > </span>
+                        <span class="font-20 color-french-gray font-weight-light"> > </span>
                     </ion-item>
                 </ion-list>
             </ng-container>

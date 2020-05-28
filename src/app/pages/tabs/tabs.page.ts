@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../core/services/menu.service';
 import { CommonService } from '../../core/services/common.service';
 import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tabs',
@@ -14,6 +15,7 @@ export class TabsPage implements OnInit {
     private menuService: MenuService,
     private navController: NavController,
     private commonService: CommonService,
+    private router: Router
   ) {
   }
 
@@ -22,7 +24,8 @@ export class TabsPage implements OnInit {
 
   goOrder() {
     if (this.menuService.order.totalPrice > 0) {
-      this.navController.navigateForward('your-order');
+      this.router.navigate([ 'your-order' ]);
+      // this.navController.navigateForward('your-order');
     } else {
       this.commonService.presentAlert('Warning', 'Please, add some menus before you checkout!');
     }

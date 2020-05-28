@@ -24,11 +24,14 @@
         </ion-tab-button>
     </ion-tab-bar>
 </ion-tabs>
-<ion-fab class="bottom-add-fab" vertical="bottom" horizontal="center" slot="fixed">
-    <ion-badge class="item-align-center" *ngIf="menuService.order.totalCount > 0">
-        <span>{{menuService.order.totalCount}}</span>
-    </ion-badge>
-    <ion-fab-button (click)="goOrder()">
-        <ion-icon name="cart" size="40"></ion-icon>
-    </ion-fab-button>
-</ion-fab>
+<ng-container *ngIf="menuService.order">
+    <ion-fab class="bottom-add-fab" vertical="bottom" horizontal="center" slot="fixed">
+        <ion-badge class="item-align-center" *ngIf="menuService.order.totalCount > 0">
+            <span>{{menuService.order.totalCount}}</span>
+        </ion-badge>
+        <ion-fab-button (click)="goOrder()">
+            <ion-icon name="cart" size="40"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ng-container>
+

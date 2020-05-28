@@ -2,29 +2,33 @@
 
 ion-tab-bar {
   height: 60px;
-  --background: #f0f0f0;
+  border: 0px;
+  -webkit-box-shadow: 0 0 8px black;
+  -moz-box-shadow: 0 0 8px black;
+  box-shadow: 0 0 8px black;
 }
 
 ion-tab-button {
   --color-focused: #FC6C35;
   --color-selected: #FC6C35;
-
+  height: 80%;
   ion-label {
     font-size: 13px;
   }
 }
 
 ion-fab {
-  bottom: 8px;
-  background-color: $gallery;
-  padding: 7px;
+  bottom: 15px;
+  padding: 3px;
+  background: white;
   border-radius: 50%;
-  margin-left: -36px;
+  margin-left: -28px;
+  box-shadow: 0px 0px 0px black, 0px -3px 10px black;
 
   ion-badge {
     position: absolute;
-    top: 0;
-    left: 35px;
+    top: -5px;
+    left: 30px;
     z-index: 200;
     width: 24px;
     height: 24px;
@@ -34,11 +38,11 @@ ion-fab {
 
   ion-fab-button {
     ion-icon {
-      font-size: 28px;
+      font-size: 35px;
     }
 
     --background: #FC6C35;
-    border: solid 5px white;
+    border: solid 1px white;
     border-radius: 50%;
     width: 50px;
     height: 50px;

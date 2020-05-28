@@ -6,7 +6,7 @@
     <ion-content>
         <div class="container d-flex flex-column">
             <div class="mt-15">
-                <p class="font-30 color-shark font-weight-light text-left mb-0 text-overflow">{{menuDetail.menu.menuName}}</p>
+                <p class="font-30 color-shark font-weight-bold text-left mb-0">{{menuDetail.menu.menuName}}</p>
             </div>
             <div class="mt-10">
                 <p class="font-15 color-french-gray font-weight-light text-left mb-0">{{menuDetail.menu.menuDescription}}</p>
@@ -38,14 +38,14 @@
                     </ion-list>
                 </ng-container>
             </ng-container>
-            <div class="mt-15">
-                <ion-textarea placeholder="Add delivery note" [(ngModel)]="comment" id="comment"></ion-textarea>
+            <div class="mt-15 mb-25">
+                <ion-textarea placeholder="Add comment" [(ngModel)]="comment" id="comment"></ion-textarea>
             </div>
 
         </div>
     </ion-content>
-    <div class="bottom" >
-        <div class="special" (click)="goComment()">
+    <div class="bottom shadow" >
+        <div class="special" (click)="goComment()" *ngIf="showComment">
             <h2 class="font-15 color-burning-orange font-weight-bold text-left ml-20 mt-30">Special Instructions?</h2>
         </div>
         <div class="order-count">

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-tab-header',
@@ -10,7 +11,9 @@ export class TabHeaderComponent implements OnInit {
   @Input() isLogo: boolean;
   @Input() title: string;
 
-  constructor() {
+  constructor(
+    private authService: AuthService
+  ) {
   }
 
   ngOnInit() {

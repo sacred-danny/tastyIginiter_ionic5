@@ -24,6 +24,7 @@ export class MenuDeatilPage implements OnInit {
   price = 0;
   onePirce = 0;
   comment = '';
+  showComment = true;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -60,6 +61,12 @@ export class MenuDeatilPage implements OnInit {
         }
         this.menuDetail.options = options;
         loading.dismiss();
+        setTimeout(() => {
+          const y = document.getElementById('comment').offsetTop;
+          if (y < document.body.offsetHeight - 315) {
+            this.showComment = false;
+          }
+        }, 1);
       });
     } catch (e) {
       console.log(e);
@@ -129,13 +136,6 @@ export class MenuDeatilPage implements OnInit {
   }
 
   addOrder() {
-    // this.menuService.order = {
-    //   totalCount: 0,
-    //   totalPrice: 0,
-    //   items: new Array(),
-    // };
-    // this.storage.set(config.storage.order, this.menuService.order);
-    // return;
     this.menuService.order.totalCount += this.count;
     this.menuService.order.totalPrice += this.price;
     const item: Item = {

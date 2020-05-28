@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { config } from '../../config/config';
 import { NavController, IonContent, IonSlides } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 import { MenuService } from '../../core/services/menu.service';
 import { Category, CategoryDetail, Menu, MenuDetail, Special } from '../../core/models/menu';
@@ -48,11 +49,13 @@ export class MenuPage implements OnInit {
   categoryDetails: Array<CategoryDetail>;
   scrolledIndex = 0;
   setScrolled = false;
+  currentIndex = 0;
 
   constructor(
     private menuService: MenuService,
     private navController: NavController,
-    private platform: Platform
+    private platform: Platform,
+    private router: Router
   ) {
   }
 
@@ -97,7 +100,7 @@ export class MenuPage implements OnInit {
   doRefresh(refresher) {
     setTimeout(() => {
       this.refresherRef.complete();
-    }, 2000);
+    }, 10);
   }
 
   getMenu(id) {
@@ -112,24 +115,26 @@ export class MenuPage implements OnInit {
 
   goDetail(menu: MenuDetail) {
     // @ts-ignore
-    this.navController.navigateForward('menu-detail/' + menu.menuId);
+    // this.router.navigate([ 'menu-detail/' + menu.menuId ]);
+    this.navController.navigateForward('menu-detail/' + menu.menuId );
   }
 
   logScrolling(event: any) {
     const detail: any = event.detail;
-    const currentPos = detail.currentY;
-    let currentIndex = 0;
+    const currentPos = detail.scrollTop;
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.categoryPositions.length; i ++) {
-      if (this.categoryPositions[i] <= currentPos) {
-        currentIndex = i;
+      // tslint:disable-next-line:max-line-length
+      if (this.categoryPositions[i] - currentPos <= 5 && this.categoryPositions[i] - currentPos >= 0 || currentPos - this.categoryPositions[i] >= 0 && currentPos - this.categoryPositions[i] <= 20) {
+        this.currentIndex = i;
+        break;
       }
     }
-    if (this.scrolledIndex !== currentIndex) {
+    if (this.scrolledIndex !== this.currentIndex) {
       if (this.setScrolled === false) {
-        this.slideCategory.slideTo(currentIndex, 500).then(() => {
+        this.scrolledIndex = this.currentIndex;
+        this.slideCategory.slideTo(this.scrolledIndex, 500).then(() => {
         });
-        this.scrolledIndex = currentIndex;
       }
     }
   }

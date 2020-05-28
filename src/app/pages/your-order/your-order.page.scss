@@ -1,8 +1,4 @@
 @import "../../../theme";
-:host {
-  background: $gallery;
-}
-
 
 .total {
   height: 175px;
@@ -33,6 +29,7 @@
 .discount-code {
   display: flex;
   height: 40px;
+  background: white;
   border: solid 2px $burning-orange;
   border-radius: 7px;
 
@@ -54,7 +51,6 @@
 }
 
 ion-content {
-  --background: #f0f0f0;
 
   ion-list {
     ion-item {
