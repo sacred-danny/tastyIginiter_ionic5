@@ -11,6 +11,7 @@ export const config = {
 
   serverURL: 'http://localhost/grubsupdev/',
   apiURL: 'http://localhost/grubsupdev/api/v1',
+  stripeApiKey: 'pk_test_KGSgL4Ccd2oGEKsSYXBF4SD600LfoqUiWa',
 
   menuBlankImage: 'https://via.placeholder.com/60',
   storage: {

@@ -44,23 +44,11 @@ export class MenuService {
     return this.http.post<Menu>(config.apiURL + '/home/menu', payload);
   }
 
-  // async getDeatail(payload) {
-  //   const res = await this.http.post(config.apiURL + '/home/menuDetail', payload);
-  //   return res;
-  // }
-
   getDeatail(payload): Observable<any> {
-    return this.http.post<any>(config.apiURL + '/home/menuDetail', payload).catch((error: any) => {
-      this.navController.pop();
-      if (error.status === 500) {
-        return throwError(error);
-      } else if (error.status === 400) {
-        return throwError(error);
-      } else if (error.status === 409) {
-        return throwError(error);
-      } else if (error.status === 406) {
-        return throwError(error);
-      }
-    });
+    return this.http.post<any>(config.apiURL + '/home/menuDetail', payload);
+  }
+
+  getCheckOutTime(payload): Observable<any> {
+    return this.http.post<any>(config.apiURL + '/home/getCheckOutTime', payload);
   }
 }

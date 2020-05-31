@@ -38,6 +38,14 @@ const routes: Routes = [
   },  {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'checkout',
+    loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
+  },
+  {
+    path: 'stripe-javascript',
+    loadChildren: () => import('./pages/stripe-javascript/stripe-javascript.module').then( m => m.StripeJavascriptPageModule)
   }
 
 

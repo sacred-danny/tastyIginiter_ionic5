@@ -107,5 +107,17 @@ export interface Order {
   items: Array<Item>;
 }
 
+export interface CheckOutTime {
+  id: number;
+  date: string;
+  day: string;
+  weekDay: string;
+  times: Array<SelectTime>;
+}
+
+export interface SelectTime {
+  orderTime: string;
+  showTime: string;
+}
 
 

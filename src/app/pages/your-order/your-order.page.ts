@@ -3,6 +3,7 @@ import { Storage } from '@ionic/storage';
 import { NavController } from '@ionic/angular';
 import { config } from '../../config/config';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { MenuService } from '../../core/services/menu.service';
 import { CommonService } from '../../core/services/common.service';
@@ -29,7 +30,8 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
     private storage: Storage,
     private navController: NavController,
     private ref: ChangeDetectorRef,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private router: Router
   ) {
     ref.detach();
     setInterval(() => {
@@ -63,7 +65,7 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
   }
 
   checkOut() {
-    this.navController.pop();
+    this.router.navigateByUrl('checkout');
   }
 
   calcPrice() {
@@ -94,7 +96,7 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
   couponApply() {
     let found = false;
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.coupons.length; i++) {
+    for (let i = 0; i < this.coupons.length; i ++) {
       if (this.coupons[i].code === this.discountCode) {
         found = true;
         this.discountType = this.coupons[i].type;
@@ -103,7 +105,7 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
         break;
       }
     }
-    if (!found) {
+    if ( ! found) {
       this.discount = 0;
       this.discountType = '';
       this.calcPrice();

@@ -1,5 +1,4 @@
 @import "../../../theme";
-
 .total {
   height: 175px;
   border-radius: 10px;
@@ -51,7 +50,6 @@
 }
 
 ion-content {
-
   ion-list {
     ion-item {
       --border-color: #efeff4;
@@ -74,6 +72,7 @@ ion-content {
 .bottom {
   height: 100px;
   width: 100%;
+
   .check-out {
     height: 50px;
     border-radius: 10px;

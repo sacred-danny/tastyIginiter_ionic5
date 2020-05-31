@@ -38,4 +38,5 @@ export interface User {
   id: string;
   name?: string;
   areaId?: string;
+  deliveryAddress?: string;
 }

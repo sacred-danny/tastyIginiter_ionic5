@@ -25,6 +25,7 @@ export class MenuDeatilPage implements OnInit {
   onePirce = 0;
   comment = '';
   showComment = true;
+  isOrder = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -136,31 +137,34 @@ export class MenuDeatilPage implements OnInit {
   }
 
   addOrder() {
-    this.menuService.order.totalCount += this.count;
-    this.menuService.order.totalPrice += this.price;
-    const item: Item = {
-      name: this.menuDetail.menu.menuName,
-      count: this.count,
-      price: this.price,
-      comment: this.comment,
-      photo: this.menuDetail.menu.menuPhoto,
-      extras: ''
-    };
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.menuDetail.options.length; i ++) {
+    if (this.isOrder === false) {
+      this.isOrder = true;
+      this.menuService.order.totalCount += this.count;
+      this.menuService.order.totalPrice += this.price;
+      const item: Item = {
+        name: this.menuDetail.menu.menuName,
+        count: this.count,
+        price: this.price,
+        comment: this.comment,
+        photo: this.menuDetail.menu.menuPhoto,
+        extras: ''
+      };
       // tslint:disable-next-line:prefer-for-of
-      for (let j = 0; j < this.menuDetail.options[i].optionValues.length; j ++) {
-        if (this.menuDetail.options[i].optionValues[j].isChecked) {
-          item.extras += this.menuDetail.options[i].optionValues[j].value;
-          if (j < this.menuDetail.options[i].optionValues.length - 1) {
-            item.extras += ', ';
+      for (let i = 0; i < this.menuDetail.options.length; i ++) {
+        // tslint:disable-next-line:prefer-for-of
+        for (let j = 0; j < this.menuDetail.options[i].optionValues.length; j ++) {
+          if (this.menuDetail.options[i].optionValues[j].isChecked) {
+            item.extras += this.menuDetail.options[i].optionValues[j].value;
+            if (j < this.menuDetail.options[i].optionValues.length - 1) {
+              item.extras += ', ';
+            }
           }
         }
       }
+      this.menuService.order.items.push(item);
+      this.storage.set(config.storage.order, this.menuService.order);
+      console.log(this.menuService.order);
+      this.navController.pop();
     }
-    this.menuService.order.items.push(item);
-    this.storage.set(config.storage.order, this.menuService.order);
-    console.log(this.menuService.order);
-    this.navController.pop();
   }
 }

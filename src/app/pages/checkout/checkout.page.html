@@ -1,0 +1,83 @@
+<app-order-header [backGroundColor]="backGroundColor" backUrl="back" subTitle="Checkout"></app-order-header>
+<div class="main shadow bg-color-white mx-15 p-20">
+    <div class="row mx-0">
+        <div class="mode">
+            <button class="btn delivery p-0" [class.active]="isSelected === 'delivery'" (click)="delivery()">
+                <span class="item-align-center">DELIVERY</span>
+            </button>
+            <button class="btn pickup p-0" [class.active]="isSelected === 'pickup'"  (click)="pickup()">
+                <span class="item-align-center">PICK-UP</span>
+            </button>
+        </div>
+    </div>
+    <div class="row mx-0 mt-15" *ngIf="isSelected === 'delivery'">
+        <div class="w-100 row m-0">
+            <p class="font-15 color-french-gray text-left mb-5">Select Delivery Day / Time</p>
+        </div>
+        <div class="w-100 row m-0" *ngIf="deliveryTimes !== undefined">
+            <ion-select class="mr-10" [(ngModel)]="deliveryTime.displayDate" name="selectCode"
+                        multiple="false" placeholder="Tap to select.." [selectedText]="deliveryTime.displayDate"
+                        (ionChange)="deliveryDateChanged()" required >
+                <ion-select-option *ngFor="let time of deliveryTimes; let i = index;" [id]="'delivery_' + i" [value]="time.weekDay + ' - ' + time.day">
+                    {{time.weekDay}} - {{time.day}}
+                </ion-select-option>
+            </ion-select>
+
+            <ion-select [(ngModel)]="deliveryTime.displayOrderTime" name="selectCode"
+                        multiple="false" placeholder="Tap to select.." [selectedText]="deliveryTime.displayOrderTime" (ionChange)="deliveryTimeChanged()" required >
+                <ion-select-option *ngFor="let time of deliveryTimes[deliveryTime.id].times" value="{{time.showTime}}">
+                    {{time.showTime}}
+                </ion-select-option>
+            </ion-select>
+        </div>
+    </div>
+    <div class="row mx-0 mt-15" *ngIf="isSelected === 'pickup'">
+        <div class="w-100 row m-0">
+            <p class="font-15 color-french-gray text-left mb-5">Select Pickup Day / Time</p>
+        </div>
+        <div class="w-100 row m-0" *ngIf="pickupTimes !== undefined">
+            <ion-select class="mr-10" [(ngModel)]="pickupTime.displayDate" name="selectCode"
+                        multiple="false" placeholder="Tap to select.." [selectedText]="pickupTime.displayDate"
+                        (ionChange)="pickupDateChanged()" required >
+                <ion-select-option *ngFor="let time of pickupTimes; let i = index;" [id]="'delivery_' + i" [value]="time.weekDay + ' - ' + time.day">
+                    {{time.weekDay}} - {{time.day}}
+                </ion-select-option>
+            </ion-select>
+
+            <ion-select [(ngModel)]="pickupTime.displayOrderTime" name="selectCode"
+                        multiple="false" placeholder="Tap to select.." [selectedText]="pickupTime.displayOrderTime" (ionChange)="pickupTimeChanged()" required >
+                <ion-select-option *ngFor="let time of pickupTimes[pickupTime.id].times" value="{{time.showTime}}">
+                    {{time.showTime}}
+                </ion-select-option>
+            </ion-select>
+        </div>
+    </div>
+    <div class="row mx-0 mt-15">
+        <div class="w-100 row m-0">
+            <h2 class="font-15 font-weight-bold color-shark text-left mb-5">DELIVERY ADDRESS</h2>
+        </div>
+        <div class="w-100 row m-0 p-10 delivery-address">
+            <div class="w-100 row m-0">
+                <h3 class="font-13 color-burning-orange text-left mb-5">ADDRESS #1</h3>
+            </div>
+            <div class="w-100 row m-0">
+                <p class="font-17 color-shark text-left mb-5">{{authService.user.deliveryAddress}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mx-0 mt-15">
+        <ion-textarea placeholder="Add Delivery Note" [(ngModel)]="comment"></ion-textarea>
+    </div>
+
+    <div class="row mx-0 mt-15">
+        <div class="w-100 row m-0">
+            <h2 class="font-15 font-weight-bold color-shark text-left mb-5">PAYMENT</h2>
+        </div>
+        <div class="w-100 row m-0">
+        </div>
+        <div class="w-100 row m-0">
+            <h2 class="font-15 font-weight-bold color-burning-orange text-left mt-10">Add New Card</h2>
+        </div>
+    </div>
+</div>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
-
 import { CommonKitModule } from './ui-kit/common-kit/common-kit.module';
 import { InputModule } from './ui-kit/input/input.module';
 
@@ -26,7 +25,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     CommonKitModule,
-    InputModule
+    InputModule,
   ],
   providers: [
     StatusBar,

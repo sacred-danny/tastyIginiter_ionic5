@@ -1,4 +1,4 @@
-<ng-container *ngIf="menuDetail != undefined">
+<ng-container *ngIf="menuDetail !== undefined">
     <div class="menu-image" >
         <ion-back-button text="Back" (click)="navController.pop();"></ion-back-button>
         <ion-img [src]="menuDetail.menu.menuPhoto == null ? menuBlankImage : menuDetail.menu.menuPhoto"></ion-img>

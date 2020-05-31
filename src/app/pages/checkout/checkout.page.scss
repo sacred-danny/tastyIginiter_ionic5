@@ -1,0 +1,76 @@
+@import "../../../theme";
+
+:host {
+  display: block;
+}
+
+:host ::ng-deep ion-select {
+  --padding-start: 0px;
+  --padding-right: 0px;
+  --padding-top: 0px;
+  --padding-bottom: 0px;
+}
+
+.main {
+  border-radius: 10px;
+  height: 400px;
+  margin-top: -90px;
+  overflow: visible;
+
+  .mode {
+    display: flex;
+    border: solid 3px $burning-orange;
+    border-radius: 10px;
+    width: 184px;
+
+    .delivery {
+      width: 92px;
+      height: 28px;
+      border-radius: 0px;
+      border-top-left-radius: 7px;
+      border-bottom-left-radius: 7px;
+      background: white;
+      span {
+        font-size: 15px;
+        color: $burning-orange;
+        height: 100%;
+        position: relative;
+      }
+    }
+    .pickup {
+      width: 92px;
+      height: 28px;
+      border-radius: 0px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      background: white;
+      span {
+        font-size: 15px;
+        color: $burning-orange;
+        height: 100%;
+        position: relative;
+      }
+    }
+    .active {
+      z-index: 1000;
+      background: $burning-orange;
+      span {
+        font-size: 15px;
+        color: white;
+        height: 100%;
+        position: relative;
+      }
+    }
+  }
+
+  .delivery-address {
+    border-radius: 5px;
+    border: solid 1px $burning-orange
+  }
+
+  ion-textarea {
+    background: #f0efef;
+    --padding-start: 10px;
+    border-radius: 10px;
+  }
+}
