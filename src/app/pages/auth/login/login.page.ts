@@ -20,8 +20,7 @@ export class LoginPage implements OnInit {
     email: [ '', Validators.compose([ Validators.required, Validators.email ]) ],
     password: [ '', Validators.compose([ Validators.required, Validators.minLength(8) ]) ],
   });
-
-  backGroundColor = config.baseColors.burningOrage;
+  serverConfig  = config;
 
   constructor(
     private formBuilder: FormBuilder,

@@ -1,4 +1,4 @@
-<app-auth-header [backGroundColor]="backGroundColor" isSignup="true" backUrl="/login"></app-auth-header>
+<app-auth-header [backGroundColor]="serverConfig.baseColors.pistachio" isSignup="true" backUrl="/login"></app-auth-header>
 <ion-content>
     <div class="container h-100 d-flex flex-column">
         <form [formGroup]="form" (ngSubmit)="signup()" class="mt-35 px-20">

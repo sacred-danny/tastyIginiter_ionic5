@@ -23,6 +23,7 @@ export class SignupPage implements OnInit {
     confirmPassword: [ '', Validators.compose([ Validators.required, Validators.minLength(8) ]) ],
   });
 
+  serverConfig = config;
   backGroundColor = config.baseColors.pistachio;
 
   constructor(

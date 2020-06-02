@@ -39,4 +39,5 @@ export interface User {
   name?: string;
   areaId?: string;
   deliveryAddress?: string;
+  stripeCustomerId?: string;
 }

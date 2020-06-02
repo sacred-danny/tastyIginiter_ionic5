@@ -45,10 +45,39 @@ export class MenuService {
   }
 
   getDeatail(payload): Observable<any> {
-    return this.http.post<any>(config.apiURL + '/home/menuDetail', payload);
+    return this.http.post<any>(config.apiURL + '/home/menuDetail', payload).catch((error: any) => {
+      throw error;
+    });
   }
 
   getCheckOutTime(payload): Observable<any> {
-    return this.http.post<any>(config.apiURL + '/home/getCheckOutTime', payload);
+    return this.http.post<any>(config.apiURL + '/home/getCheckOutTime', payload).catch((error: any) => {
+      this.navController.pop();
+      throw error;
+    });
+  }
+
+  getSavedCard(payload): Observable<any> {
+    return this.http.post<any>(config.apiURL + '/home/getSavedCard', payload).catch((error: any) => {
+      throw error;
+    });
+  }
+
+  deleteCard(payload): Observable<any> {
+    return this.http.post<any>(config.apiURL + '/home/deleteCard', payload).catch((error: any) => {
+      throw error;
+    });
+  }
+
+  makePaymentIntent(payload): Observable<any> {
+    return this.http.post<any>(config.apiURL + '/home/makePaymentIntent', payload).catch((error: any) => {
+      throw error;
+    });
+  }
+
+  verifyPayment(payload): Observable<any> {
+    return this.http.post<any>(config.apiURL + '/home/verifyPayment', payload).catch((error: any) => {
+      throw error;
+    });
   }
 }

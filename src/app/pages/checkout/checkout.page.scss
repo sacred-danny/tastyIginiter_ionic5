@@ -12,10 +12,10 @@
 }
 
 .main {
-  border-radius: 10px;
-  height: 400px;
+  border-radius: 10px 10px 0px 0px;
+  height: calc(100% - 245px);
   margin-top: -90px;
-  overflow: visible;
+  overflow: auto;
 
   .mode {
     display: flex;
@@ -73,4 +73,128 @@
     --padding-start: 10px;
     border-radius: 10px;
   }
+
+  .save-card {
+    background: transparent;
+  }
+
+  ion-img {
+    width: 24px;
+    height: 24px;
+  }
+
+  ion-list {
+    background: transparent;
+  }
+
+  ion-item {
+    --border-color: transparent;
+
+    margin-bottom: 10px;
+
+    .main {
+      background: #f0efef;
+      padding: 8px;
+      border-radius: 8px;
+      height: 40px;
+      overflow: unset;
+
+      ion-checkbox{
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        --background: transparent;
+        --checkmark-color: #FC6C35;
+        --checkmark-width: 3px;
+        --border-color: transparent;
+        right: 30px;
+        top: 10px;
+      }
+    }
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.bottom {
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+
+  .pay {
+    height: 50px;
+    border-radius: 10px;
+  }
+}
+
+//.StripeElement {
+//  background-color: white;
+//  padding: 8px 12px;
+//  border-radius: 4px;
+//  border: 1px solid transparent;
+//  box-shadow: 0 1px 3px 0 #e6ebf1;
+//  -webkit-transition: box-shadow 150ms ease;
+//  transition: box-shadow 150ms ease;
+//}
+//
+//.StripeElement--focus {
+//  box-shadow: 0 1px 3px 0 #cfd7df;
+//}
+//
+//.StripeElement--invalid {
+//  border-color: #fa755a;
+//}
+//
+//.StripeElement--webkit-autofill {
+//  background-color: #fefde5 !important;
+//}
+#stripe-token-handler {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  padding: 20px 30px;
+  border-radius: 0 0 4px 4px;
+  box-sizing: border-box;
+  box-shadow: 0 50px 100px rgba(50, 50, 93, 0.1),
+  0 15px 35px rgba(50, 50, 93, 0.15),
+  0 5px 15px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out;
+  transform: translateY(0);
+  opacity: 1;
+  background-color: white;
+}
+
+#stripe-token-handler.is-hidden {
+  opacity: 0;
+  transform: translateY(-80px);
+}
+
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+.StripeElement {
+  background-color: white;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }

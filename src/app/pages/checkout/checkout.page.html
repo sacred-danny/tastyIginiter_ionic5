@@ -1,11 +1,11 @@
-<app-order-header [backGroundColor]="backGroundColor" backUrl="back" subTitle="Checkout"></app-order-header>
+<app-order-header [backGroundColor]="serverConfig.baseColors.burningOrage" backUrl="back" subTitle="Checkout"></app-order-header>
 <div class="main shadow bg-color-white mx-15 p-20">
     <div class="row mx-0">
         <div class="mode">
             <button class="btn delivery p-0" [class.active]="isSelected === 'delivery'" (click)="delivery()">
                 <span class="item-align-center">DELIVERY</span>
             </button>
-            <button class="btn pickup p-0" [class.active]="isSelected === 'pickup'"  (click)="pickup()">
+            <button class="btn pickup p-0" [class.active]="isSelected === 'collection'"  (click)="pickup()">
                 <span class="item-align-center">PICK-UP</span>
             </button>
         </div>
@@ -74,10 +74,39 @@
         <div class="w-100 row m-0">
             <h2 class="font-15 font-weight-bold color-shark text-left mb-5">PAYMENT</h2>
         </div>
-        <div class="w-100 row m-0">
+        <div class="w-100 row mx-0 mb-10" *ngIf="this.savedCards !== undefined">
+            <ion-list class="row p-0 m-0 w-100">
+                <ion-item class="w-100" *ngFor="let item of this.savedCards.data;" (click)="selectCard(item)">
+                    <div class="row w-100 m-0 main">
+                        <div>
+                            <ion-img  [src]="serverConfig.serverURL + serverConfig.debitCardURL + item.card.brand + '.svg'"></ion-img>
+                        </div>
+                        <div class="ml-10">
+                            <p *ngIf="item.card.brand !== 'amex'" class="font-17 color-shark text-left m-0">**** **** **** {{item.card.last4}}</p>
+                            <p *ngIf="item.card.brand === 'amex'" class="font-17 color-shark text-left m-0">**** ****** *{{item.card.last4}}</p>
+                        </div>
+                        <ion-checkbox color="light" class="m-0" [checked]="item.isChecked === true"></ion-checkbox>
+                    </div>
+                    <ion-icon name="trash" [size]="30" (click)="deleteCard(item)"></ion-icon>
+                </ion-item>
+            </ion-list>
         </div>
         <div class="w-100 row m-0">
-            <h2 class="font-15 font-weight-bold color-burning-orange text-left mt-10">Add New Card</h2>
+            <form class="w-100 row m-0" (ngSubmit)="saveCard()" [class.ion-hide]="isNewCard === false">
+                <div id="card-element" class="field w-100"></div>
+                <div id="card-errors" class="color-torch-red" role="alert"></div>
+                <div class="w-100 m-0">
+                    <button type="submit" class="font-15 save-card font-weight-bold color-burning-orange text-left  ion-float-right mt-10">
+                        Save
+                    </button>
+                </div>
+            </form>
+            <h2 class="font-15 font-weight-bold color-burning-orange text-left mt-10" (click)="addCard()">Add New Card</h2>
         </div>
+    </div>
+</div>
+<div class="bottom shadow row m-0 -w100" >
+    <div class="pay row w-100 mx-20 my-25 item-align-center bg-color-burning-orange" (click)="pay()">
+        <h3 class="font-17 color-white font-weight-bold ion-text-md-capitalize m-0">Pay {{menuService.order.currentPrice | currency:'GBP'}}</h3>
     </div>
 </div>

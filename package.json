@@ -31,7 +31,6 @@
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
     "ngx-mask": "^9.0.2",
-    "ngx-stripe": "^9.0.2",
     "rxjs": "~6.5.1",
     "rxjs-compat": "^6.5.5",
     "tslib": "^1.9.0",

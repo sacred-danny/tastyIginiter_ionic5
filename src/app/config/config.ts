@@ -13,6 +13,7 @@ export const config = {
   apiURL: 'http://localhost/grubsupdev/api/v1',
   stripeApiKey: 'pk_test_KGSgL4Ccd2oGEKsSYXBF4SD600LfoqUiWa',
 
+  debitCardURL: 'assets/media/debitcards/',
   menuBlankImage: 'https://via.placeholder.com/60',
   storage: {
     token: 'token',
@@ -22,6 +23,26 @@ export const config = {
   baseColors: {
     burningOrage: '#fc6c35',
     pistachio: '#8FD400'
+  },
+  stripeElementStyles: {
+    base: {
+      color: '#32325D',
+      fontWeight: 500,
+      fontSize: '16px',
+      fontSmoothing: 'antialiased',
+      '::placeholder': {
+        color: '#CFD7DF',
+      },
+      ':-webkit-autofill': {
+        color: '#e39f48',
+      },
+    },
+    invalid: {
+      color: '#E25950',
+      '::placeholder': {
+        color: '#FFCCA5',
+      },
+    },
   }
 };
 

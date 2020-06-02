@@ -1,4 +1,4 @@
-<app-auth-header [backGroundColor]="backGroundColor" isLogo="true" isSignIn="true"></app-auth-header>
+<app-auth-header [backGroundColor]="serverConfig.baseColors.burningOrage" isLogo="true" isSignIn="true"></app-auth-header>
 <ion-content>
     <div class="container h-100 d-flex flex-column">
         <form [formGroup]="form" (ngSubmit)="signin()" class="px-20 mt-50">

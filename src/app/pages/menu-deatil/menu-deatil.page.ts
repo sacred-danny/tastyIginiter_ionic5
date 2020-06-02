@@ -83,7 +83,7 @@ export class MenuDeatilPage implements OnInit {
   }
 
   checkboxClick(item) {
-    item.isChecked = ! item.isChecked;
+    item.isChecked = !item.isChecked;
     if (item.isChecked) {
       this.onePirce += item.price;
     } else {
@@ -99,7 +99,7 @@ export class MenuDeatilPage implements OnInit {
         this.onePirce -= optionsValues[i].price;
       }
     }
-    item.isChecked = ! item.isChecked;
+    item.isChecked = !item.isChecked;
     if (item.isChecked) {
       this.onePirce += item.price;
     }

@@ -16,7 +16,7 @@ import { Coupon, Item } from '../../core/models/menu';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class YourOrderPage implements OnInit, AfterContentChecked {
-  backGroundColor = config.baseColors.burningOrage;
+  serverConfig = config;
   menuBlankImage = config.menuBlankImage;
   discount = 0;
   discountType = '';
@@ -59,12 +59,12 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
         this.delivery = this.menuService.menu.deliveryAmount;
       }
     }
-
     this.calcPrice();
-
   }
 
   checkOut() {
+    this.menuService.order.currentPrice = this.currentPrice;
+    this.storage.set(config.storage.order, this.menuService.order);
     this.router.navigateByUrl('checkout');
   }
 

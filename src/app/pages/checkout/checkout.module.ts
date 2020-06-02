@@ -15,7 +15,7 @@ import { CheckoutPage } from './checkout.page';
     FormsModule,
     IonicModule,
     CheckoutPageRoutingModule,
-    CommonKitModule
+    CommonKitModule,
   ],
   declarations: [CheckoutPage]
 })

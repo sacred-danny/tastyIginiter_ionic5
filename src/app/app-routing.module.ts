@@ -35,7 +35,8 @@ const routes: Routes = [
   {
     path: 'your-order',
     loadChildren: () => import('./pages/your-order/your-order.module').then( m => m.YourOrderPageModule)
-  },  {
+  },
+  {
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
@@ -43,12 +44,6 @@ const routes: Routes = [
     path: 'checkout',
     loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
   },
-  {
-    path: 'stripe-javascript',
-    loadChildren: () => import('./pages/stripe-javascript/stripe-javascript.module').then( m => m.StripeJavascriptPageModule)
-  }
-
-
 ];
 
 @NgModule({

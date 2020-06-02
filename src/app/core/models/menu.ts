@@ -104,6 +104,7 @@ export interface Item {
 export interface Order {
   totalPrice: number;
   totalCount: number;
+  currentPrice?: number;
   items: Array<Item>;
 }
 
@@ -112,6 +113,7 @@ export interface CheckOutTime {
   date: string;
   day: string;
   weekDay: string;
+  savedCards: any;
   times: Array<SelectTime>;
 }
 

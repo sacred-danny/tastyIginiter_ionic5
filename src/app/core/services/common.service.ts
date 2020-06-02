@@ -51,6 +51,12 @@ export class CommonService {
     });
   }
 
+  toUnderScore(s) {
+    return s.replace(/(?:^|\.?)([A-Z])/g, (x, y) => {
+      return '_' + y.toLowerCase();
+    }).replace(/^_/, '');
+  }
+
   keysToCamel(o: any) {
     if (isObject(o)) {
       const n = {};
@@ -63,6 +69,23 @@ export class CommonService {
     } else if (isArray(o)) {
       return o.map((i) => {
         return this.keysToCamel(i);
+      });
+    }
+    return o;
+  }
+
+  keysToUnderScore(o: any) {
+    if (isObject(o)) {
+      const n = {};
+
+      Object.keys(o)
+        .forEach((k) => {
+          n[this.toUnderScore(k)] = this.keysToUnderScore(o[k]);
+        });
+      return n;
+    } else if (isArray(o)) {
+      return o.map((i) => {
+        return this.keysToUnderScore(i);
       });
     }
     return o;
