@@ -77,6 +77,7 @@ export class AuthService {
 
       this.menuService.order = {
         totalCount: 0,
+        currentPrice: 0,
         totalPrice: 0,
         items: new Array(),
       };
@@ -100,6 +101,7 @@ export class AuthService {
 
       this.menuService.order = {
         totalCount: 0,
+        currentPrice: 0,
         totalPrice: 0,
         items: new Array(),
       };

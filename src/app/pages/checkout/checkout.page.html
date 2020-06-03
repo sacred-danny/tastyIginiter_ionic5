@@ -92,16 +92,17 @@
             </ion-list>
         </div>
         <div class="w-100 row m-0">
-            <form class="w-100 row m-0" (ngSubmit)="saveCard()" [class.ion-hide]="isNewCard === false">
-                <div id="card-element" class="field w-100"></div>
-                <div id="card-errors" class="color-torch-red" role="alert"></div>
+            <form class="w-100 row m-0" id="formCard" (ngSubmit)="saveCard()">
+                <div class="row m-0 w-100 mb-5 item-align-center">
+                    <div id="cardElement" class="w-100"></div>
+                </div>
                 <div class="w-100 m-0">
-                    <button type="submit" class="font-15 save-card font-weight-bold color-burning-orange text-left  ion-float-right mt-10">
-                        Save
+                    <div id="card-errors" class="color-torch-red" role="alert"></div>
+                    <button type="submit" class="font-15 save-card font-weight-bold color-burning-orange text-left ion-float-right">
+                        Add New Card
                     </button>
                 </div>
             </form>
-            <h2 class="font-15 font-weight-bold color-burning-orange text-left mt-10" (click)="addCard()">Add New Card</h2>
         </div>
     </div>
 </div>

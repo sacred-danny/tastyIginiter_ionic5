@@ -54,6 +54,8 @@
 
   ion-list {
     width: calc(100% - 2px);
+    height: 170px;
+    overflow: auto;
   }
   ion-item {
     --border-color: #C8C7CC;

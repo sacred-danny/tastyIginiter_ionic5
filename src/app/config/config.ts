@@ -25,22 +25,26 @@ export const config = {
     pistachio: '#8FD400'
   },
   stripeElementStyles: {
-    base: {
-      color: '#32325D',
-      fontWeight: 500,
-      fontSize: '16px',
-      fontSmoothing: 'antialiased',
-      '::placeholder': {
-        color: '#CFD7DF',
+    iconStyle: 'solid',
+    style: {
+      base: {
+        iconColor: '#c4f0ff',
+        fontWeight: 500,
+        fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+        lineHeight: '22px',
+        fontSize: '9px',
+        fontSmoothing: 'antialiased',
+
+        ':-webkit-autofill': {
+          color: '#fce883',
+        },
+        '::placeholder': {
+          color: '#87BBFD',
+        },
       },
-      ':-webkit-autofill': {
-        color: '#e39f48',
-      },
-    },
-    invalid: {
-      color: '#E25950',
-      '::placeholder': {
-        color: '#FFCCA5',
+      invalid: {
+        iconColor: '#FFC7EE',
+        color: '#FFC7EE',
       },
     },
   }

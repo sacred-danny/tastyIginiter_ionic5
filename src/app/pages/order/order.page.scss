@@ -1,0 +1,33 @@
+@import "../../../theme";
+
+.main {
+  margin-top: -130px;
+  position: fixed;
+  height: calc(100% - 110px);
+  overflow: auto;
+}
+
+.total {
+  height: 175px;
+  border-radius: 10px;
+  background: white;
+
+  div {
+    padding: 0 15px 10px 15px;
+    display: flex;
+    .right {
+      position: absolute;
+      right: 30px;
+    }
+
+    &:first-child {
+      padding-top: 15px;
+    }
+  }
+
+  .div-total {
+    height: 50px;
+    display: flex;
+    border-top: solid 2px $french-gray;
+  }
+}

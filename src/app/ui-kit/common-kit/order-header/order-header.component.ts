@@ -14,6 +14,7 @@ export class OrderHeaderComponent implements OnInit {
   @Input() subTitle: string;
   @Input() close: string;
   @Input() backUrl: string;
+  @Input() main: string;
 
   constructor(
     private navController: NavController,
@@ -24,4 +25,7 @@ export class OrderHeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  back() {
+    this.navController.pop();
+  }
 }

@@ -3,32 +3,41 @@
 ion-tab-bar {
   height: 60px;
   border: 0px;
-  -webkit-box-shadow: 0 0 8px black;
-  -moz-box-shadow: 0 0 8px black;
-  box-shadow: 0 0 8px black;
+  background: white;
+  //background-image: linear-gradient(white, #eeeeee);
+  //-webkit-box-shadow: 0 0 8px #b7acac;
+  //-moz-box-shadow: 0 0 8px #b7acac;
+  //box-shadow: 0 0 8px #b7acac;
 }
 
 ion-tab-button {
-  --color-focused: #FC6C35;
-  --color-selected: #FC6C35;
+  --color-focused: #fc6c35;
+  --color-selected: #fc6c35;
+  --background-focused: #fc6c35;
+  --background-selected: #fc6c35;
+  background: white;
   height: 80%;
+  border-top: solid 2px transparent;
   ion-label {
     font-size: 13px;
+  }
+  &:focus, &:active, &:hover {
+    border-top: solid 2px #fc6c35;
   }
 }
 
 ion-fab {
-  bottom: 15px;
-  padding: 3px;
+  bottom: 5px;
+  padding: 7px;
   background: white;
   border-radius: 50%;
-  margin-left: -28px;
-  box-shadow: 0px 0px 0px black, 0px -3px 10px black;
+  margin-left: -27px;
+  //box-shadow: 0px -5px 3px rgba(224, 211, 211, 0.75);
 
   ion-badge {
     position: absolute;
-    top: -5px;
-    left: 30px;
+    top: 0px;
+    left: 35px;
     z-index: 200;
     width: 24px;
     height: 24px;
@@ -38,22 +47,13 @@ ion-fab {
 
   ion-fab-button {
     ion-icon {
-      font-size: 35px;
+      font-size: 30px;
     }
 
-    --background: #FC6C35;
-    border: solid 1px white;
+    --background: #fc6c35;
     border-radius: 50%;
     width: 50px;
     height: 50px;
-    //--color: #999999;
-    //--background: white;
-    //--color-activated: white;
-    //--color-hover: white;
-    //--color-focused: white;
-    //--background-activated: #FC6C35;
-    //--background-hover: #FC6C35;
-    //--background-focused: #FC6C35;
 
     --background-activated: #F84A08;
     --background-hover: #F84A08;

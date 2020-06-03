@@ -7,6 +7,8 @@ import { CheckOutTime } from '../../core/models/menu';
 import { CommonService } from '../../core/services/common.service';
 import { AuthService } from '../../core/services/auth.service';
 import { MenuService } from '../../core/services/menu.service';
+import { Storage } from '@ionic/storage';
+
 declare var Stripe: any;
 
 @Component({
@@ -21,13 +23,12 @@ export class CheckoutPage implements OnInit {
   deliveryTimes: Array<CheckOutTime>;
   savedCards: any;
   serverConfig = config;
+  isDeleting = false;
 
   stripe = Stripe(config.stripeApiKey);
   card: any;
   clientSecret: string;
   paymentMethodId = '';
-
-  isNewCard = false;
 
   pickupTime = {
     id: 0,
@@ -53,6 +54,7 @@ export class CheckoutPage implements OnInit {
     private authService: AuthService,
     private menuService: MenuService,
     private navController: NavController,
+    private storage: Storage
   ) {
   }
 
@@ -76,14 +78,18 @@ export class CheckoutPage implements OnInit {
   async ngOnInit() {
     const loading = await this.commonService.showLoading('Please wait...');
     try {
-      this.menuService.getCheckOutTime({user: this.authService.user}).subscribe((checkOutTime: any) => {
+      this.menuService.getCheckOutTime({ user: this.authService.user }).subscribe((checkOutTime: any) => {
         this.deliveryTimes = checkOutTime.delivery;
         this.pickupTimes = checkOutTime.pickup;
         this.clientSecret = checkOutTime.clientSecret;
         this.savedCards = checkOutTime.savedCards;
         // tslint:disable-next-line:prefer-for-of
-        for (let i = 0; i < this.savedCards.data.length; i++) {
-          this.savedCards.data[i] = {...this.savedCards.data[i], isChecked: false};
+        for (let i = 0; i < this.savedCards.data.length; i ++) {
+          this.savedCards.data[i] = { ...this.savedCards.data[i], isChecked: false };
+          if (i === 0) {
+            this.savedCards.data[i].isChecked = true;
+            this.paymentMethodId = this.savedCards.data[i].id;
+          }
         }
         this.setTime(0, 0);
         this.setupStripe();
@@ -101,7 +107,7 @@ export class CheckoutPage implements OnInit {
   }
 
   deliveryDateChanged() {
-    for (let i = 0; i < this.deliveryTimes.length; i++) {
+    for (let i = 0; i < this.deliveryTimes.length; i ++) {
       if (this.deliveryTime.displayDate === this.deliveryTimes[i].weekDay + ' - ' + this.deliveryTimes[i].day) {
         this.setTime(i);
         break;
@@ -110,13 +116,16 @@ export class CheckoutPage implements OnInit {
   }
 
   selectCard(item) {
+    if (this.isDeleting === true) {
+      return;
+    }
     // tslint:disable-next-line:prefer-for-of
-    for (let i = 0;  i < this.savedCards.data.length; i++) {
+    for (let i = 0; i < this.savedCards.data.length; i ++) {
       if (this.savedCards.data[i].id !== item.id) {
         this.savedCards.data[i].isChecked = false;
       }
     }
-    item.isChecked = !item.isChecked;
+    item.isChecked = ! item.isChecked;
     if (item.isChecked) {
       this.paymentMethodId = item.id;
     } else {
@@ -129,7 +138,7 @@ export class CheckoutPage implements OnInit {
   }
 
   pickupDateChanged() {
-    for (let i = 0; i < this.pickupTimes.length; i++) {
+    for (let i = 0; i < this.pickupTimes.length; i ++) {
       if (this.pickupTime.displayDate === this.pickupTimes[i].weekDay + ' - ' + this.pickupTimes[i].day) {
         this.setTime(null, i);
         break;
@@ -146,28 +155,13 @@ export class CheckoutPage implements OnInit {
   }
 
   async setupStripe() {
+    const self = await this;
     const elements = await this.stripe.elements();
-    const style = {
-      base: {
-        color: '#32325d',
-        lineHeight: '24px',
-        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSmoothing: 'antialiased',
-        fontSize: '13px',
-        '::placeholder': {
-          color: '#aab7c4'
-        }
-      },
-      invalid: {
-        color: '#fa755a',
-        iconColor: '#fa755a'
-      }
-    };
-
-    this.card = await elements.create('card', { style });
-
-    await this.card.mount('#card-element');
-
+    this.card = await elements.create('card', config.stripeElementStyles);
+    await this.card.mount('#cardElement');
+    await this.card.on('ready', () => {
+      self.card.focus();
+    });
     await this.card.addEventListener('change', event => {
       const displayError = document.getElementById('card-errors');
       if (event.error) {
@@ -176,9 +170,14 @@ export class CheckoutPage implements OnInit {
         displayError.textContent = '';
       }
     });
+
   }
 
   async saveCard() {
+    if (document.getElementById('card-errors').textContent !== '') {
+      await this.commonService.presentAlert('Warning', 'Please enter correct card Info.');
+      return;
+    }
     const loading = await this.commonService.showLoading('Please wait...');
     const self = this;
     try {
@@ -186,11 +185,10 @@ export class CheckoutPage implements OnInit {
         self.clientSecret,
         {
           payment_method: {
-            card: self.card,
+            card: this.card,
           },
         }
       ).then(async (result) => {
-        self.isNewCard = false;
         if (result.error) {
           // Display error.message in your UI.
           loading.dismiss();
@@ -200,12 +198,17 @@ export class CheckoutPage implements OnInit {
           // The setup has succeeded. Display a success message.
           console.log(result);
           try {
-            const savedCards = await self.menuService.getSavedCard({user: this.authService.user}).toPromise();
+            const savedCards = await self.menuService.getSavedCard({ user: this.authService.user }).toPromise();
             self.savedCards = JSON.parse(JSON.stringify(savedCards));
             // tslint:disable-next-line:prefer-for-of
-            for (let i = 0; i < self.savedCards.data.length; i++) {
-              self.savedCards.data[i] = {...self.savedCards.data[i], isChecked: false};
+            for (let i = 0; i < self.savedCards.data.length; i ++) {
+              self.savedCards.data[i] = { ...self.savedCards.data[i], isChecked: false };
+              if (i === 0) {
+                self.savedCards.data[i].isChecked = true;
+                self.paymentMethodId = self.savedCards.data[i].id;
+              }
             }
+            self.card.clear();
             loading.dismiss();
           } catch (e) {
             loading.dismiss();
@@ -228,28 +231,29 @@ export class CheckoutPage implements OnInit {
   }
 
   async deleteCard(item) {
+    this.isDeleting = await true;
     const loading = await this.commonService.showLoading('Please wait...');
     try {
-      const savedCards = await this.menuService.deleteCard({user: this.authService.user, paymentMethodId: item.id}).toPromise();
+      const savedCards = await this.menuService.deleteCard({ user: this.authService.user, paymentMethodId: item.id }).toPromise();
+      this.isDeleting = await false;
       this.savedCards = JSON.parse(JSON.stringify(savedCards));
       // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.savedCards.data.length; i++) {
-        this.savedCards.data[i] = {...this.savedCards.data[i], isChecked: false};
+      for (let i = 0; i < this.savedCards.data.length; i ++) {
+        this.savedCards.data[i] = { ...this.savedCards.data[i], isChecked: false };
+        if (i === 0) {
+          this.savedCards.data[i].isChecked = true;
+          this.paymentMethodId = this.savedCards.data[i].id;
+        }
       }
       loading.dismiss();
     } catch (e) {
+      this.isDeleting = await false;
       loading.dismiss();
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error');
         return;
       }
       await this.commonService.presentAlert('Warning', e.error.message);
-    }
-  }
-
-  addCard() {
-    if (!this.isNewCard) {
-      this.isNewCard = true;
     }
   }
 
@@ -272,10 +276,10 @@ export class CheckoutPage implements OnInit {
     };
     if (this.isSelected === 'delivery') {
       // @ts-ignore
-      payload = {...payload, orderTime: this.deliveryTime.orderTime, orderDate: this.deliveryTime.date};
+      payload = { ...payload, orderTime: this.deliveryTime.orderTime, orderDate: this.deliveryTime.date };
     } else {
       // @ts-ignore
-      payload = {...payload, orderTime: this.pickupTime.orderTime, orderDate: this.pickupTime.date};
+      payload = { ...payload, orderTime: this.pickupTime.orderTime, orderDate: this.pickupTime.date };
     }
     payload = this.commonService.keysToUnderScore(payload);
     // tslint:disable-next-line:no-shadowed-variable
@@ -283,9 +287,17 @@ export class CheckoutPage implements OnInit {
       const result = await this.menuService.verifyPayment(payload).toPromise();
       loading.dismiss();
       if (result) {
-        alert('success');
+        this.menuService.order = {
+          totalCount: 0,
+          currentPrice: 0,
+          totalPrice: 0,
+          items: new Array(),
+        };
+        await this.storage.set(config.storage.order, this.menuService.order);
+        this.commonService.activeIcon(2);
+        this.router.navigateByUrl('tabs/order');
       } else {
-        alert('fail');
+        this.commonService.presentAlert('Warning', 'Make order failed.');
       }
     } catch (e) {
       loading.dismiss();
@@ -306,7 +318,11 @@ export class CheckoutPage implements OnInit {
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       // tslint:disable-next-line:max-line-length
-      const paymentIntent = await this.menuService.makePaymentIntent({user: this.authService.user, paymentMethodId: this.paymentMethodId, amount: Math.round(this.menuService.order.currentPrice * 100)}).toPromise();
+      const paymentIntent = await this.menuService.makePaymentIntent({
+        user: this.authService.user,
+        paymentMethodId: this.paymentMethodId,
+        amount: Math.round(this.menuService.order.currentPrice * 100)
+      }).toPromise();
       if (paymentIntent == null) {
         self.verifyPayment(loading);
         return;

@@ -5,6 +5,7 @@ import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 import { MenuService } from '../../core/services/menu.service';
+import { CommonService } from '../../core/services/common.service';
 import { Category, CategoryDetail, Menu, MenuDetail, Special } from '../../core/models/menu';
 
 @Component({
@@ -53,6 +54,7 @@ export class MenuPage implements OnInit {
 
   constructor(
     private menuService: MenuService,
+    private commonService: CommonService,
     private navController: NavController,
     private platform: Platform,
     private router: Router
@@ -60,6 +62,7 @@ export class MenuPage implements OnInit {
   }
 
   ngOnInit() {
+    this.commonService.activeIcon(0);
     this.specials = new Array();
     this.categories = new Array();
     this.categoryDetails = new Array();
@@ -116,7 +119,7 @@ export class MenuPage implements OnInit {
   goDetail(menu: MenuDetail) {
     // @ts-ignore
     // this.router.navigate([ 'menu-detail/' + menu.menuId ]);
-    this.navController.navigateForward('menu-detail/' + menu.menuId );
+    this.navController.navigateForward('menu-detail/' + menu.menuId);
   }
 
   logScrolling(event: any) {

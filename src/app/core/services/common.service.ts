@@ -7,6 +7,7 @@ import { isArray, isObject } from 'util';
   providedIn: 'root'
 })
 export class CommonService {
+  navBarActivateIcons = [false, false, false, false];
 
   constructor(
     private toastController: ToastController,
@@ -89,5 +90,15 @@ export class CommonService {
       });
     }
     return o;
+  }
+
+  activeIcon(index) {
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0 ; i < this.navBarActivateIcons.length; i++) {
+      this.navBarActivateIcons[i] = false;
+      if (i === index) {
+        this.navBarActivateIcons[i] = true;
+      }
+    }
   }
 }
