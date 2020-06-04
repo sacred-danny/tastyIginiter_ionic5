@@ -4,12 +4,7 @@ import { Router } from '@angular/router';
 
 import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
-
 import { PrepareLocationRequest } from '../../../core/models/auth';
-import { config } from '../../../config/config';
-import { error } from 'util';
-import { elementSelectors } from '@angular/material/schematics/ng-update/data';
-
 
 @Component({
   selector: 'app-set-location',
