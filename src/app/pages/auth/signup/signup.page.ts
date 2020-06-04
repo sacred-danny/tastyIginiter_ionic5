@@ -6,7 +6,7 @@ import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
 
 import { SignUpRequest } from '../../../core/models/auth';
-import { config } from '../../../config/config';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-signup',
@@ -23,8 +23,8 @@ export class SignupPage implements OnInit {
     confirmPassword: [ '', Validators.compose([ Validators.required, Validators.minLength(8) ]) ],
   });
 
-  serverConfig = config;
-  backGroundColor = config.baseColors.pistachio;
+  serverConfig = environment;
+  backGroundColor = environment.baseColors.pistachio;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -47,13 +47,13 @@ export class SignupPage implements OnInit {
     } else if (this.form.value.telephone === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your phone number.');
       return;
-    } else if (this.form.value.telephone.length < 11 ) {
+    } else if (this.form.value.telephone.length < 11) {
       await this.commonService.presentAlert('Warning', 'Phone number must must be 11 numerics.');
       return;
     } else if (this.form.value.email === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your e-mail address.');
       return;
-    } else if (!this.commonService.emailIsValid(this.form.value.email)) {
+    } else if ( ! this.commonService.emailIsValid(this.form.value.email)) {
       await this.commonService.presentAlert('Warning', 'You have entered an invalid e-mail address. Please try again.');
       return;
     } else if (this.form.value.password === '') {

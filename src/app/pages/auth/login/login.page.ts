@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+// import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
 
 import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
-
 import { LoginRequest } from '../../../core/models/auth';
-import { config } from '../../../config/config';
-
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -20,13 +19,14 @@ export class LoginPage implements OnInit {
     email: [ '', Validators.compose([ Validators.required, Validators.email ]) ],
     password: [ '', Validators.compose([ Validators.required, Validators.minLength(8) ]) ],
   });
-  serverConfig  = config;
+  serverConfig = environment;
 
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private commonService: CommonService,
     private router: Router,
+    // private fb: Facebook
   ) {
   }
 
@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
     if (this.form.value.email === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your e-mail address.');
       return;
-    } else if (!this.commonService.emailIsValid(this.form.value.email)) {
+    } else if ( ! this.commonService.emailIsValid(this.form.value.email)) {
       await this.commonService.presentAlert('Warning', 'You have entered an invalid e-mail address. Please try again.');
       return;
     } else if (this.form.value.password === '') {
@@ -63,5 +63,30 @@ export class LoginPage implements OnInit {
     } finally {
       await loading.dismiss();
     }
+  }
+
+  loginWithFaceBook() {
+    // this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
+    //   .then( (res: FacebookLoginResponse) => {
+    //     if (res.status === 'connected') {
+    //       // Get user ID and Token
+    //       const fbId = res.authResponse.userID;
+    //       const fbToken = res.authResponse.accessToken;
+    //       // Get user infos from the API
+    //       this.fb.api('/me?fields=name,gender,birthday,email', []).then((user) => {
+    //         // Get the connected user details
+    //         const gender    = user.gender;
+    //         const birthday  = user.birthday;
+    //         const name      = user.name;
+    //         const email     = user.email;
+    //         // => Open user session and redirect to the next page
+    //       });
+    //     } else {
+    //       console.log('An error occurred...');
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.log('Error logging into Facebook', e);
+    //   });
   }
 }

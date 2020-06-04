@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { config } from '../../config/config';
+import { environment } from '../../../environments/environment';
 import { NavController, IonContent, IonSlides } from '@ionic/angular';
 import { Platform } from '@ionic/angular';
 import { Router } from '@angular/router';
@@ -17,8 +17,8 @@ export class MenuPage implements OnInit {
   @ViewChild(IonContent, { read: IonContent }) myContent: IonContent;
   @ViewChild('slideCategory') slideCategory: IonSlides;
   @ViewChild('refresherRef') refresherRef;
-  backGroundColor = config.baseColors.burningOrage;
-  menuBlankImage = config.menuBlankImage;
+  backGroundColor = environment.baseColors.burningOrage;
+  menuBlankImage = environment.menuBlankImage;
   specailSlideOpts = {
     coverflowEffect: {
       rotate: 50,

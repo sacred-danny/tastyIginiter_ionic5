@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { config } from '../../config/config';
+import { environment } from '../../../environments/environment';
 
 import { CommonService } from '../../core/services/common.service';
 
@@ -9,7 +9,7 @@ import { CommonService } from '../../core/services/common.service';
   styleUrls: [ './profile.page.scss' ],
 })
 export class ProfilePage implements OnInit {
-  menuBlankImage = config.menuBlankImage;
+  menuBlankImage = environment.menuBlankImage;
   profileItems = [
     {
       icon: 'help-circle',

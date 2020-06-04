@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { MenuService } from '../../core/services/menu.service';
 import { CommonService } from '../../core/services/common.service';
-import { config } from '../../config/config';
+import { environment } from '../../../environments/environment';
 import { Item, MenuDetailOption, MenuOptions, MenuOptionValue } from '../../core/models/menu';
 
 import { IonContent, NavController } from '@ionic/angular';
@@ -19,7 +19,7 @@ export class MenuDeatilPage implements OnInit {
   @ViewChild(IonContent, { read: IonContent }) myContent: IonContent;
   menuId: string;
   menuDetail: MenuDetailOption;
-  menuBlankImage = config.menuBlankImage;
+  menuBlankImage = environment.menuBlankImage;
   count = 1;
   price = 0;
   onePirce = 0;
@@ -162,7 +162,7 @@ export class MenuDeatilPage implements OnInit {
         }
       }
       this.menuService.order.items.push(item);
-      this.storage.set(config.storage.order, this.menuService.order);
+      this.storage.set(environment.storage.order, this.menuService.order);
       console.log(this.menuService.order);
       this.navController.pop();
     }

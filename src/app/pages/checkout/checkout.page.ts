@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
-import { config } from '../../config/config';
+import { environment } from '../../../environments/environment';
 import { CheckOutTime } from '../../core/models/menu';
 import { CommonService } from '../../core/services/common.service';
 import { AuthService } from '../../core/services/auth.service';
@@ -17,15 +17,17 @@ declare var Stripe: any;
   styleUrls: [ './checkout.page.scss' ],
 })
 export class CheckoutPage implements OnInit {
-  backGroundColor = config.baseColors.burningOrage;
+  @ViewChild('main') mainDiv;
+
+  backGroundColor = environment.baseColors.burningOrage;
   isSelected = 'delivery';
   pickupTimes: Array<CheckOutTime>;
   deliveryTimes: Array<CheckOutTime>;
   savedCards: any;
-  serverConfig = config;
+  serverConfig = environment;
   isDeleting = false;
 
-  stripe = Stripe(config.stripeApiKey);
+  stripe = Stripe(environment.stripeApiKey);
   card: any;
   clientSecret: string;
   paymentMethodId = '';
@@ -157,10 +159,13 @@ export class CheckoutPage implements OnInit {
   async setupStripe() {
     const self = await this;
     const elements = await this.stripe.elements();
-    this.card = await elements.create('card', config.stripeElementStyles);
+    this.card = await elements.create('card', environment.stripeElementStyles);
     await this.card.mount('#cardElement');
-    await this.card.on('ready', () => {
-      self.card.focus();
+    await this.card.on('ready', async () => {
+      await self.card.focus();
+      await setTimeout( () => {
+        self.mainDiv.nativeElement.scrollTo(0, 0);
+      }, 100);
     });
     await this.card.addEventListener('change', event => {
       const displayError = document.getElementById('card-errors');
@@ -293,7 +298,7 @@ export class CheckoutPage implements OnInit {
           totalPrice: 0,
           items: new Array(),
         };
-        await this.storage.set(config.storage.order, this.menuService.order);
+        await this.storage.set(environment.storage.order, this.menuService.order);
         this.commonService.activeIcon(2);
         this.router.navigateByUrl('tabs/order');
       } else {

@@ -1,5 +1,5 @@
 <app-order-header [backGroundColor]="serverConfig.baseColors.burningOrage" backUrl="back" subTitle="Checkout"></app-order-header>
-<div class="main shadow bg-color-white mx-15 p-20">
+<div #main class="main shadow bg-color-white mx-15 p-20">
     <div class="row mx-0">
         <div class="mode">
             <button class="btn delivery p-0" [class.active]="isSelected === 'delivery'" (click)="delivery()">
@@ -31,7 +31,7 @@
             </ion-select>
         </div>
     </div>
-    <div class="row mx-0 mt-15" *ngIf="isSelected === 'pickup'">
+    <div class="row mx-0 mt-15" *ngIf="isSelected === 'collection'">
         <div class="w-100 row m-0">
             <p class="font-15 color-french-gray text-left mb-5">Select Pickup Day / Time</p>
         </div>

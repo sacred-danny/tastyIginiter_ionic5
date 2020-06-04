@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { NavController } from '@ionic/angular';
-import { config } from '../../config/config';
+import { environment } from '../../../environments/environment';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -16,8 +16,8 @@ import { Coupon, Item } from '../../core/models/menu';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class YourOrderPage implements OnInit, AfterContentChecked {
-  serverConfig = config;
-  menuBlankImage = config.menuBlankImage;
+  serverConfig = environment;
+  menuBlankImage = environment.menuBlankImage;
   discount = 0;
   discountType = '';
   delivery = 0;
@@ -64,7 +64,7 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
 
   checkOut() {
     this.menuService.order.currentPrice = this.currentPrice;
-    this.storage.set(config.storage.order, this.menuService.order);
+    this.storage.set(environment.storage.order, this.menuService.order);
     this.router.navigateByUrl('checkout');
   }
 
@@ -129,7 +129,7 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
       }
     }
     this.menuService.order.items = items;
-    this.storage.set(config.storage.order, this.menuService.order);
+    this.storage.set(environment.storage.order, this.menuService.order);
     this.calcPrice();
   }
 }
