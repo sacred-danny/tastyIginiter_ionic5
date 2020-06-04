@@ -10,6 +10,8 @@ export class TabHeaderComponent implements OnInit {
   @Input() backGroundColor: string;
   @Input() isLogo: boolean;
   @Input() title: string;
+  @Input() subTitle: string;
+  @Input() logout: boolean;
 
   constructor(
     private authService: AuthService

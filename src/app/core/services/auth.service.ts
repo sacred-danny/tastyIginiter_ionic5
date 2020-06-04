@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { BehaviorSubject, Subject } from 'rxjs';
@@ -19,9 +19,6 @@ export class AuthService {
 
   user: User;
   token: string;
-
-  tokenChanged$: Subject<boolean> = new Subject<boolean>();
-  userChanged$: BehaviorSubject<User> = new BehaviorSubject<User>(this.user);
 
   constructor(
     private http: HttpClient,

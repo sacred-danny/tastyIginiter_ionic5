@@ -36,6 +36,7 @@ export interface LoginResponse {
 
 export interface User {
   id: string;
+  email?: string;
   name?: string;
   areaId?: string;
   deliveryAddress?: string;

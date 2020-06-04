@@ -1,0 +1,18 @@
+.menu {
+  width: calc(50% - 22.5px);
+  margin-left: 15px;
+  position: relative;
+  .photo {
+    height: 120px;
+    ion-img {
+      object-fit: cover;
+      height: 100%;
+    }
+  }
+  ion-icon {
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+  }
+}

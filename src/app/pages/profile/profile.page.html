@@ -8,30 +8,26 @@
       <img [src]="menuBlankImage">
     </div>
     <div class="user-info">
-      <h2 class="font-17 color-shark font-weight-bold mt-10 mb-0 text-overflow">Ricardo McDonald</h2>
-      <p class="font-15 color-french-gray mt-5 text-overflow">corkery_dakota@gmail.com</p>
+      <h2 class="font-17 color-shark font-weight-bold mt-10 mb-0 text-overflow">{{authService.user.name}}</h2>
+      <p class="font-15 color-french-gray mt-5 text-overflow">{{authService.user.email}}</p>
     </div>
   </div>
 </div>
-<ion-content>
-  <div class="container d-flex flex-column p-0">
-    <div class="profile-list shadow mt-20 mx-15 pt-15 pl-15 pb-30">
-      <div class="address mt-5">
-        <div>
-          <h2 class="font-15 color-shark font-weight-bold mb-0 text-overflow">Address</h2>
-          <p class="font-13 color-french-gray mt-10 mb-15">Add or remove  a delivery address</p>
-        </div>
-        <span class="font-20 color-french-gray font-weight-light"> > </span>
-      </div>
-      <ion-list>
-        <ng-container *ngFor="let item of profileItems;">
-          <ion-item  (click)="goDetail(item)">
-            <ion-icon [name]="item.icon" [style.color]="item.color" [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
-            <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
-            <span class="font-20 color-french-gray font-weight-light"> > </span>
-          </ion-item>
-        </ng-container>
-      </ion-list>
+<div class="profile-list shadow mt-20 mx-15 pt-15 pl-15">
+  <div class="address mt-5" >
+    <div>
+      <h2 class="font-15 color-shark font-weight-bold mb-0 text-overflow">Address</h2>
+      <p class="font-13 color-french-gray mt-10 mb-15">Add or remove  a delivery address</p>
     </div>
+    <span class="font-20 color-french-gray font-weight-light"> > </span>
   </div>
-</ion-content>
+  <ion-list class="py-0">
+    <ng-container *ngFor="let item of profileItems;">
+      <ion-item  (click)="goDetail(item)">
+        <ion-icon [name]="item.icon" [style.color]="item.color" [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
+        <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
+        <span class="font-20 color-french-gray font-weight-light"> > </span>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</div>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { environment } from '../../../environments/environment';
 
 import { CommonService } from '../../core/services/common.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -38,7 +39,8 @@ export class ProfilePage implements OnInit {
   ];
 
   constructor(
-    private commonService: CommonService
+    private commonService: CommonService,
+    private authService: AuthService
   ) {
   }
 

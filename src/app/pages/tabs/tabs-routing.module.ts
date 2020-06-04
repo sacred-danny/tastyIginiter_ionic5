@@ -35,6 +35,15 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'favorite',
+        children: [
+          {
+            path: '',
+            loadChildren: () => import('../favorite/favorite.module').then(m => m.FavoritePageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/tabs/menu',
         pathMatch: 'full'

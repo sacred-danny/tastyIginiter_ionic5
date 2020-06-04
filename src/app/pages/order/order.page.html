@@ -1,109 +1,25 @@
 <app-order-header [backGroundColor]="serverConfig.baseColors.burningOrage" main="Orders"></app-order-header>
 <ion-content>
     <div class="container d-flex flex-column main p-15">
-        <div class="total shadow mb-10">
-            <div class="sub-total">
-                <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
-                <p class="font-17 color-french-gray m-0 right">#2232323</p>
+        <ng-container *ngIf="orders !== undefined && orders.length > 0">
+            <div class="total shadow mb-10" *ngFor="let order of orders;">
+                <div class="sub-total">
+                    <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
+                    <p class="font-17 color-french-gray m-0 right">{{order.orderId}}</p>
+                </div>
+                <div class="discount">
+                    <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
+                    <p class="font-17 color-french-gray m-0 right">{{order.date}}</p>
+                </div>
+                <div class="delivery">
+                    <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
+                    <p class="font-17 color-french-gray m-0 right">{{order.orderTotal | currency:'GBP'}}</p>
+                </div>
+                <div class="div-total py-10 item-align-center">
+                    <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">{{order.status.statusName}}</h3>
+                </div>
             </div>
-            <div class="discount">
-                <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
-                <p class="font-17 color-french-gray m-0 right">05/11/2020</p>
-            </div>
-            <div class="delivery">
-                <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
-                <p class="font-17 color-french-gray m-0 right">46.5</p>
-            </div>
-            <div class="div-total py-10 item-align-center">
-                <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">Process</h3>
-            </div>
-        </div>
-        <div class="total shadow mb-10">
-            <div class="sub-total">
-                <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
-                <p class="font-17 color-french-gray m-0 right">#2232323</p>
-            </div>
-            <div class="discount">
-                <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
-                <p class="font-17 color-french-gray m-0 right">05/11/2020</p>
-            </div>
-            <div class="delivery">
-                <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
-                <p class="font-17 color-french-gray m-0 right">46.5</p>
-            </div>
-            <div class="div-total py-10 item-align-center">
-                <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">Process</h3>
-            </div>
-        </div>
-        <div class="total shadow mb-10">
-            <div class="sub-total">
-                <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
-                <p class="font-17 color-french-gray m-0 right">#2232323</p>
-            </div>
-            <div class="discount">
-                <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
-                <p class="font-17 color-french-gray m-0 right">05/11/2020</p>
-            </div>
-            <div class="delivery">
-                <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
-                <p class="font-17 color-french-gray m-0 right">46.5</p>
-            </div>
-            <div class="div-total py-10 item-align-center">
-                <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">Process</h3>
-            </div>
-        </div>
-        <div class="total shadow mb-10">
-            <div class="sub-total">
-                <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
-                <p class="font-17 color-french-gray m-0 right">#2232323</p>
-            </div>
-            <div class="discount">
-                <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
-                <p class="font-17 color-french-gray m-0 right">05/11/2020</p>
-            </div>
-            <div class="delivery">
-                <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
-                <p class="font-17 color-french-gray m-0 right">46.5</p>
-            </div>
-            <div class="div-total py-10 item-align-center">
-                <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">Process</h3>
-            </div>
-        </div>
-        <div class="total shadow mb-10">
-            <div class="sub-total">
-                <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
-                <p class="font-17 color-french-gray m-0 right">#2232323</p>
-            </div>
-            <div class="discount">
-                <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
-                <p class="font-17 color-french-gray m-0 right">05/11/2020</p>
-            </div>
-            <div class="delivery">
-                <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
-                <p class="font-17 color-french-gray m-0 right">46.5</p>
-            </div>
-            <div class="div-total py-10 item-align-center">
-                <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">Process</h3>
-            </div>
-        </div>
-        <div class="total shadow mb-10">
-            <div class="sub-total">
-                <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
-                <p class="font-17 color-french-gray m-0 right">#2232323</p>
-            </div>
-            <div class="discount">
-                <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
-                <p class="font-17 color-french-gray m-0 right">05/11/2020</p>
-            </div>
-            <div class="delivery">
-                <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
-                <p class="font-17 color-french-gray m-0 right">46.5</p>
-            </div>
-            <div class="div-total py-10 item-align-center">
-                <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">Process</h3>
-            </div>
-        </div>
-
+        </ng-container>
     </div>
 </ion-content>
 

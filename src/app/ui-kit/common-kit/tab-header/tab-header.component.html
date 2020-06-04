@@ -1,6 +1,7 @@
 <div class="tab-header" [style.background]="backGroundColor">
     <div class="logo" *ngIf="isLogo"></div>
     <p class="font-27 font-weight-medium title color-white m-0" *ngIf="title">{{title}}</p>
-    <p class="font-20 font-weight-medium logout color-white m-0" (click)="authService.logout()">Log out</p>
+    <p class="font-34 font-weight-extremly-bold sub-title color-white m-0" *ngIf="subTitle">{{subTitle}}</p>
+    <p class="font-20 font-weight-medium logout color-white m-0" (click)="authService.logout()" *ngIf="logout">Log out</p>
 </div>
 

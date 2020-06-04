@@ -277,6 +277,7 @@ export class CheckoutPage implements OnInit {
       comment: this.comment,
       payment: 'stripe',
       orderType: this.isSelected,
+      orderTotal: this.menuService.order.currentPrice,
       statusId: 1,
     };
     if (this.isSelected === 'delivery') {

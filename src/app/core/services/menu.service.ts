@@ -80,4 +80,10 @@ export class MenuService {
       throw error;
     });
   }
+
+  getOrders(payload): Observable<any> {
+    return this.http.post<any>(environment.apiURL + '/home/getOrders', payload).catch((error: any) => {
+      throw error;
+    });
+  }
 }

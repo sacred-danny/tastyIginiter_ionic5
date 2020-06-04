@@ -1,5 +1,5 @@
 <app-tab-header [backGroundColor]="backGroundColor" isLogo="true"
-                [title]="this.menuService.menu.locationName"></app-tab-header>
+                [title]="this.menuService.menu.locationName" logout="true"></app-tab-header>
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
     <div class="container d-flex flex-column p-0">
         <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">

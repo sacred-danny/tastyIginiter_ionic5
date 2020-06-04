@@ -32,6 +32,7 @@
     "bootstrap": "^4.4.1",
     "cordova-android": "^8.1.0",
     "cordova-plugin-facebook4": "^6.4.0",
+    "cordova-plugin-ionic-webview": "^5.0.0",
     "core-js": "^2.5.4",
     "ngx-mask": "^9.0.2",
     "rxjs": "~6.5.1",
@@ -79,7 +80,8 @@
       "cordova-plugin-facebook4": {
         "APP_ID": "com.grubsup.foodapp",
         "APP_NAME": "Grubs Up"
-      }
+      },
+      "cordova-plugin-ionic-webview": {}
     },
     "platforms": [
       "android"
