@@ -8,6 +8,7 @@ import { CommonService } from '../../core/services/common.service';
 import { AuthService } from '../../core/services/auth.service';
 import { MenuService } from '../../core/services/menu.service';
 import { Storage } from '@ionic/storage';
+import { Platform } from '@ionic/angular';
 
 declare var Stripe: any;
 
@@ -56,7 +57,8 @@ export class CheckoutPage implements OnInit {
     private authService: AuthService,
     private menuService: MenuService,
     private navController: NavController,
-    private storage: Storage
+    private storage: Storage,
+    private platform: Platform
   ) {
   }
 
@@ -159,11 +161,15 @@ export class CheckoutPage implements OnInit {
   async setupStripe() {
     const self = await this;
     const elements = await this.stripe.elements();
-    this.card = await elements.create('card', environment.stripeElementStyles);
+    const stripeElementStyles = environment.stripeElementStyles;
+    if (this.platform.is('ios') || this.platform.is('android')) {
+      stripeElementStyles.style.base.fontSize = '16px';
+    }
+    this.card = await elements.create('card', stripeElementStyles);
     await this.card.mount('#cardElement');
     await this.card.on('ready', async () => {
       await self.card.focus();
-      await setTimeout( () => {
+      await setTimeout(() => {
         self.mainDiv.nativeElement.scrollTo(0, 0);
       }, 100);
     });

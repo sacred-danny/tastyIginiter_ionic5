@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-// import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook';
+import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
 
 import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private commonService: CommonService,
     private router: Router,
-    // private fb: Facebook
+    private fb: Facebook
   ) {
   }
 
@@ -66,27 +66,30 @@ export class LoginPage implements OnInit {
   }
 
   loginWithFaceBook() {
-    // this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
-    //   .then( (res: FacebookLoginResponse) => {
-    //     if (res.status === 'connected') {
-    //       // Get user ID and Token
-    //       const fbId = res.authResponse.userID;
-    //       const fbToken = res.authResponse.accessToken;
-    //       // Get user infos from the API
-    //       this.fb.api('/me?fields=name,gender,birthday,email', []).then((user) => {
-    //         // Get the connected user details
-    //         const gender    = user.gender;
-    //         const birthday  = user.birthday;
-    //         const name      = user.name;
-    //         const email     = user.email;
-    //         // => Open user session and redirect to the next page
-    //       });
-    //     } else {
-    //       console.log('An error occurred...');
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.log('Error logging into Facebook', e);
-    //   });
+    this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
+      .then( (res: FacebookLoginResponse) => {
+        console.log('facebookResponse:', res);
+        if (res.status === 'connected') {
+          // Get user ID and Token
+          const fbId = res.authResponse.userID;
+          const fbToken = res.authResponse.accessToken;
+          alert(fbId + '::' + fbToken);
+          // Get user infos from the API
+          this.fb.api('/me?fields=name,gender,birthday,email', []).then((user) => {
+            // Get the connected user details
+            const gender    = user.gender;
+            const birthday  = user.birthday;
+            const name      = user.name;
+            const email     = user.email;
+            alert(gender);
+            // => Open user session and redirect to the next page
+          });
+        } else {
+          console.log('An error occurred...');
+        }
+      })
+      .catch((e) => {
+        console.log('Error logging into Facebook', e);
+      });
   }
 }

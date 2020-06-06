@@ -10,8 +10,8 @@ export const environment = {
   // serverURL: 'http://www.grubsupdev.com/',
   // apiURL: 'http://www.grubsupdev.com/api/v1',
 
-  serverURL: 'http://localhost/grubsupdev/',
-  apiURL: 'http://localhost/grubsupdev/api/v1',
+  serverURL: 'http://192.168.208.123/grubsupdev/',
+  apiURL: 'http://192.168.208.123/grubsupdev/api/v1',
   stripeApiKey: 'pk_test_KGSgL4Ccd2oGEKsSYXBF4SD600LfoqUiWa',
 
   debitCardURL: 'assets/media/debitcards/',
@@ -35,7 +35,6 @@ export const environment = {
         lineHeight: '22px',
         fontSize: '9px',
         fontSmoothing: 'antialiased',
-
         ':-webkit-autofill': {
           color: '#fce883',
         },
