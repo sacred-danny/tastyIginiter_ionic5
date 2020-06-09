@@ -118,8 +118,8 @@ export class MenuPage implements OnInit {
 
   goDetail(menu: MenuDetail) {
     // @ts-ignore
-    // this.router.navigate([ 'menu-detail/' + menu.menuId ]);
-    this.navController.navigateForward('menu-detail/' + menu.menuId);
+    this.router.navigate([ 'menu-detail/' + menu.menuId ]);
+    // this.navController.navigateForward('menu-detail/' + menu.menuId);
   }
 
   logScrolling(event: any) {

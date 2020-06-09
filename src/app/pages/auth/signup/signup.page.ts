@@ -7,6 +7,7 @@ import { AuthService } from '../../../core/services/auth.service';
 
 import { SignUpRequest } from '../../../core/models/auth';
 import { environment } from '../../../../environments/environment';
+import { User } from '../../../core/models/auth';
 
 @Component({
   selector: 'app-signup',
@@ -23,6 +24,17 @@ export class SignupPage implements OnInit {
     confirmPassword: [ '', Validators.compose([ Validators.required, Validators.minLength(8) ]) ],
   });
 
+  user = {
+    userId: '',
+    firstName: '',
+    lastName: '',
+    telephone: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  };
+  title = 'Sign up';
+
   serverConfig = environment;
   backGroundColor = environment.baseColors.pistachio;
 
@@ -30,39 +42,47 @@ export class SignupPage implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private commonService: CommonService,
-    private router: Router
+    private router: Router,
   ) {
   }
 
   ngOnInit() {
+    if (this.authService.user) {
+      this.title = "Edit Profile";
+      this.user.userId = this.authService.user.id;
+      this.user.firstName = this.authService.user.firstName;
+      this.user.lastName = this.authService.user.lastName;
+      this.user.telephone = this.authService.user.telephone;
+      this.user.email = this.authService.user.email;
+    }
   }
 
   async signup() {
-    if (this.form.value.firstName === '') {
+    if (this.user.firstName === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your first name.');
       return;
-    } else if (this.form.value.lastName === '') {
+    } else if (this.user.lastName === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your last name.');
       return;
-    } else if (this.form.value.telephone === '') {
+    } else if (this.user.telephone === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your phone number.');
       return;
-    } else if (this.form.value.telephone.length < 11) {
+    } else if (this.user.telephone.length < 11) {
       await this.commonService.presentAlert('Warning', 'Phone number must must be 11 numerics.');
       return;
-    } else if (this.form.value.email === '') {
+    } else if (this.user.email === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your e-mail address.');
       return;
-    } else if ( ! this.commonService.emailIsValid(this.form.value.email)) {
+    } else if ( ! this.commonService.emailIsValid(this.user.email)) {
       await this.commonService.presentAlert('Warning', 'You have entered an invalid e-mail address. Please try again.');
       return;
-    } else if (this.form.value.password === '') {
+    } else if (this.user.password === '') {
       await this.commonService.presentAlert('Warning', 'Please set a password.');
       return;
-    } else if (this.form.value.password.length < 8) {
+    } else if (this.user.password.length < 8) {
       await this.commonService.presentAlert('Warning', 'Password must be at least 8 characters.');
       return;
-    } else if (this.form.value.password !== this.form.value.confirmPassword) {
+    } else if (this.user.password !== this.user.confirmPassword) {
       await this.commonService.presentAlert('Warning', 'The passwords you entered do not match. Please re-enter your password.');
       return;
     }
@@ -70,15 +90,20 @@ export class SignupPage implements OnInit {
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       const payload: SignUpRequest = {
-        firstName: this.form.value.firstName,
-        lastName: this.form.value.lastName,
-        telephone: this.form.value.telephone,
-        email: this.form.value.email,
-        password: this.form.value.password
+        userId: this.user.userId,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        telephone: this.user.telephone,
+        email: this.user.email,
+        password: this.user.password
       };
       await this.authService.signup(payload);
-      await this.router.navigate([ '/set-location' ], { replaceUrl: true });
-      await this.commonService.showToast('Thanks for Signing Up.');
+      if (this.user.userId === '') {
+        await this.router.navigate([ '/set-location' ], { replaceUrl: true });
+        await this.commonService.showToast('Thanks for Signing Up.');
+      } else {
+        await this.router.navigate([ '' ], { replaceUrl: true });
+      }
     } catch (e) {
       console.log(e);
       if (e.status === 500) {

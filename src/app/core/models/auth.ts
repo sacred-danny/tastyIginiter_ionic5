@@ -4,11 +4,13 @@ export interface LoginRequest {
 }
 
 export interface SignUpRequest {
+  userId?: string;
   firstName: string;
   lastName: string;
   telephone: string;
   email: string;
   password: string;
+  isFacebook?: boolean;
 }
 
 export interface TokenRequest {
@@ -37,8 +39,11 @@ export interface LoginResponse {
 export interface User {
   id: string;
   email?: string;
-  name?: string;
+  firstName?: string;
+  lastName?: string;
+  telephone?: string;
   areaId?: string;
   deliveryAddress?: string;
   stripeCustomerId?: string;
+  isFacebook?: boolean;
 }

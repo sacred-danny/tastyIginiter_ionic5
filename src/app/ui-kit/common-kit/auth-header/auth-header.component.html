@@ -1,7 +1,7 @@
 <div class="auth-header">
     <div class="main-circle" [style.background]="backGroundColor"></div>
     <div class="logo" *ngIf="isLogo"></div>
-    <ion-back-button [routerLink]="backUrl" routerDirection="back" *ngIf="backUrl" text="Back"></ion-back-button>
-    <h2 class="font-34 font-weight-extremly-bold signUp color-white" *ngIf="isSignup">Sign up</h2>
+    <ion-back-button text="Back" (click)="back()" *ngIf="backUrl"></ion-back-button>
+    <h2 class="font-34 font-weight-extremly-bold signUp color-white" *ngIf="signUp">{{signUp}}</h2>
     <h2 class="font-17 font-weight-bold signIn color-white" *ngIf="isSignIn">Sign in to continue</h2>
 </div>

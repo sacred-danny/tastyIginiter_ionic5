@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 import { environment } from '../../../environments/environment';
 import { CommonService } from './common.service';
@@ -19,13 +19,15 @@ export class AuthService {
 
   user: User;
   token: string;
+  isFaceBookLoggedIn = false;
 
   constructor(
     private http: HttpClient,
     private storage: Storage,
     private router: Router,
     private  commonService: CommonService,
-    private menuService: MenuService
+    private menuService: MenuService,
+    private fb: Facebook
   ) {
   }
 
@@ -37,13 +39,13 @@ export class AuthService {
     return this.storage.get(environment.storage.user);
   }
 
-  async isAuthenticated(): Promise<boolean> {
+  async isAuthenticated(): Promise<number> {
     const localUser = await this.getUser();
     const payload = {
       user: localUser
     };
     // tslint:disable-next-line:ban-types
-    const res: boolean = await this.http.post<boolean>(environment.apiURL + '/auth/validateToken', payload).toPromise();
+    const res: number = await this.http.post<number>(environment.apiURL + '/auth/validateToken', payload).toPromise();
     return res;
   }
 
@@ -139,7 +141,20 @@ export class AuthService {
   }
 
   async logout() {
-    await this.storage.clear();
-    await this.router.navigate([ '/login' ], { replaceUrl: true });
+    if (this.user.isFacebook === true) {
+      await this.fb.logout()
+        .then( res => {
+          this.storage.clear();
+          this.router.navigate([ '/login' ], { replaceUrl: true });
+        })
+        .catch(e => {
+          this.storage.clear();
+          this.router.navigate([ '/login' ], { replaceUrl: true });
+        });
+    } else {
+      await this.storage.clear();
+      this.user = await this.getUser();
+      await this.router.navigate([ '/login' ], { replaceUrl: true });
+    }
   }
 }

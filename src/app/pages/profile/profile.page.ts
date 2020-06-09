@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { Router } from '@angular/router';
 
+import { environment } from '../../../environments/environment';
 import { CommonService } from '../../core/services/common.service';
 import { AuthService } from '../../core/services/auth.service';
 
@@ -40,7 +41,8 @@ export class ProfilePage implements OnInit {
 
   constructor(
     private commonService: CommonService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
   }
 
@@ -48,7 +50,29 @@ export class ProfilePage implements OnInit {
     this.commonService.activeIcon(3);
   }
 
-  goDetail(item) {
+  profileEdit() {
+    if (this.authService.user.isFacebook) {
+      this.commonService.presentAlert('Warning', 'Facebook user is not available to edit.');
+      return;
+    }
+    this.router.navigate([ '/signup' ]);
+  }
 
+  goDetail(item) {
+    switch (item.title) {
+      case 'Delivery Support':
+        this.router.navigate([ '/set-location' ]);
+        break;
+      case 'Terms of use':
+        this.router.navigate([ '/terms' ]);
+        break;
+      case 'Privacy policy':
+        this.router.navigate([ '/policy' ]);
+        break;
+    }
+  }
+
+  goSetLocation() {
+    this.router.navigate([ '/set-location' ]);
   }
 }

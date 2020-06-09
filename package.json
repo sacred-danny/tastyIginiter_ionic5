@@ -77,11 +77,11 @@
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-facebook4": {
-        "APP_ID": "com.grubsup.foodapp",
+        "APP_ID": "651535838729441",
         "APP_NAME": "Grubs Up"
-      },
-      "cordova-plugin-ionic-webview": {}
+      }
     },
     "platforms": [
       "android"

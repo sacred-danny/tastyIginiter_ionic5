@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   enableLog: true,
   addressKey: 'h8oJpLQObUWNXeSh4vtDiw25701',
-
+  //
   // serverURL: 'http://www.grubsupdev.com/',
   // apiURL: 'http://www.grubsupdev.com/api/v1',
 

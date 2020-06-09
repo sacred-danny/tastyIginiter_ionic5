@@ -10,6 +10,14 @@
   background: white;
 }
 
+ion-content {
+  background: white !important;
+}
+
+.content {
+  background: white !important;
+}
+
 :host(.ion-activatable:hover) ion-item {
   color: red !important;
 }

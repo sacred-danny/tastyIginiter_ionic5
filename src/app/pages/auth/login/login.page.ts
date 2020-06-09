@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
+import { Facebook } from '@ionic-native/facebook/ngx';
 
 import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
-import { LoginRequest } from '../../../core/models/auth';
+import { LoginRequest, LoginResponse, SignUpRequest } from '../../../core/models/auth';
 import { environment } from '../../../../environments/environment';
 
 @Component({
@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private commonService: CommonService,
     private router: Router,
-    private fb: Facebook
+    private fb: Facebook,
   ) {
   }
 
@@ -65,31 +65,73 @@ export class LoginPage implements OnInit {
     }
   }
 
-  loginWithFaceBook() {
-    this.fb.login(['public_profile', 'user_photos', 'email', 'user_birthday'])
-      .then( (res: FacebookLoginResponse) => {
-        console.log('facebookResponse:', res);
-        if (res.status === 'connected') {
-          // Get user ID and Token
-          const fbId = res.authResponse.userID;
-          const fbToken = res.authResponse.accessToken;
-          alert(fbId + '::' + fbToken);
-          // Get user infos from the API
-          this.fb.api('/me?fields=name,gender,birthday,email', []).then((user) => {
-            // Get the connected user details
-            const gender    = user.gender;
-            const birthday  = user.birthday;
-            const name      = user.name;
-            const email     = user.email;
-            alert(gender);
-            // => Open user session and redirect to the next page
-          });
-        } else {
-          console.log('An error occurred...');
-        }
+  async loginWithFaceBook() {
+    const loading = await this.commonService.showLoading('Please wait...');
+    try {
+      this.fb.login(['public_profile', 'user_friends', 'email'])
+        .then(async (res) => {
+          if (res.status === 'connected') {
+            this.fb.api('/' + res.authResponse.userID + '/?fields=id,email,name,picture', ['public_profile'])
+              .then(async (user) => {
+                // user.id. user.email, user.name
+                try {
+                  const payload: SignUpRequest = {
+                    firstName: (user.name.split(' ').length[0] > 1) ? user.name.split(' ')[0] : user.name,
+                    lastName: (user.name.split(' ').length[0] > 1) ? user.name.split(' ')[1] : '',
+                    telephone: '',
+                    email: user.email,
+                    password: '',
+                    isFacebook: true
+                  };
+                  const result: LoginResponse = await this.authService.signup(payload);
+                  await loading.dismiss();
+                  if (result.user.deliveryAddress === '') {
+                    await this.router.navigate([ '/set-location' ], { replaceUrl: true });
+                    return;
+                  }
+                  await this.router.navigate([ '' ], { replaceUrl: true });
+                } catch (e) {
+                  console.log(e);
+                  await loading.dismiss();
+                  if (e.status === 500) {
+                    await this.commonService.presentAlert('Warning', 'Internal Server Error.');
+                    return;
+                  }
+                  await this.commonService.presentAlert('Warning', e.error.message);
+                } finally {
+                  await loading.dismiss();
+                }
+              })
+              .catch(e => {
+                loading.dismiss();
+                console.log(e);
+                this.commonService.presentAlert('Warning', 'Error logging into Facebook');
+              });
+          } else {
+            this.commonService.presentAlert('Warning', 'Error logging into Facebook');
+            await loading.dismiss();
+          }
+        })
+        .catch(e => {
+          loading.dismiss();
+          console.log('Error logging into Facebook', e);
+          this.commonService.presentAlert('Warning', 'Error logging into Facebook');
+        });
+    } catch (e) {
+      await loading.dismiss();
+      if (e.status === 500) {
+        await this.commonService.presentAlert('Warning', 'Internal Server Error');
+        return;
+      }
+      await this.commonService.presentAlert('Warning', e.error.message);
+    }
+  }
+
+  facebookLogout() {
+    this.fb.logout()
+      .then( res => {
+        console.log('facebook logouted', res);
       })
-      .catch((e) => {
-        console.log('Error logging into Facebook', e);
-      });
+      .catch(e => console.log('Error logout from Facebook', e));
   }
 }
