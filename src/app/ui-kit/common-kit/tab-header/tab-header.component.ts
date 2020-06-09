@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 import { AuthService } from '../../../core/services/auth.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-tab-header',
@@ -16,6 +17,7 @@ export class TabHeaderComponent implements OnInit {
   @Input() subTitle: string;
   @Input() logout: boolean;
 
+  menuBlankImage = environment.menuBlankImage;
   constructor(
     private authService: AuthService,
     private navController: NavController

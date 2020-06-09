@@ -48,7 +48,7 @@ export class SignupPage implements OnInit {
 
   ngOnInit() {
     if (this.authService.user) {
-      this.title = "Edit Profile";
+      this.title = 'Edit Profile';
       this.user.userId = this.authService.user.id;
       this.user.firstName = this.authService.user.firstName;
       this.user.lastName = this.authService.user.lastName;

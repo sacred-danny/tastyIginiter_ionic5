@@ -111,6 +111,17 @@ export class AuthService {
     }
   }
 
+  async forgotPassword(payload): Promise<boolean> {
+    try {
+      // tslint:disable-next-line:max-line-length
+      const res: boolean = await this.http.post<boolean>(environment.apiURL + '/auth/forgotPassword', parseToPayload(payload), { params: anonParam() }).toPromise();
+      console.log(res);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   async setLocation(beforePayload: PrepareLocationRequest) {
     try {
       // tslint:disable-next-line:max-line-length

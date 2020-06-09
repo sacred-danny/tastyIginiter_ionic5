@@ -43,6 +43,7 @@ export interface User {
   lastName?: string;
   telephone?: string;
   areaId?: string;
+  locationId?: string;
   deliveryAddress?: string;
   stripeCustomerId?: string;
   isFacebook?: boolean;

@@ -3,15 +3,13 @@
 <ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
     <div class="container d-flex flex-column p-0">
         <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
-<!--            <ion-refresher-content>-->
-<!--            </ion-refresher-content>-->
         </ion-refresher>
         <div class="deliveryOpen mt-15 px-15">
             <div class="delivery float-left">
                 <h2 class="font-15 color-shark font-weight-bold text-left mb-0">Delivery</h2>
                 <p class="font-15 color-shark text-left">{{this.menuService.menu.delivery}}</p>
             </div>
-            <div class="open float-right mx-20">
+            <div class="open float-right">
                 <h2 class="font-15 color-pistachio font-weight-bold text-left mb-0">{{this.menuService.menu.titleOpenTime}}</h2>
                 <p class="font-15 color-shark text-left">{{this.menuService.menu.openTime}}</p>
             </div>
@@ -22,7 +20,7 @@
             <ion-slides [options]="specailSlideOpts">
                 <ion-slide *ngFor="let special of specials;" (click)="goDetail(special.menu)" [class.m-0]="platform.is('android')" [class.mx-15]="platform.is('ios')">
                     <div class="menu-image">
-                        <ion-img *ngIf="special.menu.menuPhoto"></ion-img>
+                        <ion-img *ngIf="special.menu.menuImageUrl"></ion-img>
                     </div>
                     <h2 class="font-15 color-shark font-weight-bold text-left mt-2 mb-0">{{special.menu.menuName}}</h2>
                     <h2 class="font-15 color-french-gray font-weight-bold text-left mb-0">{{special.menu.menuPrice | currency:'GBP'}}</h2>
@@ -48,14 +46,17 @@
 
                     <ion-item *ngFor="let menu of categoryDetail.menus;" (click)="goDetail(menu)">
                         <ion-avatar slot="start">
-                            <img [src]="menu.menuPhoto == null ? menuBlankImage : menu.menuPhoto">
+                            <img [src]="menu.menuImageUrl == null ? menuBlankImage : menu.menuImageUrl">
                         </ion-avatar>
-                        <div class="descripton">
-                            <h2 class="font-15 color-shark font-weight-bold mt-5 mb-0 text-overflow">{{menu.menuName}}</h2>
-                            <p class="font-12 color-french-gray mt-5 mb-0">{{menu.menuDescription}}</p>
+                        <div class="main w-100">
+                            <div class="w-100">
+                                <h2 class="font-15 color-shark font-weight-bold mt-5 mb-0 text-overflow">{{menu.menuName}}</h2>
+                            </div>
+                            <div class="descripton">
+                                <p class="font-12 color-french-gray mt-5 mb-0">{{menu.menuDescription}}</p>
+                            </div>
                         </div>
                         <h2 class="price font-15 color-burning-orange font-weight-bold text-overflow m-0">{{menu.menuPrice | currency:'GBP'}}</h2>
-                        <span class="font-20 color-french-gray font-weight-light"> > </span>
                     </ion-item>
                 </ion-list>
             </ng-container>

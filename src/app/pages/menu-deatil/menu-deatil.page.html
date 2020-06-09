@@ -1,7 +1,10 @@
 <ng-container *ngIf="menuDetail !== undefined">
     <div class="menu-image" >
         <ion-back-button text="Back" (click)="navController.pop();"></ion-back-button>
-        <ion-img [src]="menuDetail.menu.menuPhoto == null ? menuBlankImage : menuDetail.menu.menuPhoto"></ion-img>
+        <ion-img [src]="menuDetail.menu.menuImageUrl == null ? menuBlankImage : menuDetail.menu.menuImageUrl"></ion-img>
+        <div class="icon" (click)="addFavorite()">
+            <ion-icon [color]="menuDetail.menu.isFavorite ? 'success' : 'dark'" name="star" ></ion-icon>
+        </div>
     </div>
     <ion-content>
         <div class="container d-flex flex-column">

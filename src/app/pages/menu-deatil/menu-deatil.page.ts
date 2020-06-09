@@ -4,11 +4,11 @@ import { Storage } from '@ionic/storage';
 
 import { MenuService } from '../../core/services/menu.service';
 import { CommonService } from '../../core/services/common.service';
+import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment';
 import { Item, MenuDetailOption, MenuOptions, MenuOptionValue } from '../../core/models/menu';
 
 import { IonContent, NavController } from '@ionic/angular';
-import { LoginRequest } from '../../core/models/auth';
 
 @Component({
   selector: 'app-menu-deatil',
@@ -30,6 +30,7 @@ export class MenuDeatilPage implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private menuService: MenuService,
+    private authService: AuthService,
     private commonService: CommonService,
     private navController: NavController,
     private storage: Storage
@@ -41,7 +42,8 @@ export class MenuDeatilPage implements OnInit {
     try {
       this.menuId = this.activatedRoute.snapshot.paramMap.get('id');
       const payload = {
-        id: this.menuId
+        id: this.menuId,
+        userId: this.authService.user.id
       };
       this.menuService.getDeatail(payload).subscribe((menuDetail: any) => {
         this.menuDetail = this.commonService.keysToCamel(menuDetail);
@@ -82,8 +84,35 @@ export class MenuDeatilPage implements OnInit {
     }
   }
 
+  async addFavorite() {
+    const loading = await this.commonService.showLoading('Please wait...');
+    try {
+      const payload = {
+        id: this.menuId,
+        userId: this.authService.user.id
+      };
+      this.menuService.addFavorite(payload).subscribe((res: boolean) => {
+        if (res) {
+          this.menuDetail.menu.isFavorite = true;
+        } else {
+          this.menuDetail.menu.isFavorite = false;
+        }
+        loading.dismiss();
+      });
+    } catch (e) {
+      console.log(e);
+      await loading.dismiss();
+      this.navController.pop();
+      if (e.status === 500) {
+        await this.commonService.presentAlert('Warning', 'Internal Server Error');
+        return;
+      }
+      await this.commonService.presentAlert('Warning', e.error.message);
+    }
+  }
+
   checkboxClick(item) {
-    item.isChecked = !item.isChecked;
+    item.isChecked = ! item.isChecked;
     if (item.isChecked) {
       this.onePirce += item.price;
     } else {
@@ -99,7 +128,7 @@ export class MenuDeatilPage implements OnInit {
         this.onePirce -= optionsValues[i].price;
       }
     }
-    item.isChecked = !item.isChecked;
+    item.isChecked = ! item.isChecked;
     if (item.isChecked) {
       this.onePirce += item.price;
     }
@@ -146,7 +175,7 @@ export class MenuDeatilPage implements OnInit {
         count: this.count,
         price: this.price,
         comment: this.comment,
-        photo: this.menuDetail.menu.menuPhoto,
+        photo: this.menuDetail.menu.menuImageUrl,
         extras: ''
       };
       // tslint:disable-next-line:prefer-for-of

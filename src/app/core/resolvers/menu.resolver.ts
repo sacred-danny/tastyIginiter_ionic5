@@ -21,7 +21,7 @@ export class MenuResolver implements Resolve<Menu> {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Menu> | Promise<Menu> | Menu {
     this.menuService.getOrder();
-    if (this.menuService.menu) {
+    if (this.menuService.menu && this.menuService.menu.locationId === this.authService.user.locationId) {
       return this.menuService.menu;
     } else {
       return new Promise(async (resolve) => {

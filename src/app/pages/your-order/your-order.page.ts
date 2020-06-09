@@ -53,10 +53,10 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
     if (this.menuService.menu.deliveryTotal === 0) {
       this.delivery = 0;
     } else {
-      if (this.menuService.order.totalPrice >= this.menuService.menu.deliveryTotal) {
+      if (this.menuService.order.totalPrice >= Number(this.menuService.menu.deliveryTotal)) {
         this.delivery = 0;
       } else {
-        this.delivery = this.menuService.menu.deliveryAmount;
+        this.delivery = Number(this.menuService.menu.deliveryAmount);
       }
     }
     this.calcPrice();
@@ -70,28 +70,26 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
 
   calcPrice() {
     if (this.discountType === 'P') {
-      if (this.menuService.order.totalPrice / 100 * this.discount - this.delivery >= 0) {
-        this.currentPrice = this.menuService.order.totalPrice / 100 * this.discount - this.delivery;
-      } else {
-        this.currentPrice = 0;
-      }
+      this.currentPrice = this.menuService.order.totalPrice / 100 * this.discount + this.delivery;
     } else {
       if (this.discountType === 'F') {
-        if (this.menuService.order.totalPrice - this.discount < 0) {
-          this.commonService.presentAlert('Warning', 'Your discount code can not be applied on orders below £' + this.discount);
+        if (this.menuService.order.totalPrice - this.discount + this.delivery < 0) {
+          const discount = this.discount;
+          this.commonService.presentAlert('Warning', 'Your discount code can not be applied on orders below £' + discount);
+          this.discount = 0;
           return;
         } else {
-          if (this.menuService.order.totalPrice - this.discount - this.delivery >= 0) {
-            this.currentPrice = this.menuService.order.totalPrice - this.discount - this.delivery;
-          } else {
-            this.currentPrice = 0;
-          }
+          this.currentPrice = this.menuService.order.totalPrice - this.discount + this.delivery;
         }
       } else {
-        this.currentPrice = this.menuService.order.totalPrice - this.discount - this.delivery;
+        if (this.menuService.order.totalPrice - this.discount + this.delivery > 0) {
+          this.currentPrice = this.menuService.order.totalPrice - this.discount + this.delivery;
+        } else {
+          this.currentPrice = 0;
+        }
       }
     }
-  }
+  }men
 
   couponApply() {
     let found = false;
@@ -129,6 +127,15 @@ export class YourOrderPage implements OnInit, AfterContentChecked {
       }
     }
     this.menuService.order.items = items;
+    if (this.menuService.menu.deliveryTotal === 0) {
+      this.delivery = 0;
+    } else {
+      if (this.menuService.order.totalPrice >= Number(this.menuService.menu.deliveryTotal)) {
+        this.delivery = 0;
+      } else {
+        this.delivery = Number(this.menuService.menu.deliveryAmount);
+      }
+    }
     this.storage.set(environment.storage.order, this.menuService.order);
     this.calcPrice();
   }

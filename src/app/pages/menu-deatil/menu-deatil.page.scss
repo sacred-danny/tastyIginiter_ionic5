@@ -7,13 +7,29 @@
     height: 100%;
     object-fit: cover;
   }
+
+  .icon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: white;
+    border-radius: 50%;
+    right: 15px;
+    top: 30px;
+
+    ion-icon {
+      font-size: 20px;
+      position: relative;
+      top: 4px;
+      left: 5px;
+    }
+  }
 }
 ion-content {
   --background: white;
 }
 
 .container {
-  background: white;
   ion-list {
     background: white;
     margin-top: -15px;
@@ -138,6 +154,7 @@ ion-content {
     h3 {
       position: absolute;
       right: 16px;
+      top: 15px;
     }
   }
 }

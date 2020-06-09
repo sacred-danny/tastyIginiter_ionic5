@@ -73,27 +73,22 @@
         }
       }
 
-      .descripton {
-        width: calc(100% - 75px);
+      .main {
+        .descripton {
+          width: calc(100% - 50px);
 
-        p {
-          line-height: 15px;
-          height: 45px;
-          white-space: pre-line;
+          p {
+            line-height: 15px;
+            height: 45px;
+            white-space: pre-line;
+          }
         }
       }
-
       .price {
         position: absolute;
         top: 29px;
-        right: 20px;
+        right: 0px;
         width: 50px;
-      }
-
-      span {
-        position: absolute;
-        right: 10px;
-        top: 22px;
       }
     }
   }

@@ -55,7 +55,7 @@ export interface MenuDetail {
   menuName: string;
   menuDescription: string;
   menuPrice: number;
-  menuPhoto: string;
+  menuImageUrl: string;
   menuCategoryId: string;
   stockQty: string;
   minimumQty: string;
@@ -65,6 +65,7 @@ export interface MenuDetail {
   menuPriority: string;
   orderRestriction: string;
   pivot?: any;
+  isFavorite?: any;
 }
 
 export interface Special {

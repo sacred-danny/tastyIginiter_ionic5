@@ -82,22 +82,22 @@ export class CheckoutPage implements OnInit {
   async ngOnInit() {
     const loading = await this.commonService.showLoading('Please wait...');
     try {
-      this.menuService.getCheckOutTime({ user: this.authService.user }).subscribe((checkOutTime: any) => {
-        this.deliveryTimes = checkOutTime.delivery;
-        this.pickupTimes = checkOutTime.pickup;
-        this.clientSecret = checkOutTime.clientSecret;
-        this.savedCards = checkOutTime.savedCards;
+      this.menuService.getCheckOutTime({ user: this.authService.user }).subscribe(async (checkOutTime: any) => {
+        this.deliveryTimes = await checkOutTime.delivery;
+        this.pickupTimes = await checkOutTime.pickup;
+        this.clientSecret = await checkOutTime.clientSecret;
+        this.savedCards = await checkOutTime.savedCards;
         // tslint:disable-next-line:prefer-for-of
         for (let i = 0; i < this.savedCards.data.length; i ++) {
-          this.savedCards.data[i] = { ...this.savedCards.data[i], isChecked: false };
+          this.savedCards.data[i] = await { ...this.savedCards.data[i], isChecked: false };
           if (i === 0) {
-            this.savedCards.data[i].isChecked = true;
-            this.paymentMethodId = this.savedCards.data[i].id;
+            this.savedCards.data[i].isChecked = await true;
+            this.paymentMethodId = await this.savedCards.data[i].id;
           }
         }
-        this.setTime(0, 0);
-        this.setupStripe();
-        loading.dismiss();
+        await this.setTime(0, 0);
+        await this.setupStripe();
+        await loading.dismiss();
       });
     } catch (e) {
       loading.dismiss();

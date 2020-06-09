@@ -50,6 +50,18 @@ export class MenuService {
     });
   }
 
+  addFavorite(payload): Observable<any> {
+    return this.http.post<any>(environment.apiURL + '/home/addFavorites', payload).catch((error: any) => {
+      throw error;
+    });
+  }
+
+  getFavorite(payload): Observable<any> {
+    return this.http.post<any>(environment.apiURL + '/home/getFavorites', payload).catch((error: any) => {
+      throw error;
+    });
+  }
+
   getCheckOutTime(payload): Observable<any> {
     return this.http.post<any>(environment.apiURL + '/home/getCheckOutTime', payload).catch((error: any) => {
       this.navController.pop();
