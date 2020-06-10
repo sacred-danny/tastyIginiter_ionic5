@@ -25,7 +25,6 @@ export class OrderPage implements OnInit {
   }
 
   async ngOnInit() {
-    this.commonService.activeIcon(2);
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise();
@@ -47,4 +46,7 @@ export class OrderPage implements OnInit {
     }
   }
 
+  ionViewWillEnter() {
+    this.commonService.activeIcon(2);
+  }
 }

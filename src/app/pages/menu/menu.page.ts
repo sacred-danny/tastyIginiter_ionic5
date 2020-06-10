@@ -62,7 +62,6 @@ export class MenuPage implements OnInit {
   }
 
   ngOnInit() {
-    this.commonService.activeIcon(0);
     this.specials = new Array();
     this.categories = new Array();
     this.categoryDetails = new Array();
@@ -90,6 +89,7 @@ export class MenuPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.commonService.activeIcon(0);
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < this.categoryDetails.length; i ++) {
       this.categoryPositions.push(document.getElementById('category_' + i).offsetTop - 20);

@@ -4,7 +4,7 @@
         <div class="row m-0 mt-15">
             <ng-container *ngIf="favorites.length > 0">
                 <ng-container *ngFor="let favorite of favorites;">
-                    <div class="menu shadow px-0 pb-5 mb-15" *ngIf="favorite.isFavorite" (click)="removeFavorite(favorite)">
+                    <div class="menu shadow px-0 pb-5 mb-15" *ngIf="favorite.isFavorite" (click)="goDetail(favorite)">
                         <div class="photo">
                             <ion-img [src]="favorite.menuImageUrl == null ? menuBlankImage : favorite.menuImageUrl"></ion-img>
                         </div>

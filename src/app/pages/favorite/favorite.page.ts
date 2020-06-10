@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
 import { CommonService } from '../../core/services/common.service';
@@ -21,11 +22,13 @@ export class FavoritePage implements OnInit {
     private commonService: CommonService,
     private authService: AuthService,
     private menuService: MenuService,
-    private navController: NavController
+    private navController: NavController,
+    private router: Router
   ) {
   }
 
   ngOnInit() {
+    console.log();
   }
 
   async ionViewWillEnter() {
@@ -53,6 +56,10 @@ export class FavoritePage implements OnInit {
     }
   }
 
+  ionViewWillLeave() {
+    this.favorites = [];
+  }
+
   async removeFavorite(favorite: any) {
     if (this.isDeleting) {
       return;
@@ -66,7 +73,7 @@ export class FavoritePage implements OnInit {
       };
       this.menuService.addFavorite(payload).subscribe((res: boolean) => {
         this.isDeleting = false;
-        if (!res) {
+        if ( ! res) {
           favorite.isFavorite = false;
         }
         loading.dismiss();
@@ -81,5 +88,12 @@ export class FavoritePage implements OnInit {
       }
       await this.commonService.presentAlert('Warning', e.error.message);
     }
+  }
+
+  goDetail(favorite) {
+    if (this.isDeleting === true) {
+      return;
+    }
+    this.router.navigate([ 'menu-detail/' + favorite.menuId ]);
   }
 }

@@ -47,6 +47,9 @@ export class ProfilePage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
     this.commonService.activeIcon(3);
   }
 

@@ -7,11 +7,11 @@ export const environment = {
   enableLog: true,
   addressKey: 'h8oJpLQObUWNXeSh4vtDiw25701',
 
-  // serverURL: 'http://www.grubsupdev.com/',
-  // apiURL: 'http://www.grubsupdev.com/api/v1',
+  serverURL: 'http://www.grubsupdev.com/',
+  apiURL: 'http://www.grubsupdev.com/api/v1',
 
-  serverURL: 'http://192.168.208.123/grubsupdev/',
-  apiURL: 'http://192.168.208.123/grubsupdev/api/v1',
+  // serverURL: 'http://192.168.208.123/grubsupdev/',
+  // apiURL: 'http://192.168.208.123/grubsupdev/api/v1',
   stripeApiKey: 'pk_test_KGSgL4Ccd2oGEKsSYXBF4SD600LfoqUiWa',
 
   debitCardURL: 'assets/media/debitcards/',

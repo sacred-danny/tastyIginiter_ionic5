@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
 import { MenuService } from '../../core/services/menu.service';
@@ -33,6 +33,7 @@ export class MenuDeatilPage implements OnInit {
     private authService: AuthService,
     private commonService: CommonService,
     private navController: NavController,
+    private router: Router,
     private storage: Storage
   ) {
   }
@@ -195,5 +196,9 @@ export class MenuDeatilPage implements OnInit {
       console.log(this.menuService.order);
       this.navController.pop();
     }
+  }
+
+  back() {
+    this.router.navigate([ '/tabs/menu' ], { replaceUrl: true });
   }
 }
