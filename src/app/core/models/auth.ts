@@ -3,6 +3,11 @@ export interface LoginRequest {
   password: string;
 }
 
+export interface Notification {
+  token: string;
+  phoneType: string;
+}
+
 export interface SignUpRequest {
   userId?: string;
   firstName: string;
@@ -11,6 +16,7 @@ export interface SignUpRequest {
   email: string;
   password: string;
   isFacebook?: boolean;
+  notification?: Notification;
 }
 
 export interface TokenRequest {

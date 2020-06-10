@@ -42,7 +42,7 @@ export class ForgotPasswordPage implements OnInit {
     //     email: this.form.value.email
     //   };
     //   const result = await this.authService.forgotPassword(payload);
-    //   await loading.dismiss();
+    //   await loading.dismiss();a
     //   if (result) {
     //     this.commonService.presentAlert('Success', 'Forgot-Password mail was sent.');
     //     this.navController.pop();

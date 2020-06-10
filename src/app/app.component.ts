@@ -1,9 +1,13 @@
 import { Component } from '@angular/core';
-
+import { FCM } from '@ionic-native/fcm/ngx';
+import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+
+import { CommonService } from './core/services/common.service';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +21,10 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private fcm: FCM,
     private router: Router,
+    private storage: Storage,
+    private commonService: CommonService
   ) {
     this.initializeApp();
 
@@ -30,6 +37,28 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      this.notificationSetup();
+    });
+  }
+
+  notificationSetup() {
+    this.fcm.getToken().then(token => {
+      console.log('firebaseToken:', token);
+      this.storage.set(environment.storage.notificationToken, token);
+    });
+    this.fcm.onTokenRefresh().subscribe(token => {
+      console.log('refreshFirebaseToken:', token);
+      this.storage.set(environment.storage.notificationToken, token);
+    });
+    this.fcm.onNotification().subscribe(data => {
+      console.log(data);
+      if (data.wasTapped) {
+        console.log('Received in background');
+        this.commonService.presentAlert('Success', JSON.stringify(data));
+      } else {
+        console.log('Received in foreground');
+        this.commonService.presentAlert('Success', JSON.stringify(data));
+      }
     });
   }
 

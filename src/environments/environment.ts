@@ -19,7 +19,8 @@ export const environment = {
   storage: {
     token: 'token',
     user: 'user',
-    order: 'order'
+    order: 'order',
+    notificationToken: 'notificationToken'
   },
   baseColors: {
     burningOrage: '#fc6c35',
