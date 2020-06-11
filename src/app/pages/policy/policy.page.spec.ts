@@ -10,7 +10,7 @@ describe('PolicyPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ PolicyPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [ IonicModule.forRoot() ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(PolicyPage);

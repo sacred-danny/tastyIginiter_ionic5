@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
 import { environment } from '../../../environments/environment';
@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { CommonService } from '../../core/services/common.service';
 import { MenuService } from '../../core/services/menu.service';
 import { AuthService } from '../../core/services/auth.service';
+import { associateArrayToArray, keysToCamel } from '../../core/utils/dto.util';
 
 @Component({
   selector: 'app-order',
@@ -13,6 +14,9 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrls: [ './order.page.scss' ],
 })
 export class OrderPage implements OnInit {
+
+  @ViewChild('refresherRef') refresherRef;
+
   serverConfig = environment;
   orders: any;
 
@@ -25,28 +29,36 @@ export class OrderPage implements OnInit {
   }
 
   async ngOnInit() {
-    const loading = await this.commonService.showLoading('Please wait...');
-    try {
-      const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise();
-      const orders = this.commonService.keysToCamel(result.orders);
-      this.orders = Array();
-      // tslint:disable-next-line:prefer-for-of forin
-      for (const order in orders) {
-        this.orders.push(orders[order]);
-      }
-      loading.dismiss();
-    } catch (e) {
-      loading.dismiss();
-      this.navController.pop();
-      if (e.status === 500) {
-        await this.commonService.presentAlert('Warning', 'Internal Server Error');
-        return;
-      }
-      await this.commonService.presentAlert('Warning', e.error.message);
+    if (this.commonService.isInit) {
+      await this.ionViewWillEnter();
     }
   }
 
-  ionViewWillEnter() {
+  async ionViewWillEnter() {
     this.commonService.activeIcon(2);
+    const loading = await this.commonService.showLoading('Please wait...');
+    try {
+      const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise();
+      const orders = keysToCamel(result.orders);
+      this.orders = associateArrayToArray(orders);
+    } catch (e) {
+      await this.navController.pop();
+      if (e.status === 500) {
+        await this.commonService.presentAlert('Warning', 'Internal Server Error');
+      } else {
+        await this.commonService.presentAlert('Warning', e.error.message);
+      }
+    } finally {
+      await loading.dismiss();
+    }
   }
+
+  doRefresh() {
+    setTimeout(async () => {
+      const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise();
+      this.orders = associateArrayToArray(keysToCamel(result.orders));
+      this.refresherRef.complete();
+    }, 10);
+  }
+
 }

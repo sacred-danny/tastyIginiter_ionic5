@@ -1,11 +1,14 @@
 <ion-tabs>
     <ion-tab-bar slot="bottom">
-        <ion-tab-button tab="menu" id="menu" [style]="commonService.navBarActivateIcons[0] === true ? ' border-top: solid 2px #fc6c35;' : 'border-top: unset'" (click)="commonService.activeIcon(0)">
+        <ion-tab-button [style]="commonService.navBarActivateIcons[0] === true ? ' border-top: solid 2px #fc6c35;' : 'border-top: unset'"
+                        id="menu"
+                        tab="menu">
             <ion-icon [name]="commonService.navBarActivateIcons[0] === true ? 'restaurant' :'restaurant-outline'"></ion-icon>
             <p class="m-0">Menu</p>
         </ion-tab-button>
 
-        <ion-tab-button tab="favorite" [style]="commonService.navBarActivateIcons[1] === true ? ' border-top: solid 2px #fc6c35;' : 'border-top: unset'" (click)="commonService.activeIcon(1)" >
+        <ion-tab-button [style]="commonService.navBarActivateIcons[1] === true ? ' border-top: solid 2px #fc6c35;' : 'border-top: unset'"
+                        tab="favorite">
             <ion-icon [name]="commonService.navBarActivateIcons[1] === true ? 'star' :'star-outline'"></ion-icon>
             <p class="m-0">Favourites</p>
         </ion-tab-button>
@@ -13,20 +16,22 @@
         <ion-tab-button disabled>
         </ion-tab-button>
 
-        <ion-tab-button tab="order" [style]="commonService.navBarActivateIcons[2] === true ? ' border-top: solid 2px #fc6c35;' : 'border-top: unset'" (click)="commonService.activeIcon(2)">
+        <ion-tab-button [style]="commonService.navBarActivateIcons[2] === true ? ' border-top: solid 2px #fc6c35;' : 'border-top: unset'"
+                        tab="order">
             <ion-icon [name]="commonService.navBarActivateIcons[2] === true ?  'document' :'document-outline'"></ion-icon>
             <p class="m-0">Orders</p>
         </ion-tab-button>
 
-        <ion-tab-button tab="profile" [style]="commonService.navBarActivateIcons[3] === true ? ' border-top: solid 2px #fc6c35;' : 'border-top: unset'" (click)="commonService.activeIcon(3)">
+        <ion-tab-button [style]="commonService.navBarActivateIcons[3] === true ? ' border-top: solid 2px #fc6c35;' : 'border-top: unset'"
+                        tab="profile">
             <ion-icon [name]="commonService.navBarActivateIcons[3] === true ?  'person' :'person-outline'"></ion-icon>
             <p class="m-0">Profile</p>
         </ion-tab-button>
     </ion-tab-bar>
 </ion-tabs>
 <ng-container *ngIf="menuService.order">
-    <ion-fab class="bottom-add-fab" vertical="bottom" horizontal="center" slot="fixed">
-        <ion-badge class="item-align-center" *ngIf="menuService.order.totalCount > 0">
+    <ion-fab class="bottom-add-fab" horizontal="center" slot="fixed" vertical="bottom">
+        <ion-badge *ngIf="menuService.order.totalCount > 0" class="item-align-center">
             <span>{{menuService.order.totalCount}}</span>
         </ion-badge>
         <ion-fab-button (click)="goOrder()">

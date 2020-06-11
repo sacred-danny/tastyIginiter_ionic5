@@ -16,6 +16,7 @@ export const environment = {
 
   debitCardURL: 'assets/media/debitcards/',
   menuBlankImage: 'https://via.placeholder.com/60',
+
   storage: {
     token: 'token',
     user: 'user',

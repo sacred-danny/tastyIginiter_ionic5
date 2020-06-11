@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import { Storage } from '@ionic/storage';
@@ -32,7 +32,7 @@ export class MenuService {
         this.order = {
           totalCount: 0,
           totalPrice: 0,
-          items: new Array(),
+          items: [],
         };
       } else {
         this.order = val;
@@ -63,8 +63,8 @@ export class MenuService {
   }
 
   getCheckOutTime(payload): Observable<any> {
-    return this.http.post<any>(environment.apiURL + '/home/getCheckOutTime', payload).catch((error: any) => {
-      this.navController.pop();
+    return this.http.post<any>(environment.apiURL + '/home/getCheckOutTime', payload).catch(async (error: any) => {
+      await this.navController.pop();
       throw error;
     });
   }
@@ -98,4 +98,5 @@ export class MenuService {
       throw error;
     });
   }
+
 }

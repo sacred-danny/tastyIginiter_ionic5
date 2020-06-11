@@ -1,37 +1,39 @@
 <div class="header-type-3">
-  <h2 class="font-34 color-white font-weight-bold text-left position-absolute profile">Profile</h2>
-  <p class="font-17 color-white text-left position-absolute edit" (click)="profileEdit()">Edit</p>
+    <h2 class="font-34 color-white font-weight-bold text-left position-absolute profile">Profile</h2>
+    <p (click)="profileEdit()" class="font-17 color-white text-left position-absolute edit">Edit</p>
 </div>
 <div class="avatar shadow mx-15">
-  <div class="main-avatar p-20">
-    <div class="mr-15 image">
-      <img [src]="menuBlankImage">
+    <div class="main-avatar p-20">
+        <div class="mr-15 image">
+            <img [src]="menuBlankImage">
+        </div>
+        <div class="user-info">
+            <h2 class="font-17 color-shark font-weight-bold mt-10 mb-0 text-overflow">{{authService.user.firstName + ' ' + authService.user.lastName}}</h2>
+            <p class="font-15 color-french-gray mt-5 text-overflow">{{authService.user.email}}</p>
+        </div>
     </div>
-    <div class="user-info">
-      <h2 class="font-17 color-shark font-weight-bold mt-10 mb-0 text-overflow">{{authService.user.firstName + ' ' + authService.user.lastName}}</h2>
-      <p class="font-15 color-french-gray mt-5 text-overflow">{{authService.user.email}}</p>
-    </div>
-  </div>
 </div>
 <div class="profile-list shadow mt-20 mx-15 pt-15 pl-15">
-  <div class="address mt-5" (click)="goSetLocation()">
-    <div>
-      <h2 class="font-15 color-shark font-weight-bold mb-0 text-overflow">Address</h2>
-      <p class="font-13 color-french-gray mt-10 mb-15">Add or remove  a delivery address</p>
-    </div>
-    <span class="font-20 color-french-gray font-weight-light"> > </span>
-  </div>
-  <ion-list class="py-0">
-    <ng-container *ngFor="let item of profileItems;">
-      <ion-item *ngIf="item.title === 'Push Notifications'">
-        <ion-icon [name]="item.icon" [style.color]="item.color" [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
-        <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
-      </ion-item>
-      <ion-item (click)="goDetail(item)" *ngIf="item.title !== 'Push Notifications'">
-        <ion-icon [name]="item.icon" [style.color]="item.color" [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
-        <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
+    <div (click)="goSetLocation()" class="address mt-5">
+        <div>
+            <h2 class="font-15 color-shark font-weight-bold mb-0 text-overflow">Address</h2>
+            <p class="font-13 color-french-gray mt-10 mb-15">Add or remove a delivery address</p>
+        </div>
         <span class="font-20 color-french-gray font-weight-light"> > </span>
-      </ion-item>
-    </ng-container>
-  </ion-list>
+    </div>
+    <ion-list class="py-0">
+        <ng-container *ngFor="let item of profileItems;">
+            <ion-item *ngIf="item.title === 'Push Notifications'">
+                <ion-icon [name]="item.icon" [style.color]="item.color"
+                          [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
+                <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
+            </ion-item>
+            <ion-item (click)="goDetail(item)" *ngIf="item.title !== 'Push Notifications'">
+                <ion-icon [name]="item.icon" [style.color]="item.color"
+                          [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
+                <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
+                <span class="font-20 color-french-gray font-weight-light"> > </span>
+            </ion-item>
+        </ng-container>
+    </ion-list>
 </div>

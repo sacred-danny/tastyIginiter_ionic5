@@ -19,22 +19,9 @@ export interface SignUpRequest {
   notification?: Notification;
 }
 
-export interface TokenRequest {
-  user: User;
-}
-
 export interface PrepareLocationRequest {
   houseName: string;
   postcode: string;
-}
-
-export interface Address {
-  address1: string;
-  address2: string;
-  postcode: string;
-  city: string;
-  state: string;
-  countryId: string;
 }
 
 export interface LoginResponse {

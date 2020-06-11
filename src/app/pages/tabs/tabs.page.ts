@@ -22,15 +22,13 @@ export class TabsPage implements OnInit {
   ngOnInit() {
   }
 
-  goOrder() {
+  async goOrder() {
     if (this.menuService.order.totalPrice > 0) {
-      this.router.navigate([ 'your-order' ]);
+      await this.router.navigate([ 'your-order' ]);
       // this.navController.navigateForward('your-order');
     } else {
-      this.commonService.presentAlert('Warning', 'Please, add some menus before you checkout!');
+      await this.commonService.presentAlert('Warning', 'Please, add some menus before you checkout!');
     }
   }
-
-
 
 }

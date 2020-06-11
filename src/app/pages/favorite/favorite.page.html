@@ -4,15 +4,16 @@
         <div class="row m-0 mt-15">
             <ng-container *ngIf="favorites.length > 0">
                 <ng-container *ngFor="let favorite of favorites;">
-                    <div class="menu shadow px-0 pb-5 mb-15" *ngIf="favorite.isFavorite" (click)="goDetail(favorite)">
+                    <div (click)="goDetail(favorite)" *ngIf="favorite.isFavorite" class="menu shadow px-0 pb-5 mb-15">
                         <div class="photo">
-                            <ion-img [src]="favorite.menuImageUrl == null ? menuBlankImage : favorite.menuImageUrl"></ion-img>
+                            <ion-img [src]="favorite.menuImageUrl == null ? menuBlankImage : favorite.menuImageUrl">
+                            </ion-img>
                         </div>
                         <h3 class="font-15 color-shark font-weight-bold text-left text-overflow mt-5 mx-5 mb-0">{{favorite.menuName}}</h3>
                         <p class="font-13 color-french-gray text-overflow mt-5 mx-5 mb-0">{{favorite.menuDescription}}</p>
                         <h3 class="font-15 color-shark font-weight-bold text-left ion-float-right mx-5 mt-10 mb-0">{{favorite.menuPrice | currency:'GBP'}}</h3>
-                        <div class="icon" (click)="removeFavorite(favorite)">
-                            <ion-icon [color]="favorite.isFavorite ? 'success' : 'dark'" name="star" ></ion-icon>
+                        <div (click)="removeFavorite(favorite)" class="icon">
+                            <ion-icon [color]="favorite.isFavorite ? 'success' : 'dark'" name="star"></ion-icon>
                         </div>
                     </div>
                 </ng-container>

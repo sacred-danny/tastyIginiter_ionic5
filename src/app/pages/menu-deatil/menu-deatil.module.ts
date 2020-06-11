@@ -16,7 +16,7 @@ import { MenuDeatilPage } from './menu-deatil.page';
     MenuDeatilPageRoutingModule
   ],
   declarations: [ MenuDeatilPage ],
-  providers: [NavParams]
+  providers: [ NavParams ]
 })
 export class MenuDeatilPageModule {
 }

@@ -1,18 +1,26 @@
 <ion-content>
-    <app-auth-header [backGroundColor]="serverConfig.baseColors.pistachio" [signUp]="title" backUrl="/login"></app-auth-header>
+    <app-auth-header [backGroundColor]="serverConfig.baseColors.pistachio" [signUp]="title"
+                     backUrl="/login"></app-auth-header>
     <div class="container d-flex flex-column">
-        <form [formGroup]="form" (ngSubmit)="signup()" class="mt-35 px-20">
-            <app-text-input type="text" placeholder="First Name" formControlName="firstName" [(ngModel)]="user.firstName"></app-text-input>
-            <app-text-input type="text" placeholder="Last Name" formControlName="lastName" [(ngModel)]="user.lastName"></app-text-input>
-            <app-phone-number-input placeholder="Mobile" formControlName="telephone" [(ngModel)]="user.telephone"></app-phone-number-input>
-            <app-text-input type="email" placeholder="Email" formControlName="email" [(ngModel)]="user.email"></app-text-input>
-            <app-text-input type="password" placeholder="Password" formControlName="password" [(ngModel)]="user.password"></app-text-input>
-            <app-text-input type="password" placeholder="Confirm Password"
-                            formControlName="confirmPassword" [(ngModel)]="user.confirmPassword"></app-text-input>
+        <form (ngSubmit)="signup()" [formGroup]="form" class="mt-35 px-20">
+            <app-text-input [(ngModel)]="user.firstName" formControlName="firstName" placeholder="First Name"
+                            type="text"></app-text-input>
+            <app-text-input [(ngModel)]="user.lastName" formControlName="lastName" placeholder="Last Name"
+                            type="text"></app-text-input>
+            <app-phone-number-input [(ngModel)]="user.telephone" formControlName="telephone"
+                                    placeholder="Mobile"></app-phone-number-input>
+            <app-text-input [(ngModel)]="user.email" formControlName="email" placeholder="Email"
+                            type="email"></app-text-input>
+            <app-text-input [(ngModel)]="user.password" formControlName="password" placeholder="Password"
+                            type="password"></app-text-input>
+            <app-text-input [(ngModel)]="user.confirmPassword" formControlName="confirmPassword"
+                            placeholder="Confirm Password" type="password"></app-text-input>
             <div class="mt-20">
-                <button class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17" *ngIf="user.userId === ''">SIGN UP
+                <button *ngIf="user.userId === ''"
+                        class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17">SIGN UP
                 </button>
-                <button class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17" *ngIf="user.userId !== ''">Edit
+                <button *ngIf="user.userId !== ''"
+                        class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17">Edit
                 </button>
             </div>
         </form>

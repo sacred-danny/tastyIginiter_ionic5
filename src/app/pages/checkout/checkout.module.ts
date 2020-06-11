@@ -17,6 +17,7 @@ import { CheckoutPage } from './checkout.page';
     CheckoutPageRoutingModule,
     CommonKitModule,
   ],
-  declarations: [CheckoutPage]
+  declarations: [ CheckoutPage ]
 })
-export class CheckoutPageModule {}
+export class CheckoutPageModule {
+}

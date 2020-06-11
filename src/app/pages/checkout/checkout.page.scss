@@ -30,6 +30,7 @@
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
       background: white;
+
       span {
         font-size: 15px;
         color: $burning-orange;
@@ -37,6 +38,7 @@
         position: relative;
       }
     }
+
     .pickup {
       width: 92px;
       height: 28px;
@@ -44,6 +46,7 @@
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
       background: white;
+
       span {
         font-size: 15px;
         color: $burning-orange;
@@ -51,9 +54,11 @@
         position: relative;
       }
     }
+
     .active {
       z-index: 1000;
       background: $burning-orange;
+
       span {
         font-size: 15px;
         color: white;
@@ -99,7 +104,7 @@
       height: 40px;
       overflow: unset;
 
-      ion-checkbox{
+      ion-checkbox {
         width: 20px;
         height: 20px;
         position: absolute;
@@ -111,6 +116,7 @@
         top: 12px;
       }
     }
+
     &:last-child {
       margin-bottom: 0px;
     }

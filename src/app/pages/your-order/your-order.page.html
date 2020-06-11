@@ -1,4 +1,5 @@
-<app-order-header [backGroundColor]="serverConfig.baseColors.burningOrage" title="Your Order" close="Close"></app-order-header>
+<app-order-header [backGroundColor]="serverConfig.baseColors.burningOrage" title="Your Order"
+                  close="Close"></app-order-header>
 <div class="total shadow mx-15">
     <div class="sub-total">
         <p class="font-17 font-weight-light color-shark m-0 left">Subtotal</p>
@@ -32,7 +33,8 @@
                         <img [src]="item.photo == null ? menuBlankImage : item.photo">
                     </ion-avatar>
                     <div class="descripton">
-                        <h2 class="font-15 color-shark font-weight-bold mt-10 mb-0 text-overflow m-0">{{item.count}}  X {{item.name}}</h2>
+                        <h2 class="font-15 color-shark font-weight-bold mt-10 mb-0 text-overflow m-0">{{item.count}}
+                            X {{item.name}}</h2>
                         <p class="font-12 color-french-gray my-5 text-overflow m-0">{{item.extras}}</p>
                         <h3 class="font-15 color-burning-orange font-weight-bold text-overflow mb-10">{{item.price | currency:'GBP'}}</h3>
                     </div>
@@ -42,7 +44,7 @@
         </div>
     </div>
 </ion-content>
-<div class="bottom shadow" >
+<div class="bottom shadow">
     <div class="check-out mx-20 my-25 item-align-center bg-color-burning-orange" (click)="checkOut()">
         <h3 class="font-17 color-white font-weight-bold ion-text-md-capitalize m-0">Checkout</h3>
     </div>

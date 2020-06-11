@@ -11,6 +11,7 @@ import { AuthService } from '../../core/services/auth.service';
   styleUrls: [ './profile.page.scss' ],
 })
 export class ProfilePage implements OnInit {
+
   menuBlankImage = environment.menuBlankImage;
   profileItems = [
     {
@@ -46,36 +47,40 @@ export class ProfilePage implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if (this.commonService.isInit) {
+      await this.ionViewWillEnter();
+    }
   }
 
   ionViewWillEnter() {
     this.commonService.activeIcon(3);
   }
 
-  profileEdit() {
+  async profileEdit() {
     if (this.authService.user.isFacebook) {
-      this.commonService.presentAlert('Warning', 'Facebook user is not available to edit.');
+      await this.commonService.presentAlert('Warning', 'Facebook user is not available to edit.');
       return;
     }
-    this.router.navigate([ '/signup' ]);
+    await this.router.navigate([ '/signup' ]);
   }
 
-  goDetail(item) {
+  async goDetail(item) {
     switch (item.title) {
       case 'Delivery Support':
-        this.router.navigate([ '/set-location' ]);
+        await this.router.navigate([ '/set-location' ]);
         break;
       case 'Terms of use':
-        this.router.navigate([ '/terms' ]);
+        await this.router.navigate([ '/terms' ]);
         break;
       case 'Privacy policy':
-        this.router.navigate([ '/policy' ]);
+        await this.router.navigate([ '/policy' ]);
         break;
     }
   }
 
-  goSetLocation() {
-    this.router.navigate([ '/set-location' ]);
+  async goSetLocation() {
+    await this.router.navigate([ '/set-location' ]);
   }
+
 }

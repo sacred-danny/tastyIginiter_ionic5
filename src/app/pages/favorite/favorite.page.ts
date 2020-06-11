@@ -6,6 +6,8 @@ import { CommonService } from '../../core/services/common.service';
 import { AuthService } from '../../core/services/auth.service';
 import { MenuService } from '../../core/services/menu.service';
 import { environment } from '../../../environments/environment';
+import { associateArrayToArray, keysToCamel } from '../../core/utils/dto.util';
+import { MenuDetail } from '../../core/models/menu';
 
 @Component({
   selector: 'app-favorite',
@@ -13,9 +15,10 @@ import { environment } from '../../../environments/environment';
   styleUrls: [ './favorite.page.scss' ],
 })
 export class FavoritePage implements OnInit {
+
   backGroundColor = environment.baseColors.burningOrage;
   menuBlankImage = environment.menuBlankImage;
-  favorites = [];
+  favorites: Array<MenuDetail> = [];
   isDeleting = false;
 
   constructor(
@@ -27,37 +30,27 @@ export class FavoritePage implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    console.log();
-  }
-
-  async ionViewWillEnter() {
-    await this.commonService.activeIcon(1);
-    const loading = await this.commonService.showLoading('Please wait...');
-    try {
-      this.menuService.getFavorite({ user: this.authService.user }).subscribe((res: any) => {
-        this.favorites = [];
-        const favorites = this.commonService.keysToCamel(res);
-        // tslint:disable-next-line:forin
-        for (const item in favorites) {
-          this.favorites.push(favorites[item]);
-        }
-        loading.dismiss();
-      });
-    } catch (e) {
-      console.log(e);
-      await loading.dismiss();
-      this.navController.pop();
-      if (e.status === 500) {
-        await this.commonService.presentAlert('Warning', 'Internal Server Error');
-        return;
-      }
-      await this.commonService.presentAlert('Warning', e.error.message);
+  async ngOnInit() {
+    if (this.commonService.isInit) {
+      await this.ionViewWillEnter();
     }
   }
 
-  ionViewWillLeave() {
-    this.favorites = [];
+  async ionViewWillEnter() {
+    this.commonService.activeIcon(1);
+    const loading = await this.commonService.showLoading('Please wait...');
+    try {
+      const res = await this.menuService.getFavorite({ user: this.authService.user }).toPromise();
+      this.favorites = associateArrayToArray(keysToCamel(res));
+    } catch (e) {
+      if (e.status === 500) {
+        await this.commonService.presentAlert('Warning', 'Internal Server Error');
+      } else {
+        await this.commonService.presentAlert('Warning', e.error.message);
+      }
+    } finally {
+      await loading.dismiss();
+    }
   }
 
   async removeFavorite(favorite: any) {
@@ -71,29 +64,27 @@ export class FavoritePage implements OnInit {
         id: favorite.menuId,
         userId: this.authService.user.id
       };
-      this.menuService.addFavorite(payload).subscribe((res: boolean) => {
-        this.isDeleting = false;
-        if ( ! res) {
-          favorite.isFavorite = false;
-        }
-        loading.dismiss();
-      });
+      const res = await this.menuService.addFavorite(payload).toPromise();
+      if ( ! res) {
+        favorite.isFavorite = false;
+      }
     } catch (e) {
-      this.isDeleting = false;
-      console.log(e);
-      await loading.dismiss();
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error');
-        return;
+      } else {
+        await this.commonService.presentAlert('Warning', e.error.message);
       }
-      await this.commonService.presentAlert('Warning', e.error.message);
+    } finally {
+      await loading.dismiss();
+      this.isDeleting = false;
     }
   }
 
-  goDetail(favorite) {
+  async goDetail(favorite) {
     if (this.isDeleting === true) {
       return;
     }
-    this.router.navigate([ 'menu-detail/' + favorite.menuId ]);
+    await this.router.navigate([ 'menu-detail/' + favorite.menuId ]);
   }
+
 }

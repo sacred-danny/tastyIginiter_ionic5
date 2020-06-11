@@ -1,8 +1,16 @@
-<app-order-header [backGroundColor]="serverConfig.baseColors.burningOrage" main="Orders"></app-order-header>
+<app-tab-header [backGroundColor]="serverConfig.baseColors.burningOrage" subTitle="Orders"></app-tab-header>
 <ion-content>
-    <div class="container d-flex flex-column main p-15">
+    <div class="container d-flex flex-column p-15">
+        <ion-refresher #refresherRef (ionRefresh)="doRefresh()" slot="fixed">
+            <ion-refresher-content
+                    pullingIcon="chevron-down-circle-outline"
+                    pullingText="Pull to refresh"
+                    refreshingSpinner="circles"
+                    refreshingText="Refreshing...">
+            </ion-refresher-content>
+        </ion-refresher>
         <ng-container *ngIf="orders !== undefined && orders.length > 0">
-            <div class="total shadow mb-10" *ngFor="let order of orders;">
+            <div *ngFor="let order of orders;" class="total shadow mb-10">
                 <div class="sub-total">
                     <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
                     <p class="font-17 color-french-gray m-0 right">{{order.orderId}}</p>
@@ -16,7 +24,7 @@
                     <p class="font-17 color-french-gray m-0 right">{{order.orderTotal | currency:'GBP'}}</p>
                 </div>
                 <div class="div-total py-10 item-align-center">
-                    <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">{{order.status.statusName}}</h3>
+                    <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">{{order.statusName}}</h3>
                 </div>
             </div>
         </ng-container>

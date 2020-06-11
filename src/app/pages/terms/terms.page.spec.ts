@@ -10,7 +10,7 @@ describe('TermsPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TermsPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [ IonicModule.forRoot() ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(TermsPage);

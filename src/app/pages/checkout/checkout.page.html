@@ -1,51 +1,56 @@
-<app-order-header [backGroundColor]="serverConfig.baseColors.burningOrage" backUrl="back" subTitle="Checkout"></app-order-header>
+<app-order-header [backGroundColor]="serverConfig.baseColors.burningOrage" backUrl="back"
+                  subTitle="Checkout"></app-order-header>
 <div #main class="main shadow bg-color-white mx-15 p-20">
     <div class="row mx-0">
         <div class="mode">
-            <button class="btn delivery p-0" [class.active]="isSelected === 'delivery'" (click)="delivery()">
+            <button (click)="delivery()" [class.active]="isSelected === 'delivery'" class="btn delivery p-0">
                 <span class="item-align-center">DELIVERY</span>
             </button>
-            <button class="btn pickup p-0" [class.active]="isSelected === 'collection'"  (click)="pickup()">
+            <button (click)="pickup()" [class.active]="isSelected === 'collection'" class="btn pickup p-0">
                 <spanco class="item-align-center">PICK-UP</spanco>
             </button>
         </div>
     </div>
-    <div class="row mx-0 mt-15" *ngIf="isSelected === 'delivery'">
+    <div *ngIf="isSelected === 'delivery'" class="row mx-0 mt-15">
         <div class="w-100 row m-0">
             <p class="font-15 color-french-gray text-left mb-5">Select Delivery Day / Time</p>
         </div>
-        <div class="w-100 row m-0" *ngIf="deliveryTimes !== undefined">
-            <ion-select class="mr-10" [(ngModel)]="deliveryTime.displayDate" name="selectCode"
-                        multiple="false" placeholder="Tap to select.." [selectedText]="deliveryTime.displayDate"
-                        (ionChange)="deliveryDateChanged()" required >
-                <ion-select-option *ngFor="let time of deliveryTimes; let i = index;" [id]="'delivery_' + i" [value]="time.weekDay + ' - ' + time.day">
+        <div *ngIf="deliveryTimes !== undefined" class="w-100 row m-0">
+            <ion-select (ionChange)="deliveryDateChanged()" [(ngModel)]="deliveryTime.displayDate"
+                        [selectedText]="deliveryTime.displayDate"
+                        class="mr-10" multiple="false" name="selectCode"
+                        placeholder="Tap to select.." required>
+                <ion-select-option *ngFor="let time of deliveryTimes; let i = index;" [id]="'delivery_' + i"
+                                   [value]="time.weekDay + ' - ' + time.day">
                     {{time.weekDay}} - {{time.day}}
                 </ion-select-option>
             </ion-select>
-
-            <ion-select [(ngModel)]="deliveryTime.displayOrderTime" name="selectCode"
-                        multiple="false" placeholder="Tap to select.." [selectedText]="deliveryTime.displayOrderTime" (ionChange)="deliveryTimeChanged()" required >
+            <ion-select (ionChange)="deliveryTimeChanged()" [(ngModel)]="deliveryTime.displayOrderTime"
+                        [selectedText]="deliveryTime.displayOrderTime" multiple="false" name="selectCode"
+                        placeholder="Tap to select.." required>
                 <ion-select-option *ngFor="let time of deliveryTimes[deliveryTime.id].times" value="{{time.showTime}}">
                     {{time.showTime}}
                 </ion-select-option>
             </ion-select>
         </div>
     </div>
-    <div class="row mx-0 mt-15" *ngIf="isSelected === 'collection'">
+    <div *ngIf="isSelected === 'collection'" class="row mx-0 mt-15">
         <div class="w-100 row m-0">
             <p class="font-15 color-french-gray text-left mb-5">Select Pickup Day / Time</p>
         </div>
-        <div class="w-100 row m-0" *ngIf="pickupTimes !== undefined">
-            <ion-select class="mr-10" [(ngModel)]="pickupTime.displayDate" name="selectCode"
-                        multiple="false" placeholder="Tap to select.." [selectedText]="pickupTime.displayDate"
-                        (ionChange)="pickupDateChanged()" required >
-                <ion-select-option *ngFor="let time of pickupTimes; let i = index;" [id]="'delivery_' + i" [value]="time.weekDay + ' - ' + time.day">
+        <div *ngIf="pickupTimes !== undefined" class="w-100 row m-0">
+            <ion-select (ionChange)="pickupDateChanged()" [(ngModel)]="pickupTime.displayDate"
+                        [selectedText]="pickupTime.displayDate"
+                        class="mr-10" multiple="false" name="selectCode"
+                        placeholder="Tap to select.." required>
+                <ion-select-option *ngFor="let time of pickupTimes; let i = index;" [id]="'delivery_' + i"
+                                   [value]="time.weekDay + ' - ' + time.day">
                     {{time.weekDay}} - {{time.day}}
                 </ion-select-option>
             </ion-select>
-
-            <ion-select [(ngModel)]="pickupTime.displayOrderTime" name="selectCode"
-                        multiple="false" placeholder="Tap to select.." [selectedText]="pickupTime.displayOrderTime" (ionChange)="pickupTimeChanged()" required >
+            <ion-select (ionChange)="pickupTimeChanged()" [(ngModel)]="pickupTime.displayOrderTime"
+                        [selectedText]="pickupTime.displayOrderTime" multiple="false" name="selectCode"
+                        placeholder="Tap to select.." required>
                 <ion-select-option *ngFor="let time of pickupTimes[pickupTime.id].times" value="{{time.showTime}}">
                     {{time.showTime}}
                 </ion-select-option>
@@ -65,49 +70,48 @@
             </div>
         </div>
     </div>
-
     <div class="row mx-0 mt-15">
-        <ion-textarea placeholder="Add Delivery Note" [(ngModel)]="comment"></ion-textarea>
+        <ion-textarea [(ngModel)]="comment" placeholder="Add Delivery Note"></ion-textarea>
     </div>
-
     <div class="row mx-0 mt-15">
         <div class="w-100 row m-0">
             <h2 class="font-15 font-weight-bold color-shark text-left mb-5">PAYMENT</h2>
         </div>
-        <div class="w-100 row mx-0 mb-10" *ngIf="this.savedCards !== undefined">
+        <div *ngIf="this.savedCards !== undefined" class="w-100 row mx-0 mb-10">
             <ion-list class="row p-0 m-0 w-100">
-                <ion-item class="w-100" *ngFor="let item of this.savedCards.data;" (click)="selectCard(item)">
+                <ion-item (click)="selectCard(item)" *ngFor="let item of this.savedCards.data;" class="w-100">
                     <div class="row w-100 m-0 main">
                         <div>
-                            <ion-img  [src]="serverConfig.serverURL + serverConfig.debitCardURL + item.card.brand + '.svg'"></ion-img>
+                            <ion-img
+                                    [src]="serverConfig.serverURL + serverConfig.debitCardURL + item.card.brand + '.svg'"></ion-img>
                         </div>
                         <div class="ml-10">
-                            <p *ngIf="item.card.brand !== 'amex'" class="font-17 color-shark text-left m-0">**** **** **** {{item.card.last4}}</p>
-                            <p *ngIf="item.card.brand === 'amex'" class="font-17 color-shark text-left m-0">**** ****** *{{item.card.last4}}</p>
+                            <p *ngIf="item.card.brand !== 'amex'" class="font-17 color-shark text-left m-0">**** ****
+                                **** {{item.card.last4}}</p>
+                            <p *ngIf="item.card.brand === 'amex'" class="font-17 color-shark text-left m-0">**** ******
+                                *{{item.card.last4}}</p>
                         </div>
-                        <ion-checkbox color="light" class="m-0" [checked]="item.isChecked === true"></ion-checkbox>
+                        <ion-checkbox [checked]="item.isChecked === true" class="m-0" color="light"></ion-checkbox>
                     </div>
-                    <ion-icon name="trash" [size]="30" (click)="deleteCard(item)"></ion-icon>
+                    <ion-icon (click)="deleteCard(item)" [size]="30" name="trash"></ion-icon>
                 </ion-item>
             </ion-list>
         </div>
         <div class="w-100 row m-0">
-            <form class="w-100 row m-0" id="formCard" (ngSubmit)="saveCard()">
+            <form (ngSubmit)="saveCard()" class="w-100 row m-0" id="formCard">
                 <div class="row m-0 w-100 mb-5 item-align-center">
-                    <div id="cardElement" class="w-100"></div>
+                    <div class="w-100" id="cardElement"></div>
                 </div>
                 <div class="w-100 m-0">
-                    <div id="card-errors" class="color-torch-red" role="alert"></div>
-                    <button type="submit" class="font-15 save-card font-weight-bold color-burning-orange text-left ion-float-right">
-                        Add New Card
-                    </button>
+                    <div class="color-torch-red" id="card-errors" role="alert"></div>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<div class="bottom shadow row m-0 -w100" >
-    <div class="pay row w-100 mx-20 my-25 item-align-center bg-color-burning-orange" (click)="pay()">
-        <h3 class="font-17 color-white font-weight-bold ion-text-md-capitalize m-0">Pay {{menuService.order.currentPrice | currency:'GBP'}}</h3>
+<div class="bottom shadow row m-0 -w100">
+    <div (click)="pay()" class="pay row w-100 mx-20 my-25 item-align-center bg-color-burning-orange">
+        <h3 class="font-17 color-white font-weight-bold ion-text-md-capitalize m-0">
+            Pay {{menuService.order.currentPrice | currency:'GBP'}}</h3>
     </div>
 </div>

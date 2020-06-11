@@ -6,6 +6,7 @@ import { Menu } from '../models/menu';
 import { MenuService } from '../services/menu.service';
 import { AuthService } from '../services/auth.service';
 import { CommonService } from '../services/common.service';
+import { keysToCamel } from '../utils/dto.util';
 
 @Injectable({
   providedIn: 'root'
@@ -29,9 +30,10 @@ export class MenuResolver implements Resolve<Menu> {
           user: this.authService.user
         };
         const res = await this.menuService.getMenu(payload).toPromise();
-        this.menuService.menu = this.commonService.keysToCamel(res);
+        this.menuService.menu = keysToCamel(res);
         resolve(res);
       });
     }
   }
+
 }

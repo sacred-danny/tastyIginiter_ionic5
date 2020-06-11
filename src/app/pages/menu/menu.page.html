@@ -1,8 +1,14 @@
-<app-tab-header [backGroundColor]="backGroundColor" isLogo="true"
-                [title]="this.menuService.menu.locationName" logout="true"></app-tab-header>
-<ion-content [scrollEvents]="true" (ionScroll)="logScrolling($event)">
+<app-tab-header [backGroundColor]="backGroundColor" [title]="this.menuService.menu.locationName"
+                isLogo="true" logout="true"></app-tab-header>
+<ion-content (ionScroll)="logScrolling($event)" [scrollEvents]="true">
     <div class="container d-flex flex-column p-0">
-        <ion-refresher #refresherRef slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher #refresherRef (ionRefresh)="doRefresh()" slot="fixed">
+            <ion-refresher-content
+                    pullingIcon="chevron-down-circle-outline"
+                    pullingText="Pull to refresh"
+                    refreshingSpinner="circles"
+                    refreshingText="Refreshing...">
+            </ion-refresher-content>
         </ion-refresher>
         <div class="deliveryOpen mt-15 px-15">
             <div class="delivery float-left">
@@ -14,11 +20,11 @@
                 <p class="font-15 color-shark text-left">{{this.menuService.menu.openTime}}</p>
             </div>
         </div>
-
-        <div class="specials pt-15 pb-10" *ngIf="specials.length > 0">
+        <div *ngIf="specials.length > 0" class="specials pt-15 pb-10">
             <h2 class="font-15 color-shark font-weight-bold text-left px-15 mb-15">FEATURED ITEMS</h2>
-            <ion-slides [options]="specailSlideOpts">
-                <ion-slide *ngFor="let special of specials;" (click)="goDetail(special.menu)" [class.m-0]="platform.is('android')" [class.mx-15]="platform.is('ios')">
+            <ion-slides [options]="specialSlideOpts">
+                <ion-slide (click)="goDetail(special.menu)" *ngFor="let special of specials;"
+                           [class.m-0]="platform.is('android')" [class.mx-15]="platform.is('ios')">
                     <div class="menu-image">
                         <ion-img *ngIf="special.menu.menuImageUrl"></ion-img>
                     </div>
@@ -27,26 +33,26 @@
                 </ion-slide>
             </ion-slides>
         </div>
-        <div class="categoreis py-5 px-1" *ngIf="categories.length > 0">
-            <ion-slides [options]="categorySlideOpts" #slideCategory>
+        <div *ngIf="categories.length > 0" class="categories py-5 px-1">
+            <ion-slides #slideCategory [options]="categorySlideOpts">
                 <ion-slide *ngFor="let category of categories; let i = index;">
-                    <div class="border-color-burning-orange h-100 category-name item-align-center"
-                         [class.active]="i === scrolledIndex" (click)="getMenu(i)">
+                    <div (click)="getMenu(i)"
+                         [class.active]="i === scrolledIndex"
+                         class="border-color-burning-orange h-100 category-name item-align-center">
                         <h3 class="font-13 color-burning-orange font-weight-bold text-left mb-0 mx-2 text-overflow">{{category.name}}</h3>
                     </div>
                 </ion-slide>
             </ion-slides>
         </div>
-        <div class="category-detail px-15" *ngIf="categoryDetails.length > 0">
+        <div *ngIf="categoryDetails.length > 0" class="category-detail px-15">
             <ng-container *ngFor="let categoryDetail of categoryDetails; let i = index;">
                 <ion-list [id]="'category_' + i">
                     <ion-list-header>
                         {{categoryDetail.name}}
                     </ion-list-header>
-
-                    <ion-item *ngFor="let menu of categoryDetail.menus;" (click)="goDetail(menu)">
+                    <ion-item (click)="goDetail(menu)" *ngFor="let menu of categoryDetail.menus;">
                         <ion-avatar slot="start">
-                            <img [src]="menu.menuImageUrl == null ? menuBlankImage : menu.menuImageUrl">
+                            <img [src]="menu.menuImageUrl == null ? menuBlankImage : menu.menuImageUrl" alt="menuPhoto">
                         </ion-avatar>
                         <div class="main w-100">
                             <div class="w-100">
@@ -60,7 +66,6 @@
                     </ion-item>
                 </ion-list>
             </ng-container>
-
         </div>
     </div>
 </ion-content>

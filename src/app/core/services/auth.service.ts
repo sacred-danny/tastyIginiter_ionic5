@@ -19,7 +19,6 @@ export class AuthService {
 
   user: User;
   token: string;
-  isFaceBookLoggedIn = false;
 
   constructor(
     private http: HttpClient,
@@ -39,26 +38,23 @@ export class AuthService {
     return this.storage.get(environment.storage.user);
   }
 
-  async isAuthenticated(): Promise<number> {
+  async isAuthenticated(): Promise<boolean> {
     const localUser = await this.getUser();
     const payload = {
       user: localUser
     };
-    // tslint:disable-next-line:ban-types
-    const res: number = await this.http.post<number>(environment.apiURL + '/auth/validateToken', payload).toPromise();
-    return res;
+    return await this.http.post<boolean>(environment.apiURL + '/auth/validateToken', payload).toPromise();
   }
 
   isLocationExist(): Promise<boolean> {
-    return new Promise<boolean>((resolve, reject) => {
-      // tslint:disable-next-line:no-shadowed-variable
+    return new Promise<boolean>((resolve) => {
       this.getUser().then(user => {
         if (user.areaId == null || user.areaId === '') {
           resolve(false);
         } else {
           resolve(true);
         }
-      }).catch(err => {
+      }).catch(() => {
         resolve(false);
       });
     });
@@ -66,8 +62,8 @@ export class AuthService {
 
   async signin(payload: LoginRequest): Promise<LoginResponse> {
     try {
-      // tslint:disable-next-line:max-line-length
-      const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signIn', parseToPayload(payload), { params: anonParam() }).toPromise();
+      const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signIn',
+        parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;
       this.token = res.token;
       // save token to the storage
@@ -78,7 +74,7 @@ export class AuthService {
         totalCount: 0,
         currentPrice: 0,
         totalPrice: 0,
-        items: new Array(),
+        items: [],
       };
       await this.storage.set(environment.storage.order, this.menuService.order);
       return res;
@@ -89,9 +85,8 @@ export class AuthService {
 
   async signup(payload: SignUpRequest): Promise<LoginResponse> {
     try {
-      // tslint:disable-next-line:max-line-length
-      const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signUp', parseToPayload(payload), { params: anonParam() }).toPromise();
-      console.log(res);
+      const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signUp',
+        parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;
       this.token = res.token;
       // save token to the storage
@@ -102,7 +97,7 @@ export class AuthService {
         totalCount: 0,
         currentPrice: 0,
         totalPrice: 0,
-        items: new Array(),
+        items: [],
       };
       await this.storage.set(environment.storage.order, this.menuService.order);
       return res;
@@ -113,10 +108,8 @@ export class AuthService {
 
   async forgotPassword(payload): Promise<boolean> {
     try {
-      // tslint:disable-next-line:max-line-length
-      const res: boolean = await this.http.post<boolean>(environment.apiURL + '/auth/forgotPassword', parseToPayload(payload), { params: anonParam() }).toPromise();
-      console.log(res);
-      return res;
+      return await this.http.post<boolean>(environment.apiURL + '/auth/forgotPassword',
+        parseToPayload(payload), { params: anonParam() }).toPromise();
     } catch (e) {
       throw e;
     }
@@ -124,8 +117,8 @@ export class AuthService {
 
   async setLocation(beforePayload: PrepareLocationRequest) {
     try {
-      // tslint:disable-next-line:max-line-length
-      const url = 'https://api.getAddress.io/find/' + beforePayload.postcode + '/' + beforePayload.houseName + '?expand=true&api-key=' + environment.addressKey;
+      const url = 'https://api.getAddress.io/find/' + beforePayload.postcode + '/' + beforePayload.houseName +
+        '?expand=true&api-key=' + environment.addressKey;
       const addressInfo: any = await this.http.get(url).toPromise();
       const payload = {
         user: this.user,
@@ -153,12 +146,12 @@ export class AuthService {
 
   async logout() {
     if (this.user.isFacebook === true) {
-      await this.fb.logout()
-        .then( res => {
+      this.fb.logout()
+        .then(() => {
           this.storage.clear();
           this.router.navigate([ '/login' ], { replaceUrl: true });
         })
-        .catch(e => {
+        .catch(() => {
           this.storage.clear();
           this.router.navigate([ '/login' ], { replaceUrl: true });
         });
@@ -168,4 +161,5 @@ export class AuthService {
       await this.router.navigate([ '/login' ], { replaceUrl: true });
     }
   }
+
 }

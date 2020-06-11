@@ -7,7 +7,7 @@ import { AuthService } from '../../../core/services/auth.service';
 
 import { SignUpRequest } from '../../../core/models/auth';
 import { environment } from '../../../../environments/environment';
-import { User } from '../../../core/models/auth';
+import { emailIsValid } from '../../../core/utils/dto.util';
 
 @Component({
   selector: 'app-signup',
@@ -15,6 +15,7 @@ import { User } from '../../../core/models/auth';
   styleUrls: [ './signup.page.scss' ],
 })
 export class SignupPage implements OnInit {
+
   form: FormGroup = this.formBuilder.group({
     firstName: [ '', Validators.compose([ Validators.required ]) ],
     lastName: [ '', Validators.compose([ Validators.required ]) ],
@@ -73,7 +74,7 @@ export class SignupPage implements OnInit {
     } else if (this.user.email === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your e-mail address.');
       return;
-    } else if ( ! this.commonService.emailIsValid(this.user.email)) {
+    } else if ( ! emailIsValid(this.user.email)) {
       await this.commonService.presentAlert('Warning', 'You have entered an invalid e-mail address. Please try again.');
       return;
     } else if (this.user.password === '') {
@@ -105,7 +106,6 @@ export class SignupPage implements OnInit {
         await this.router.navigate([ '' ], { replaceUrl: true });
       }
     } catch (e) {
-      console.log(e);
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error.');
         return;
@@ -115,4 +115,5 @@ export class SignupPage implements OnInit {
       await loading.dismiss();
     }
   }
+
 }

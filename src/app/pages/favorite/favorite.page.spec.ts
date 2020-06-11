@@ -10,7 +10,7 @@ describe('FavoritePage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ FavoritePage ],
-      imports: [IonicModule.forRoot()]
+      imports: [ IonicModule.forRoot() ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(FavoritePage);

@@ -1,4 +1,5 @@
 @import "../../../theme";
+
 .total {
   height: 175px;
   border-radius: 10px;
@@ -8,6 +9,7 @@
   div {
     padding: 0 15px 10px 15px;
     display: flex;
+
     .right {
       position: absolute;
       right: 30px;
@@ -54,9 +56,11 @@ ion-content {
     ion-item {
       --border-color: #efeff4;
       padding-left: 10px;
+
       ion-avatar {
         width: 60px;
         height: 60px;
+
         img {
           border-radius: 8px;
         }

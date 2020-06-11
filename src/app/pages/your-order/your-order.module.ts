@@ -18,6 +18,7 @@ import { YourOrderPage } from './your-order.page';
     CommonKitModule,
     YourOrderPageRoutingModule
   ],
-  declarations: [YourOrderPage]
+  declarations: [ YourOrderPage ]
 })
-export class YourOrderPageModule {}
+export class YourOrderPageModule {
+}

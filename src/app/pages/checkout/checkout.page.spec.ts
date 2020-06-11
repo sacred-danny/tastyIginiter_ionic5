@@ -10,7 +10,7 @@ describe('CheckoutPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ CheckoutPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [ IonicModule.forRoot() ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(CheckoutPage);

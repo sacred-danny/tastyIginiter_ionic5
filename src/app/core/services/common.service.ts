@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ModalController, ToastController, AlertController } from '@ionic/angular';
-import { environment } from '../../../environments/environment';
-import { isArray, isObject } from 'util';
+import { AlertController, LoadingController, ToastController } from '@ionic/angular';
+import { isArray, isObject } from 'rxjs/internal-compatibility';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CommonService {
-  navBarActivateIcons = [false, false, false, false];
+
+  navBarActivateIcons = [ false, false, false, false ];
+  isInit = false;
 
   constructor(
     private toastController: ToastController,
-    private alertContoller: AlertController,
+    private alertController: AlertController,
     private loadingController: LoadingController,
-    private modalController: ModalController
   ) {
   }
 
@@ -23,7 +23,7 @@ export class CommonService {
     return loading;
   }
 
-  async showToast(message: string, duration = 2000) {
+  async showToast(message: string) {
     const toast = await this.toastController.create({
       duration: 2000,
       message
@@ -32,7 +32,7 @@ export class CommonService {
   }
 
   async presentAlert(warning, msg) {
-    const alert = await this.alertContoller.create({
+    const alert = await this.alertController.create({
       header: warning,
       message: msg,
       buttons: [ 'OK' ]
@@ -40,65 +40,10 @@ export class CommonService {
     await alert.present();
   }
 
-  emailIsValid(email) {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  }
-
-  toCamel(s) {
-    return s.replace(/([-_][a-z])/ig, ($1) => {
-      return $1.toUpperCase()
-        .replace('-', '')
-        .replace('_', '');
+  activeIcon(index) {
+    Object.keys(this.navBarActivateIcons).forEach(i => {
+      this.navBarActivateIcons[i] = (Number(i) === index);
     });
   }
 
-  toUnderScore(s) {
-    return s.replace(/(?:^|\.?)([A-Z])/g, (x, y) => {
-      return '_' + y.toLowerCase();
-    }).replace(/^_/, '');
-  }
-
-  keysToCamel(o: any) {
-    if (isObject(o)) {
-      const n = {};
-
-      Object.keys(o)
-        .forEach((k) => {
-          n[this.toCamel(k)] = this.keysToCamel(o[k]);
-        });
-      return n;
-    } else if (isArray(o)) {
-      return o.map((i) => {
-        return this.keysToCamel(i);
-      });
-    }
-    return o;
-  }
-
-  keysToUnderScore(o: any) {
-    if (isObject(o)) {
-      const n = {};
-
-      Object.keys(o)
-        .forEach((k) => {
-          n[this.toUnderScore(k)] = this.keysToUnderScore(o[k]);
-        });
-      return n;
-    } else if (isArray(o)) {
-      return o.map((i) => {
-        return this.keysToUnderScore(i);
-      });
-    }
-    return o;
-  }
-
-  activeIcon(index) {
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0 ; i < this.navBarActivateIcons.length; i++) {
-      this.navBarActivateIcons[i] = false;
-      if (i === index) {
-        this.navBarActivateIcons[i] = true;
-      }
-    }
-  }
 }

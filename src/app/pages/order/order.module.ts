@@ -17,6 +17,7 @@ import { CommonModule } from '@angular/common';
     CommonKitModule,
     CommonModule,
   ],
-  declarations: [OrderPage]
+  declarations: [ OrderPage ]
 })
-export class OrderPageModule {}
+export class OrderPageModule {
+}

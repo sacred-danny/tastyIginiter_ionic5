@@ -1,24 +1,28 @@
 <ion-content>
-    <app-auth-header [backGroundColor]="serverConfig.baseColors.burningOrage" isLogo="true" isSignIn="true"></app-auth-header>
+    <app-auth-header [backGroundColor]="serverConfig.baseColors.burningOrage" isLogo="true"
+                     isSignIn="true"></app-auth-header>
     <div class="container d-flex flex-column">
         <form [formGroup]="form" class="px-20 mt-50">
-            <app-text-input type="email" placeholder="Email" formControlName="email"></app-text-input>
-            <app-text-input type="password" placeholder="Password" formControlName="password"></app-text-input>
+            <app-text-input formControlName="email" placeholder="Email" type="email"></app-text-input>
+            <app-text-input formControlName="password" placeholder="Password" type="password"></app-text-input>
         </form>
         <div class="mt-30 px-20">
-            <button class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17" (click)="signin()">SIGN IN
+            <button (click)="signin()" class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17">SIGN
+                IN
             </button>
-            <button class="btn btn-facebook btn-outline-mariner w-100 font-weight-bold font-17" (click)="loginWithFaceBook()">
-                <span class="font-30 font-weight-extremly-bold">f</span>
+            <button (click)="loginWithFaceBook()"
+                    class="btn btn-facebook btn-outline-mariner w-100 font-weight-bold font-17">
+                <span class="font-30 font-weight-extremely-bold">f</span>
                 CONNECT WITH FACEBOOK
             </button>
         </div>
         <div class="mt-25 px-20 item-align-center">
-            <p class="label-forgot">Forgot your<span class="font-weight-bold" routerLink="/forgot-password" routerDirection="forward"> password?</span>
+            <p class="label-forgot">Forgot your<span class="font-weight-bold" routerDirection="forward"
+                                                     routerLink="/forgot-password"> password?</span>
             </p>
         </div>
         <div class="mt-45 px-20 item-align-center">
-            <p>Don't have an account? <span class="font-weight-bold" routerLink="/signup" routerDirection="forward">Sign up</span>
+            <p>Don't have an account? <span class="font-weight-bold" routerDirection="forward" routerLink="/signup">Sign up</span>
             </p>
         </div>
     </div>

@@ -7,6 +7,7 @@ import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { LoginRequest, LoginResponse, SignUpRequest } from '../../../core/models/auth';
 import { environment } from '../../../../environments/environment';
+import { emailIsValid } from '../../../core/utils/dto.util';
 
 @Component({
   selector: 'app-login',
@@ -37,7 +38,7 @@ export class LoginPage implements OnInit {
     if (this.form.value.email === '') {
       await this.commonService.presentAlert('Warning', 'Please enter your e-mail address.');
       return;
-    } else if ( ! this.commonService.emailIsValid(this.form.value.email)) {
+    } else if ( ! emailIsValid(this.form.value.email)) {
       await this.commonService.presentAlert('Warning', 'You have entered an invalid e-mail address. Please try again.');
       return;
     } else if (this.form.value.password === '') {
@@ -54,12 +55,11 @@ export class LoginPage implements OnInit {
       await this.authService.signin(payload);
       await this.router.navigate([ '' ], { replaceUrl: true });
     } catch (e) {
-      console.log(e);
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error');
-        return;
+      } else {
+        await this.commonService.presentAlert('Warning', e.error.message);
       }
-      await this.commonService.presentAlert('Warning', e.error.message);
     } finally {
       await loading.dismiss();
     }
@@ -68,70 +68,35 @@ export class LoginPage implements OnInit {
   async loginWithFaceBook() {
     const loading = await this.commonService.showLoading('Please wait...');
     try {
-      this.fb.login(['public_profile', 'user_friends', 'email'])
-        .then(async (res) => {
-          if (res.status === 'connected') {
-            this.fb.api('/' + res.authResponse.userID + '/?fields=id,email,name,picture', ['public_profile'])
-              .then(async (user) => {
-                // user.id. user.email, user.name
-                try {
-                  const payload: SignUpRequest = {
-                    firstName: (user.name.split(' ').length[0] > 1) ? user.name.split(' ')[0] : user.name,
-                    lastName: (user.name.split(' ').length[0] > 1) ? user.name.split(' ')[1] : '',
-                    telephone: '',
-                    email: user.email,
-                    password: '',
-                    isFacebook: true
-                  };
-                  const result: LoginResponse = await this.authService.signup(payload);
-                  await loading.dismiss();
-                  if (result.user.deliveryAddress === '') {
-                    await this.router.navigate([ '/set-location' ]);
-                    return;
-                  }
-                  await this.router.navigate([ '' ], { replaceUrl: true });
-                } catch (e) {
-                  console.log(e);
-                  await loading.dismiss();
-                  if (e.status === 500) {
-                    await this.commonService.presentAlert('Warning', 'Internal Server Error.');
-                    return;
-                  }
-                  await this.commonService.presentAlert('Warning', e.error.message);
-                } finally {
-                  await loading.dismiss();
-                }
-              })
-              .catch(e => {
-                loading.dismiss();
-                console.log(e);
-                this.commonService.presentAlert('Warning', 'Error logging into Facebook');
-              });
-          } else {
-            this.commonService.presentAlert('Warning', 'Error logging into Facebook');
-            await loading.dismiss();
-          }
-        })
-        .catch(e => {
-          loading.dismiss();
-          console.log('Error logging into Facebook', e);
-          this.commonService.presentAlert('Warning', 'Error logging into Facebook');
-        });
+      const res = await this.fb.login([ 'public_profile', 'user_friends', 'email' ]);
+      if (res.status === 'connected') {
+        const user = await this.fb.api('/' + res.authResponse.userID + '/?fields=id,email,name,picture', [ 'public_profile' ]);
+        const payload: SignUpRequest = {
+          firstName: (user.name.split(' ').length[0] > 1) ? user.name.split(' ')[0] : user.name,
+          lastName: (user.name.split(' ').length[0] > 1) ? user.name.split(' ')[1] : '',
+          telephone: '',
+          email: user.email,
+          password: '',
+          isFacebook: true
+        };
+        const result: LoginResponse = await this.authService.signup(payload);
+        if (result.user.deliveryAddress === '') {
+          await this.router.navigate([ '/set-location' ]);
+        } else {
+          await this.router.navigate([ '' ], { replaceUrl: true });
+        }
+      } else {
+        await this.commonService.presentAlert('Warning', 'Error logging into Facebook');
+      }
     } catch (e) {
-      await loading.dismiss();
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error');
-        return;
+      } else {
+        await this.commonService.presentAlert('Warning', 'Error logging into Facebook');
       }
-      await this.commonService.presentAlert('Warning', e.error.message);
+    } finally {
+      await loading.dismiss();
     }
   }
 
-  facebookLogout() {
-    this.fb.logout()
-      .then( res => {
-        console.log('facebook logouted', res);
-      })
-      .catch(e => console.log('Error logout from Facebook', e));
-  }
 }

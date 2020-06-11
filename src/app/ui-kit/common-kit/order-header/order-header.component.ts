@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-order-header',
@@ -8,6 +7,7 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: [ './order-header.component.scss' ],
 })
 export class OrderHeaderComponent implements OnInit {
+
   @Input() backGroundColor: string;
   @Input() isClose: boolean;
   @Input() title: string;
@@ -18,14 +18,14 @@ export class OrderHeaderComponent implements OnInit {
 
   constructor(
     private navController: NavController,
-    private authService: AuthService
   ) {
   }
 
   ngOnInit() {
   }
 
-  back() {
-    this.navController.pop();
+  async back() {
+    await this.navController.pop();
   }
+
 }

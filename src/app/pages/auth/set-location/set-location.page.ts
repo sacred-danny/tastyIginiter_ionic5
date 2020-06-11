@@ -13,6 +13,7 @@ import { PrepareLocationRequest } from '../../../core/models/auth';
   styleUrls: [ './set-location.page.scss' ],
 })
 export class SetLocationPage implements OnInit {
+
   form: FormGroup = this.formBuilder.group({
     houseName: [ '', Validators.compose([ Validators.required ]) ],
     postcode: [ '', Validators.compose([ Validators.required ]) ],
@@ -40,23 +41,23 @@ export class SetLocationPage implements OnInit {
       await this.authService.setLocation(payload);
       await this.router.navigate([ '' ], { replaceUrl: true });
     } catch (e) {
-      console.log(e);
       if (e.url.indexOf('https://api.getaddress.io/find') >= 0) {
-        this.commonService.presentAlert('Warning', 'Your House Name/ Number or Postcode is incorrect, please try again.');
-        return;
+        await this.commonService.presentAlert('Warning',
+          'Your House Name/ Number or Postcode is incorrect, please try again.');
       }
       if (e.error.message.indexOf('expired') >= 0) {
         await this.commonService.presentAlert('Warning', e.error.message);
         await this.router.navigate([ '/login' ], { replaceUrl: true });
-        return;
+      } else {
+        await this.commonService.presentAlert('Warning', e.error.message);
       }
-      await this.commonService.presentAlert('Warning', e.error.message);
     } finally {
       await loading.dismiss();
     }
   }
 
-  back() {
-    this.navController.pop();
+  async back() {
+    await this.navController.pop();
   }
+
 }

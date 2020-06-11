@@ -4,11 +4,14 @@ import { environment } from '../../../environments/environment';
 @Component({
   selector: 'app-policy',
   templateUrl: './policy.page.html',
-  styleUrls: ['./policy.page.scss'],
+  styleUrls: [ './policy.page.scss' ],
 })
 export class PolicyPage implements OnInit {
+
   backGroundColor = environment.baseColors.burningOrage;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

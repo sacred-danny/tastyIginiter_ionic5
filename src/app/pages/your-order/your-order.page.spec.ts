@@ -10,7 +10,7 @@ describe('YourOrderPage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ YourOrderPage ],
-      imports: [IonicModule.forRoot()]
+      imports: [ IonicModule.forRoot() ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(YourOrderPage);

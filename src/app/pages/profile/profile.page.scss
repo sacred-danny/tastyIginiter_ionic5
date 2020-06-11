@@ -3,6 +3,7 @@
 :host {
   display: block;
 }
+
 .header-type-3 {
   .profile {
     top: 50px;
@@ -48,6 +49,7 @@
   .address {
     border-bottom: solid 1px $french-gray;
     position: relative;
+
     span {
       position: absolute;
       top: 10px;
@@ -58,8 +60,10 @@
   ion-list {
     width: calc(100% - 2px);
   }
+
   ion-item {
     --border-color: #C8C7CC;
+
     ion-icon {
       width: 40px;
       margin-right: 10px;

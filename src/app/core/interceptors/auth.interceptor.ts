@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor
-} from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
@@ -37,10 +32,11 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(duplicate).pipe(
       catchError(error => {
         if (error.status === 401) {
-          this.router.navigate([ '/login' ]);
+          this.router.navigate([ '/login' ]).then();
         }
         return throwError(error);
       })
     );
   }
+
 }

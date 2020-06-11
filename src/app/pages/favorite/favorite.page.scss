@@ -2,13 +2,16 @@
   width: calc(50% - 22.5px);
   margin-left: 15px;
   position: relative;
+
   .photo {
     height: 120px;
+
     ion-img {
       object-fit: cover;
       height: 100%;
     }
   }
+
   .icon {
     position: absolute;
     width: 30px;

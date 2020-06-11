@@ -18,16 +18,12 @@
   }
 }
 
-.categoreis {
+.categories {
   position: -webkit-sticky;
   position: sticky;
   top: 0;
   z-index: 1000;
   background: white;
-
-  .swiper-slide {
-    //width: auto !important;
-  }
 
   ion-slide {
     height: 25px;
@@ -84,6 +80,7 @@
           }
         }
       }
+
       .price {
         position: absolute;
         top: 29px;

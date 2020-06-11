@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router, Event as RouterEvent, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
+import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 
 import { CommonService } from './core/services/common.service';
 import { environment } from '../environments/environment';
@@ -15,6 +15,7 @@ import { environment } from '../environments/environment';
   styleUrls: [ 'app.component.scss' ]
 })
 export class AppComponent {
+
   loading = false;
 
   constructor(
@@ -42,22 +43,22 @@ export class AppComponent {
   }
 
   notificationSetup() {
-    this.fcm.getToken().then(token => {
+    this.fcm.getToken().then(async (token) => {
       console.log('firebaseToken:', token);
-      this.storage.set(environment.storage.notificationToken, token);
+      await this.storage.set(environment.storage.notificationToken, token);
     });
-    this.fcm.onTokenRefresh().subscribe(token => {
+    this.fcm.onTokenRefresh().subscribe(async (token) => {
       console.log('refreshFirebaseToken:', token);
-      this.storage.set(environment.storage.notificationToken, token);
+      await this.storage.set(environment.storage.notificationToken, token);
     });
-    this.fcm.onNotification().subscribe(data => {
+    this.fcm.onNotification().subscribe(async (data) => {
       console.log(data);
       if (data.wasTapped) {
         console.log('Received in background');
-        this.commonService.presentAlert('Success', JSON.stringify(data));
+        await this.commonService.presentAlert('Success', JSON.stringify(data));
       } else {
         console.log('Received in foreground');
-        this.commonService.presentAlert('Success', JSON.stringify(data));
+        await this.commonService.presentAlert('Success', JSON.stringify(data));
       }
     });
   }
@@ -80,4 +81,5 @@ export class AppComponent {
       this.loading = false;
     }
   }
+
 }

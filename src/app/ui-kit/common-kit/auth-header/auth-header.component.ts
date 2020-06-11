@@ -22,8 +22,8 @@ export class AuthHeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  back() {
-    this.navController.pop();
+  async back() {
+    await this.navController.pop();
   }
 
 }

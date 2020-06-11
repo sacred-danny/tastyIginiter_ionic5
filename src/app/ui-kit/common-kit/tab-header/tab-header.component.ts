@@ -10,6 +10,7 @@ import { environment } from '../../../../environments/environment';
   styleUrls: [ './tab-header.component.scss' ],
 })
 export class TabHeaderComponent implements OnInit {
+
   @Input() backGroundColor: string;
   @Input() isLogo: boolean;
   @Input() backUrl: string;
@@ -18,6 +19,7 @@ export class TabHeaderComponent implements OnInit {
   @Input() logout: boolean;
 
   menuBlankImage = environment.menuBlankImage;
+
   constructor(
     private authService: AuthService,
     private navController: NavController
@@ -27,8 +29,8 @@ export class TabHeaderComponent implements OnInit {
   ngOnInit() {
   }
 
-  back() {
-    this.navController.pop();
+  async back() {
+    await this.navController.pop();
   }
 
 }
