@@ -16,7 +16,7 @@ import { MenuDetail } from '../../core/models/menu';
 })
 export class FavoritePage implements OnInit {
 
-  backGroundColor = environment.baseColors.burningOrage;
+  backGroundColor = environment.baseColors.burningOrange;
   menuBlankImage = environment.menuBlankImage;
   favorites: Array<MenuDetail> = [];
   isDeleting = false;

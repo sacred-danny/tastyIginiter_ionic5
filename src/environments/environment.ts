@@ -9,11 +9,11 @@ export const environment = {
   supportPhoneNumber: '07833360935',
   supportDialCode: '+447833360935',
 
-  // serverURL: 'http://www.grubsupdev.com/',
-  // apiURL: 'http://www.grubsupdev.com/api/v1',
+  serverURL: 'https://www.grubsupdev.com/',
+  apiURL: 'https://www.grubsupdev.com/api/v1',
 
-  serverURL: 'http://192.168.208.123/grubsupdev/',
-  apiURL: 'http://192.168.208.123/grubsupdev/api/v1',
+  // serverURL: 'http://192.168.208.123/grubsupdev/',
+  // apiURL: 'http://192.168.208.123/grubsupdev/api/v1',
   stripeApiKey: 'pk_test_KGSgL4Ccd2oGEKsSYXBF4SD600LfoqUiWa',
 
   debitCardURL: 'assets/media/debitcards/',
@@ -29,18 +29,17 @@ export const environment = {
     notificationToken: 'notificationToken'
   },
   baseColors: {
-    burningOrage: '#fc6c35',
+    burningOrange: '#fc6c35',
     pistachio: '#8FD400'
   },
   stripeElementStyles: {
-    iconStyle: 'solid',
     style: {
       base: {
         iconColor: '#c4f0ff',
         fontWeight: 500,
         fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
         lineHeight: '22px',
-        fontSize: '9px',
+        fontSize: '16px',
         fontSmoothing: 'antialiased',
         ':-webkit-autofill': {
           color: '#fce883',

@@ -1,15 +1,16 @@
 <app-tab-header [backGroundColor]="backGroundColor" [title]="this.menuService.menu.locationName"
                 isLogo="true" logout="true"></app-tab-header>
 <ion-content (ionScroll)="logScrolling($event)" [scrollEvents]="true">
+    <ion-refresher #refresherRef (ionRefresh)="doRefresh()" slot="fixed">
+        <ion-refresher-content
+                pullingIcon="chevron-down-circle-outline"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+        <!--            <ion-refresher-content></ion-refresher-content>-->
+    </ion-refresher>
     <div class="container d-flex flex-column p-0">
-        <ion-refresher #refresherRef (ionRefresh)="doRefresh()" slot="fixed">
-            <ion-refresher-content
-                    pullingIcon="chevron-down-circle-outline"
-                    pullingText="Pull to refresh"
-                    refreshingSpinner="circles"
-                    refreshingText="Refreshing...">
-            </ion-refresher-content>
-        </ion-refresher>
         <div class="deliveryOpen mt-15 px-15">
             <div class="delivery float-left">
                 <h2 class="font-15 color-shark font-weight-bold text-left mb-0">Delivery</h2>

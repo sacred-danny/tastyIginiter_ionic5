@@ -20,7 +20,7 @@ export class MenuPage implements OnInit {
   @ViewChild('slideCategory') slideCategory: IonSlides;
   @ViewChild('refresherRef') refresherRef;
 
-  backGroundColor = environment.baseColors.burningOrage;
+  backGroundColor = environment.baseColors.burningOrange;
   menuBlankImage = environment.menuBlankImage;
 
   specialSlideOpts = {

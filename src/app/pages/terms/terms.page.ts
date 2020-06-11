@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
+import { CommonService } from '../../core/services/common.service';
+import { MenuService} from '../../core/services/menu.service';
 import { environment } from '../../../environments/environment';
+import { associateArrayToArray, keysToCamel } from '../../core/utils/dto.util';
 
 @Component({
   selector: 'app-terms',
@@ -8,12 +12,28 @@ import { environment } from '../../../environments/environment';
 })
 export class TermsPage implements OnInit {
 
-  backGroundColor = environment.baseColors.burningOrage;
+  backGroundColor = environment.baseColors.burningOrange;
+  content = '';
 
-  constructor() {
+  constructor(
+    private commonService: CommonService,
+    private menuService: MenuService
+  ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    const loading = await this.commonService.showLoading('Please wait...');
+    try {
+      const res = await this.menuService.getTerms().toPromise();
+      this.content = res.content;
+    } catch (e) {
+      if (e.status === 500) {
+        await this.commonService.presentAlert('Warning', 'Internal Server Error');
+      } else {
+        await this.commonService.presentAlert('Warning', e.error.message);
+      }
+    } finally {
+      await loading.dismiss();
+    }
   }
-
 }

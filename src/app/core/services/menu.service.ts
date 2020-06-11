@@ -99,4 +99,16 @@ export class MenuService {
     });
   }
 
+  getPolicy(): Observable<any> {
+    return this.http.get<any>(environment.apiURL + '/home/getPolicy').catch((error: any) => {
+      throw error;
+    });
+  }
+
+  getTerms(): Observable<any> {
+    return this.http.get<any>(environment.apiURL + '/home/getTerms').catch((error: any) => {
+      throw error;
+    });
+  }
+
 }

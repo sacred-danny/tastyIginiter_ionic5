@@ -39,7 +39,8 @@ export class YourOrderPage implements OnInit {
     if (this.menuService.menu.deliveryTotal === 0) {
       this.delivery = 0;
     } else {
-      if (this.menuService.order.totalPrice >= Number(this.menuService.menu.deliveryTotal)) {
+      if (this.menuService.order.totalPrice >= Number(this.menuService.menu.deliveryTotal)
+        && Number(this.menuService.menu.deliveryTotal) !== 0) {
         this.delivery = 0;
       } else {
         this.delivery = Number(this.menuService.menu.deliveryAmount);

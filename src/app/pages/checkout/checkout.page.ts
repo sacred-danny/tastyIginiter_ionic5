@@ -10,6 +10,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { MenuService } from '../../core/services/menu.service';
 import { keysToUnderScore } from '../../core/utils/dto.util';
 
+import { ElementsOptions } from 'ngx-stripe';
 declare var Stripe: any;
 
 @Component({
@@ -21,7 +22,7 @@ export class CheckoutPage implements OnInit {
 
   @ViewChild('main') mainDiv;
 
-  backGroundColor = environment.baseColors.burningOrage;
+  backGroundColor = environment.baseColors.burningOrange;
   isSelected = 'delivery';
   pickupTimes: Array<CheckOutTime>;
   deliveryTimes: Array<CheckOutTime>;
@@ -78,14 +79,13 @@ export class CheckoutPage implements OnInit {
       this.pickupTimes = checkOutTime.pickup;
       this.clientSecret = checkOutTime.clientSecret;
       this.savedCards = checkOutTime.savedCards;
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.savedCards.data.length; i ++) {
-        this.savedCards.data[i] = await { ...this.savedCards.data[i], isChecked: false };
-        if (i === 0) {
+      Object.keys(this.savedCards.data).forEach(i => {
+        this.savedCards.data[i] = { ...this.savedCards.data[i], isChecked: false };
+        if (Number(i) === 0) {
           this.savedCards.data[i].isChecked = true;
-          this.paymentMethodId = await this.savedCards.data[i].id;
+          this.paymentMethodId = this.savedCards.data[i].id;
         }
-      }
+      });
       this.setTime(this.deliveryTime, this.deliveryTimes, 0);
       this.setTime(this.pickupTime, this.pickupTimes, 0);
       await this.setupStripe();
@@ -121,12 +121,11 @@ export class CheckoutPage implements OnInit {
     if (this.isDeleting === true) {
       return;
     }
-    // tslint:disable-next-line:prefer-for-of
-    for (let i = 0; i < this.savedCards.data.length; i ++) {
+    Object.keys(this.savedCards.data).forEach(i => {
       if (this.savedCards.data[i].id !== item.id) {
         this.savedCards.data[i].isChecked = false;
       }
-    }
+    });
     item.isChecked = ! item.isChecked;
     if (item.isChecked) {
       this.paymentMethodId = item.id;
@@ -149,7 +148,10 @@ export class CheckoutPage implements OnInit {
     if (this.platform.is('ios') || this.platform.is('android')) {
       stripeElementStyles.style.base.fontSize = '16px';
     }
-    this.card = await this.stripe.elements().create('card', stripeElementStyles);
+    const elementsOptions: ElementsOptions = {
+      locale: 'en'
+    };
+    this.card = await this.stripe.elements(elementsOptions).create('card', stripeElementStyles);
     await this.card.mount('#cardElement');
     this.card.on('ready', async () => {
       await this.card.focus();
@@ -216,14 +218,13 @@ export class CheckoutPage implements OnInit {
     try {
       const savedCards = await this.menuService.deleteCard({ user: this.authService.user, paymentMethodId: item.id }).toPromise();
       this.savedCards = JSON.parse(JSON.stringify(savedCards));
-      // tslint:disable-next-line:prefer-for-of
-      for (let i = 0; i < this.savedCards.data.length; i ++) {
+      Object.keys(this.savedCards.data).forEach(i => {
         this.savedCards.data[i] = { ...this.savedCards.data[i], isChecked: false };
-        if (i === 0) {
+        if (Number(i) === 0) {
           this.savedCards.data[i].isChecked = true;
           this.paymentMethodId = this.savedCards.data[i].id;
         }
-      }
+      });
       if (this.savedCards.data.length === 0) {
         this.paymentMethodId = '';
       }
@@ -265,7 +266,6 @@ export class CheckoutPage implements OnInit {
       payload = { ...payload, orderTime: this.pickupTime.orderTime, orderDate: this.pickupTime.date };
     }
     payload = keysToUnderScore(payload);
-    // tslint:disable-next-line:no-shadowed-variable
     try {
       const result = await this.menuService.verifyPayment(payload).toPromise();
       if (result) {

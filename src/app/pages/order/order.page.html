@@ -1,14 +1,14 @@
-<app-tab-header [backGroundColor]="serverConfig.baseColors.burningOrage" subTitle="Orders"></app-tab-header>
+<app-tab-header [backGroundColor]="serverConfig.baseColors.burningOrange" subTitle="Orders"></app-tab-header>
 <ion-content>
+    <ion-refresher #refresherRef (ionRefresh)="doRefresh()" slot="fixed">
+        <ion-refresher-content
+                pullingIcon="chevron-down-circle-outline"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing..">
+        </ion-refresher-content>
+    </ion-refresher>
     <div class="container d-flex flex-column p-15">
-        <ion-refresher #refresherRef (ionRefresh)="doRefresh()" slot="fixed">
-            <ion-refresher-content
-                    pullingIcon="chevron-down-circle-outline"
-                    pullingText="Pull to refresh"
-                    refreshingSpinner="circles"
-                    refreshingText="Refreshing...">
-            </ion-refresher-content>
-        </ion-refresher>
         <ng-container *ngIf="orders !== undefined && orders.length > 0">
             <div *ngFor="let order of orders;" class="total shadow mb-10">
                 <div class="sub-total">
