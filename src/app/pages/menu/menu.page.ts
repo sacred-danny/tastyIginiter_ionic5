@@ -76,6 +76,9 @@ export class MenuPage implements OnInit {
     this.specials = associateArrayToArray(this.menuService.menu.specials);
     this.categories = associateArrayToArray(this.menuService.menu.categories);
     this.categoryDetails = associateArrayToArray(this.menuService.menu.categoryDetails);
+    Object.keys(this.categoryDetails).forEach(i => {
+      this.categoryDetails[i].menus = associateArrayToArray(this.categoryDetails[i].menus);
+    });
   }
 
   async ionViewWillEnter() {

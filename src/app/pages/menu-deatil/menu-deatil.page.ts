@@ -53,12 +53,15 @@ export class MenuDeatilPage implements OnInit {
       this.price = this.menuDetail.menu.menuPrice;
       this.onePrice = this.menuDetail.menu.menuPrice;
       this.menuDetail.options = associateArrayToArray(this.menuDetail.options);
-      Object.keys(this.menuDetail.options).forEach(key => {
-        if (key === 'optionVlaues') {
-          Object.keys(this.menuDetail.options[key]).forEach(subkey => {
-            this.menuDetail.options[key][subkey] = {...this.menuDetail.options[key][subkey],  isChecked: false};
-          });
-        }
+      Object.keys(this.menuDetail.options).forEach(i => {
+        Object.keys(this.menuDetail.options[i]).forEach(key => {
+          if (key === 'optionValues') {
+            this.menuDetail.options[i][key] = associateArrayToArray(this.menuDetail.options[i][key]);
+            Object.keys(this.menuDetail.options[i][key]).forEach(subkey => {
+              this.menuDetail.options[i][key][subkey] = {...this.menuDetail.options[i][key][subkey],  isChecked: false};
+            });
+          }
+        });
       });
       await setTimeout(() => {
         const y = document.getElementById('comment').offsetTop;

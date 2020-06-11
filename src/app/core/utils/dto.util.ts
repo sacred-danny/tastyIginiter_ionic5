@@ -41,19 +41,12 @@ export function keysToCamel(obj: any) {
 
 export function associateArrayToArray(obj: any) {
   return Object.keys(obj).map(key => {
-    if (isObject(obj[key]) && obj[key]) {
-      Object.keys(obj[key]).forEach(subKey => {
-        if (isObject(obj[key][subKey]) && obj[key][subKey]) {
-          obj[key][subKey] = associateArrayToArray(obj[key][subKey]);
-        }
-      });
-    }
     return obj[key];
   });
 }
 
 export function keysToUnderScore(o: any) {
-  if (isObject(o)) {
+  if (typeof (o) === 'object') {
     const n = {};
     Object.keys(o)
       .forEach((k) => {

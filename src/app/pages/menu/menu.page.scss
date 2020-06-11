@@ -8,12 +8,12 @@
     display: inline-grid;
 
     .menu-image {
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      background-image: url('https://via.placeholder.com/172x103');
       width: 172px;
       height: 103px;
+      ion-img {
+        height: 100%;
+        object-fit: cover;
+      }
     }
   }
 }
