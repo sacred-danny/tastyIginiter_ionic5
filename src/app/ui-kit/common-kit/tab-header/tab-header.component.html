@@ -3,8 +3,4 @@
     <ion-back-button text="Back" (click)="back()" *ngIf="backUrl"></ion-back-button>
     <p class="font-27 font-weight-medium title text-overflow color-white m-0" *ngIf="title">{{title}}</p>
     <p class="font-34 font-weight-extremely-bold sub-title color-white m-0" *ngIf="subTitle">{{subTitle}}</p>
-    <div class="image" *ngIf="logout" (click)="authService.logout()">
-        <img [src]="menuBlankImage">
-    </div>
 </div>
-

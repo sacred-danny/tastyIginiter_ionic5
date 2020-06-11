@@ -8,6 +8,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Facebook } from '@ionic-native/facebook/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { CommonKitModule } from './ui-kit/common-kit/common-kit.module';
 import { InputModule } from './ui-kit/input/input.module';
@@ -32,6 +33,7 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
     SplashScreen,
     Facebook,
     FCM,
+    CallNumber,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, multi: true, useClass: AuthInterceptor }
   ],

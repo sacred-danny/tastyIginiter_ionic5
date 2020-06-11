@@ -22,6 +22,7 @@
     "@angular/platform-browser-dynamic": "~9.1.6",
     "@angular/router": "~9.1.6",
     "@capacitor/core": "2.0.2",
+    "@ionic-native/call-number": "^5.26.0",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/facebook": "^5.26.0",
     "@ionic-native/fcm": "^5.26.0",
@@ -31,7 +32,9 @@
     "@ionic/storage": "^2.2.0",
     "@types/node": "^8.0.0",
     "bootstrap": "^4.4.1",
+    "call-number": "^1.0.1",
     "cordova-android": "^8.1.0",
+    "cordova-plugin-call-number": "^1.0.1",
     "cordova-plugin-facebook4": "^6.4.0",
     "cordova-plugin-fcm-with-dependecy-updated": "^6.4.3",
     "cordova-plugin-ionic-webview": "^5.0.0",
@@ -90,7 +93,8 @@
         "GOOGLE_SERVICES_VERSION": "4.3.3",
         "SUPPORT_LIBRARY_VERSION": "28.0.0",
         "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher"
-      }
+      },
+      "cordova-plugin-call-number": {}
     },
     "platforms": [
       "android"

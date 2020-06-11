@@ -15,26 +15,37 @@ export class ProfilePage implements OnInit {
   menuBlankImage = environment.menuBlankImage;
   profileItems = [
     {
+      icon: 'home',
+      title: 'Address',
+      message: 'Change your delivery  address',
+      url: '',
+      color: '#70e2a5'
+    },
+    {
       icon: 'help-circle',
       title: 'Delivery Support',
+      message: '',
       url: '',
       color: '#f1374c'
     },
     {
       icon: 'settings',
       title: 'Push Notifications',
+      message: '',
       url: '',
       color: '#3f93fa'
     },
     {
       icon: 'alert-circle',
       title: 'Terms of use',
+      message: '',
       url: '',
       color: '#6fe1a5'
     },
     {
       icon: 'lock-closed',
       title: 'Privacy policy',
+      message: '',
       url: '',
       color: '#fc8c12'
     }
@@ -68,7 +79,7 @@ export class ProfilePage implements OnInit {
   async goDetail(item) {
     switch (item.title) {
       case 'Delivery Support':
-        await this.router.navigate([ '/set-location' ]);
+        await this.commonService.presentCallPhoneAlert();
         break;
       case 'Terms of use':
         await this.router.navigate([ '/terms' ]);

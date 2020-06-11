@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   enableLog: true,
   addressKey: 'h8oJpLQObUWNXeSh4vtDiw25701',
+  supportPhoneNumber: '07833360935',
+  supportDialCode: '+447833360935',
 
   // serverURL: 'http://www.grubsupdev.com/',
   // apiURL: 'http://www.grubsupdev.com/api/v1',
@@ -16,6 +18,9 @@ export const environment = {
 
   debitCardURL: 'assets/media/debitcards/',
   menuBlankImage: 'https://via.placeholder.com/60',
+
+  // android.useAndroidX=true
+  // android.enableJetifier=true
 
   storage: {
     token: 'token',
