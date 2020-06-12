@@ -13,6 +13,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class ProfilePage implements OnInit {
 
   menuBlankImage = environment.menuBlankImage;
+  supportDialCode = environment.supportDialCode;
   profileItems = [
     {
       icon: 'home',

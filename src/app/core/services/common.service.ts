@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AlertController, LoadingController, ToastController } from '@ionic/angular';
-import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { environment } from '../../../environments/environment';
 
@@ -16,7 +15,6 @@ export class CommonService {
     private toastController: ToastController,
     private alertController: AlertController,
     private loadingController: LoadingController,
-    private callNumber: CallNumber
   ) {
   }
 
@@ -57,12 +55,7 @@ export class CommonService {
         {
           text: 'Call',
           handler: async () => {
-            const response = await this.callNumber.isCallSupported();
-            if (response === true) {
-              await this.callNumber.callNumber(environment.supportDialCode, true);
-            } else {
-              await this.presentAlert('Warning', 'Current device is not available to call.');
-            }
+            document.getElementById('telephone').click();
           }
         }
       ]
