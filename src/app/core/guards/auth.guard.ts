@@ -20,6 +20,7 @@ export class AuthGuard implements CanActivate {
     this.authService.token = await this.authService.getToken();
     let flag: boolean = await this.authService.isAuthenticated();
     if ( ! flag) {
+      this.authService.user = undefined;
       await this.router.navigate([ '/login' ]);
       return false;
     }
