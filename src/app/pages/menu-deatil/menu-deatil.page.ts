@@ -170,8 +170,8 @@ export class MenuDeatilPage implements OnInit {
         photo: this.menuDetail.menu.menuImageUrl,
         extras: ''
       };
-      Object.keys(this.menuDetail.options.length).forEach(i => {
-        Object.keys(this.menuDetail.options[i]).forEach(j => {
+      Object.keys(this.menuDetail.options).forEach(i => {
+        Object.keys(this.menuDetail.options[i].optionValues).forEach(j => {
           if (this.menuDetail.options[i].optionValues[j].isChecked) {
             item.extras += this.menuDetail.options[i].optionValues[j].value;
             if (Number(j) < this.menuDetail.options[i].optionValues.length - 1) {

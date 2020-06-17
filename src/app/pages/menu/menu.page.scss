@@ -56,23 +56,18 @@
       color: $burning-orange;
       font-weight: 700;
     }
-
     ion-item {
       --border-color: #efeff4;
-
       ion-avatar {
         width: 60px;
         height: 60px;
-
         img {
           border-radius: 8px;
         }
       }
-
       .main {
-        .descripton {
-          width: calc(100% - 50px);
-
+        .description {
+          width: calc(100% - 55px);
           p {
             line-height: 15px;
             height: 45px;
@@ -80,7 +75,6 @@
           }
         }
       }
-
       .price {
         position: absolute;
         top: 29px;

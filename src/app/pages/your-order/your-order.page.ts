@@ -36,7 +36,7 @@ export class YourOrderPage implements OnInit {
 
   async ngOnInit() {
     this.coupons = associateArrayToArray(this.menuService.menu.coupons);
-    if (this.menuService.menu.deliveryTotal === 0) {
+    if (this.menuService.menu.deliveryTotal === 0 || this.menuService.order.totalPrice === 0 && this.menuService.order.totalCount === 0) {
       this.delivery = 0;
     } else {
       if (this.menuService.order.totalPrice >= Number(this.menuService.menu.deliveryTotal)
@@ -57,7 +57,7 @@ export class YourOrderPage implements OnInit {
 
   async calcPrice() {
     if (this.discountType === 'P') {
-      this.currentPrice = this.menuService.order.totalPrice / 100 * this.discount + this.delivery;
+      this.currentPrice = this.menuService.order.totalPrice / 100 * (100 - this.discount) + this.delivery;
     } else {
       if (this.discountType === 'F') {
         if (this.menuService.order.totalPrice - this.discount + this.delivery < 0) {
@@ -92,27 +92,26 @@ export class YourOrderPage implements OnInit {
       this.discount = 0;
       this.discountType = '';
       await this.calcPrice();
-      await this.commonService.presentAlert('Warning', 'Please enter a valid discount code. ');
+      // await this.commonService.presentAlert('Warning', 'Please enter a valid discount code. ');
       return;
     }
   }
 
   async delete(index) {
     Object.keys(this.menuService.order.items).forEach(i => {
-      if (i === index) {
+      if (Number(i) === index) {
         this.menuService.order.totalPrice -= this.menuService.order.items[i].price;
         this.menuService.order.totalCount -= this.menuService.order.items[i].count;
       }
     });
-
     const items: Array<Item> = [];
-    for (let i = 0; i < this.menuService.order.items.length; i ++) {
-      if (i !== index) {
+    Object.keys(this.menuService.order.items).forEach(i => {
+      if (Number(i) !== index) {
         items.push(this.menuService.order.items[i]);
       }
-    }
+    });
     this.menuService.order.items = items;
-    if (this.menuService.menu.deliveryTotal === 0) {
+    if (this.menuService.menu.deliveryTotal === 0 || this.menuService.order.totalPrice === 0 && this.menuService.order.totalCount === 0) {
       this.delivery = 0;
     } else {
       if (this.menuService.order.totalPrice >= Number(this.menuService.menu.deliveryTotal)) {

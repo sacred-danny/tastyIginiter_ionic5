@@ -86,6 +86,7 @@ export interface Menu {
   locationName: string;
   delivery: string;
   titleOpenTime: string;
+  titleOpenTimeColor?: string;
   openTime: string;
   specials: Array<Special>;
   categories: Array<Category>;
