@@ -64,7 +64,6 @@ export class MenuService {
 
   getCheckOutTime(payload): Observable<any> {
     return this.http.post<any>(environment.apiURL + '/home/getCheckOutTime', payload).catch(async (error: any) => {
-      await this.navController.pop();
       throw error;
     });
   }

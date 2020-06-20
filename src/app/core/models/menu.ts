@@ -96,11 +96,25 @@ export interface Menu {
   coupons: Array<Coupon>;
 }
 
+export interface ExtraOption {
+  orderId: string;
+  menuId: string;
+  orderOptionName: string;
+  orderOptionPrice: number;
+  orderMenuId: string;
+  orderMenuOptionId: string;
+  menuOptionValueId: string;
+  quantity: number;
+}
+
 export interface Item {
   name: string;
-  count: number;
-  extras: string;
+  menuId: string;
+  quantity: number;
+  extras: Array<ExtraOption>;
+  extrasTitle: string;
   price: number;
+  subtotal: number;
   comment: string;
   photo: string;
 }
@@ -108,6 +122,7 @@ export interface Item {
 export interface Order {
   totalPrice: number;
   totalCount: number;
+  delivery?: number;
   currentPrice?: number;
   items: Array<Item>;
 }

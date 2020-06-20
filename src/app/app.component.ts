@@ -7,6 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 
 import { CommonService } from './core/services/common.service';
+import { AuthService } from './core/services/auth.service';
 import { environment } from '../environments/environment';
 
 @Component({
@@ -25,10 +26,10 @@ export class AppComponent {
     private fcm: FCM,
     private router: Router,
     private storage: Storage,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private authService: AuthService
   ) {
     this.initializeApp();
-
     this.router.events.subscribe((e: RouterEvent) => {
       this.navigationInterceptor(e);
     });

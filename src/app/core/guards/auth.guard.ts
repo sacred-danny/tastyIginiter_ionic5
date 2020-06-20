@@ -12,12 +12,15 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private commonService: CommonService,
-    private router: Router
+    private router: Router,
   ) {
   }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     this.authService.token = await this.authService.getToken();
+    if (!this.authService.getInfo()) {
+      navigator['app'].exitApp();
+    }
     let flag: boolean = await this.authService.isAuthenticated();
     if ( ! flag) {
       this.authService.user = undefined;

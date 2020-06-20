@@ -257,6 +257,7 @@ export class CheckoutPage implements OnInit {
       orderType: this.isSelected,
       orderTotal: this.menuService.order.currentPrice,
       statusId: 1,
+      order: this.menuService.order
     };
     if (this.isSelected === 'delivery') {
       // @ts-ignore
@@ -271,6 +272,7 @@ export class CheckoutPage implements OnInit {
       if (result) {
         this.menuService.order = {
           totalCount: 0,
+          delivery: 0,
           currentPrice: 0,
           totalPrice: 0,
           items: [],

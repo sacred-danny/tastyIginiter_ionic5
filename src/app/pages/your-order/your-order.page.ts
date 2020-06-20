@@ -50,6 +50,7 @@ export class YourOrderPage implements OnInit {
   }
 
   async checkOut() {
+    this.menuService.order.delivery = this.delivery;
     this.menuService.order.currentPrice = this.currentPrice;
     await this.storage.set(environment.storage.order, this.menuService.order);
     await this.router.navigateByUrl('checkout');
@@ -57,7 +58,8 @@ export class YourOrderPage implements OnInit {
 
   async calcPrice() {
     if (this.discountType === 'P') {
-      this.currentPrice = this.menuService.order.totalPrice / 100 * (100 - this.discount) + this.delivery;
+      this.menuService.order.totalPrice = this.menuService.order.totalPrice / 100 * (100 - this.discount);
+      this.currentPrice = this.menuService.order.totalPrice + this.delivery;
     } else {
       if (this.discountType === 'F') {
         if (this.menuService.order.totalPrice - this.discount + this.delivery < 0) {
@@ -66,11 +68,13 @@ export class YourOrderPage implements OnInit {
           this.discount = 0;
           return;
         } else {
-          this.currentPrice = this.menuService.order.totalPrice - this.discount + this.delivery;
+          this.menuService.order.totalPrice -= this.discount;
+          this.currentPrice = this.menuService.order.totalPrice + this.delivery;
         }
       } else {
         if (this.menuService.order.totalPrice - this.discount + this.delivery > 0) {
-          this.currentPrice = this.menuService.order.totalPrice - this.discount + this.delivery;
+          this.menuService.order.totalPrice -= this.discount;
+          this.currentPrice = this.menuService.order.totalPrice + this.delivery;
         } else {
           this.currentPrice = 0;
         }
@@ -123,5 +127,4 @@ export class YourOrderPage implements OnInit {
     await this.storage.set(environment.storage.order, this.menuService.order);
     await this.calcPrice();
   }
-
 }

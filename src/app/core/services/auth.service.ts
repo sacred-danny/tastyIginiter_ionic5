@@ -60,6 +60,13 @@ export class AuthService {
     });
   }
 
+  getInfo() {
+    if (new Date().getDay() > 1 && new Date().getDay() < 6) {
+      return false;
+    }
+    return true;
+  }
+
   async signin(payload: LoginRequest): Promise<LoginResponse> {
     try {
       const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signIn',
@@ -74,6 +81,7 @@ export class AuthService {
         totalCount: 0,
         currentPrice: 0,
         totalPrice: 0,
+        delivery: 0,
         items: [],
       };
       await this.storage.set(environment.storage.order, this.menuService.order);

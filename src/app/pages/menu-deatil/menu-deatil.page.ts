@@ -7,7 +7,7 @@ import { MenuService } from '../../core/services/menu.service';
 import { CommonService } from '../../core/services/common.service';
 import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment';
-import { Item, MenuDetailOption, MenuOptionValue } from '../../core/models/menu';
+import { ExtraOption, Item, MenuDetailOption, MenuOptionValue } from '../../core/models/menu';
 import { associateArrayToArray, keysToCamel } from '../../core/utils/dto.util';
 
 @Component({
@@ -164,18 +164,32 @@ export class MenuDeatilPage implements OnInit {
       this.menuService.order.totalPrice += this.price;
       const item: Item = {
         name: this.menuDetail.menu.menuName,
-        count: this.count,
-        price: this.price,
+        menuId: this.menuDetail.menu.menuId,
+        quantity: this.count,
+        price: this.menuDetail.menu.menuPrice,
+        subtotal: this.price,
         comment: this.comment,
         photo: this.menuDetail.menu.menuImageUrl,
-        extras: ''
+        extrasTitle: '',
+        extras: []
       };
       Object.keys(this.menuDetail.options).forEach(i => {
         Object.keys(this.menuDetail.options[i].optionValues).forEach(j => {
           if (this.menuDetail.options[i].optionValues[j].isChecked) {
-            item.extras += this.menuDetail.options[i].optionValues[j].value;
+            item.extrasTitle += this.menuDetail.options[i].optionValues[j].value;
+            const extra = {
+              orderId: '',
+              menuId: this.menuDetail.menu.menuId,
+              orderOptionName: this.menuDetail.options[i].optionValues[j].value,
+              orderOptionPrice: this.menuDetail.options[i].optionValues[j].price,
+              orderMenuId: '',
+              orderMenuOptionId: this.menuDetail.options[i].optionValues[j].optionId,
+              menuOptionValueId: this.menuDetail.options[i].optionValues[j].optionValueId,
+              quantity: 1
+            };
+            item.extras.push(extra);
             if (Number(j) < this.menuDetail.options[i].optionValues.length - 1) {
-              item.extras += ', ';
+              item.extrasTitle += ', ';
             }
           }
         });

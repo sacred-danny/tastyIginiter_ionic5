@@ -91,18 +91,28 @@ export class MenuPage implements OnInit {
 
   doRefresh() {
     setTimeout(async () => {
-      await this.menuService.getOrder();
-      const payload = {
-        user: this.authService.user
-      };
-      const res = await this.menuService.getMenu(payload).toPromise();
-      this.menuService.menu = keysToCamel(res);
-      this.setData();
-      this.categoryPositions = [];
-      for (let i = 0; i < this.categoryDetails.length; i ++) {
-        this.categoryPositions.push(document.getElementById('category_' + i).offsetTop - 20);
+      try {
+        await this.menuService.getOrder();
+        const payload = {
+          user: this.authService.user
+        };
+        const res = await this.menuService.getMenu(payload).toPromise();
+        this.menuService.menu = keysToCamel(res);
+        this.setData();
+        this.categoryPositions = [];
+        for (let i = 0; i < this.categoryDetails.length; i ++) {
+          this.categoryPositions.push(document.getElementById('category_' + i).offsetTop - 20);
+        }
+      } catch (e) {
+        await this.navController.pop();
+        if (e.status === 500) {
+          await this.commonService.presentAlert('Warning', 'Internal Server Error');
+        } else {
+          await this.commonService.presentAlert('Warning', e.error.message);
+        }
+      } finally {
+        this.refresherRef.complete();
       }
-      this.refresherRef.complete();
     }, 10);
   }
 
