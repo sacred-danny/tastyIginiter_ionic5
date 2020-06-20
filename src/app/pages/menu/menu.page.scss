@@ -1,14 +1,21 @@
 @import "../../../theme";
 
+.swiper-slide {
+
+}
+
 .specials {
   border-top: solid 2px;
   border-color: $athens-gray;
 
   ion-slide {
+    width: 185px;
+    &:first-child {
+      margin-left:7px !important;
+    }
     display: inline-grid;
-
     .menu-image {
-      width: 172px;
+      width: 170px;
       height: 103px;
       ion-img {
         height: 100%;
@@ -17,7 +24,6 @@
     }
   }
 }
-
 .categories {
   position: -webkit-sticky;
   position: sticky;

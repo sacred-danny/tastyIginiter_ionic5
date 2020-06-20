@@ -132,7 +132,7 @@ export class AuthService {
         user: this.user,
         address: {
           address1: addressInfo.addresses[0].line_1,
-          address2: '',
+          address2: addressInfo.addresses[0].line_2,
           postcode: beforePayload.postcode,
           city: addressInfo.addresses[0].town_or_city,
           state: addressInfo.addresses[0].county,

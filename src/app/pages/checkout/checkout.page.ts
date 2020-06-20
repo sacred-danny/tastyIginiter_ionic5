@@ -153,12 +153,12 @@ export class CheckoutPage implements OnInit {
     };
     this.card = await this.stripe.elements(elementsOptions).create('card', stripeElementStyles);
     await this.card.mount('#cardElement');
-    this.card.on('ready', async () => {
-      await this.card.focus();
-      await setTimeout(async () => {
-        await this.mainDiv.nativeElement.scrollTo(0, 0);
-      }, 100);
-    });
+    // this.card.on('ready', async () => {
+    //   await this.card.focus();
+    //   await setTimeout(async () => {
+    //     await this.mainDiv.nativeElement.scrollTo(0, 0);
+    //   }, 100);
+    // });
     this.card.addEventListener('change', event => {
       const displayError = document.getElementById('card-errors');
       if (event.error) {

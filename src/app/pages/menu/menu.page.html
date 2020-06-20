@@ -27,7 +27,7 @@
             <h2 class="font-15 color-shark font-weight-bold text-left px-15 mb-15">FEATURED ITEMS</h2>
             <ion-slides [options]="specialSlideOpts">
                 <ion-slide (click)="goDetail(special.menu)" *ngFor="let special of specials;"
-                           [class.m-0]="platform.is('android')" [class.mx-15]="platform.is('ios')">
+                           [class.mx-0]="platform.is('android')" [class.ml-10]="platform.is('ios')">
                     <div class="menu-image">
                         <ion-img [src]="special.menu.menuImageUrl == null ? menuBlankImage : special.menu.menuImageUrl"></ion-img>
                     </div>
