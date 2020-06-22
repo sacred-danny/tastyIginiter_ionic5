@@ -77,7 +77,7 @@ export class LoginPage implements OnInit {
           telephone: '',
           email: user.email,
           password: '',
-          isFacebook: true
+          isFacebook: true,
         };
         const result: LoginResponse = await this.authService.signup(payload);
         if (result.user.deliveryAddress === '') {

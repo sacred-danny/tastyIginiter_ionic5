@@ -13,7 +13,8 @@ import { AuthService } from '../../core/services/auth.service';
 export class ProfilePage implements OnInit {
 
   menuBlankImage = environment.menuBlankImage;
-  supportDialCode = environment.supportDialCode;
+  isPushNotification = false;
+
   profileItems = [
     {
       icon: 'home',
@@ -60,6 +61,7 @@ export class ProfilePage implements OnInit {
   }
 
   async ngOnInit() {
+    this.isPushNotification = this.authService.user.isPush;
     if (this.commonService.isInit) {
       await this.ionViewWillEnter();
     }
@@ -95,4 +97,23 @@ export class ProfilePage implements OnInit {
     await this.router.navigate([ '/set-location' ]);
   }
 
+  async pushStatus() {
+    const loading = await this.commonService.showLoading('Please wait...');
+    try {
+      this.isPushNotification = !this.isPushNotification;
+      const payload = {
+        user: this.authService.user,
+        isPush: (this.isPushNotification === true) ? 1 : 0
+      };
+      const result = await this.authService.pushStatus(payload).toPromise();
+    } catch (e) {
+      if (e.status === 500) {
+        await this.commonService.presentAlert('Warning', 'Internal Server Error');
+      } else {
+        await this.commonService.presentAlert('Warning', e.error.message);
+      }
+    } finally {
+      await loading.dismiss();
+    }
+  }
 }

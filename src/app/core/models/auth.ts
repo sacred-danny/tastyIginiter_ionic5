@@ -16,7 +16,8 @@ export interface SignUpRequest {
   email: string;
   password: string;
   isFacebook?: boolean;
-  notification?: Notification;
+  fcmToken?: string;
+  deviceType?: string;
 }
 
 export interface PrepareLocationRequest {
@@ -31,13 +32,14 @@ export interface LoginResponse {
 
 export interface User {
   id: string;
-  email?: string;
-  firstName?: string;
-  lastName?: string;
-  telephone?: string;
-  areaId?: string;
-  locationId?: string;
-  deliveryAddress?: string;
-  stripeCustomerId?: string;
-  isFacebook?: boolean;
+  email: string;
+  firstName: string;
+  lastName: string;
+  telephone: string;
+  areaId: string;
+  locationId: string;
+  deliveryAddress: string;
+  stripeCustomerId: string;
+  isFacebook: boolean;
+  isPush: boolean;
 }

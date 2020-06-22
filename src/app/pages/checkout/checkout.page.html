@@ -57,7 +57,7 @@
             </ion-select>
         </div>
     </div>
-    <div class="row mx-0 mt-15">
+    <div class="row mx-0 mt-15" *ngIf="isSelected === 'delivery'">
         <div class="w-100 row m-0">
             <h2 class="font-15 font-weight-bold color-shark text-left mb-5">DELIVERY ADDRESS</h2>
         </div>
@@ -71,7 +71,7 @@
         </div>
     </div>
     <div class="row mx-0 mt-15">
-        <ion-textarea [(ngModel)]="comment" placeholder="Add Delivery Note"></ion-textarea>
+        <ion-textarea [(ngModel)]="comment" [placeholder]="isSelected === 'delivery' ? 'Add Delivery Note' : 'Add Pick-Up Note'"></ion-textarea>
     </div>
     <div class="row mx-0 mt-15">
         <div class="w-100 row m-0">

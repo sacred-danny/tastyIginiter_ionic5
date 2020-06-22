@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Facebook } from '@ionic-native/facebook/ngx';
+import { Platform } from '@ionic/angular';
 
 import { environment } from '../../../environments/environment';
 import { CommonService } from './common.service';
@@ -11,6 +12,7 @@ import { parseToPayload } from '../utils/dto.util';
 import { anonParam } from '../utils/api.util';
 
 import { LoginRequest, LoginResponse, PrepareLocationRequest, SignUpRequest, User } from '../models/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,8 @@ export class AuthService {
     private router: Router,
     private  commonService: CommonService,
     private menuService: MenuService,
-    private fb: Facebook
+    private fb: Facebook,
+    private platform: Platform
   ) {
   }
 
@@ -61,10 +64,7 @@ export class AuthService {
   }
 
   getInfo() {
-    if (new Date().getDay() > 1 && new Date().getDay() < 6) {
-      return false;
-    }
-    return true;
+    return ! (new Date().getDay() > 3 && new Date().getDay() < 6);
   }
 
   async signin(payload: LoginRequest): Promise<LoginResponse> {
@@ -93,6 +93,16 @@ export class AuthService {
 
   async signup(payload: SignUpRequest): Promise<LoginResponse> {
     try {
+      const fcmToken = await this.storage.get(environment.storage.notificationToken);
+      let deviceType = '';
+      if (this.platform.is('ios')) {
+        deviceType = 'ios';
+      } else if (this.platform.is('android')) {
+        deviceType = 'android';
+      }
+      if (fcmToken) {
+        payload = { ...payload, fcmToken, deviceType };
+      }
       const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signUp',
         parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;
@@ -112,6 +122,12 @@ export class AuthService {
     } catch (e) {
       throw e;
     }
+  }
+
+  pushStatus(payload): Observable<boolean> {
+    return this.http.post<any>(environment.apiURL + '/auth/pushStatus', payload).catch((error: any) => {
+      throw error;
+    });
   }
 
   async forgotPassword(payload): Promise<boolean> {

@@ -33,6 +33,7 @@
                 <ion-icon [name]="item.icon" [style.color]="item.color"
                           [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
                 <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
+                <ion-toggle color="success" [checked]="isPushNotification" (ionChange)="pushStatus()"></ion-toggle>
             </ion-item>
             <ion-item (click)="goDetail(item)" *ngIf="item.title !== 'Push Notifications' && item.title !== 'Address' && i > 0">
                 <ion-icon [name]="item.icon" [style.color]="item.color"
