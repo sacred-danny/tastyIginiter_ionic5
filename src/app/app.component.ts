@@ -56,10 +56,10 @@ export class AppComponent {
       console.log(data);
       if (data.wasTapped) {
         console.log('Received in background');
-        await this.commonService.presentAlert('Success', JSON.stringify(data));
+        await this.router.navigateByUrl('tabs/order');
       } else {
         console.log('Received in foreground');
-        await this.commonService.presentAlert('Success', JSON.stringify(data));
+        await this.commonService.presentAlert(data.title, data.body);
       }
     });
   }

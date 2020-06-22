@@ -69,6 +69,16 @@ export class AuthService {
 
   async signin(payload: LoginRequest): Promise<LoginResponse> {
     try {
+      const fcmToken = await this.storage.get(environment.storage.notificationToken);
+      let deviceType = '';
+      if (this.platform.is('ios')) {
+        deviceType = 'ios';
+      } else if (this.platform.is('android')) {
+        deviceType = 'android';
+      }
+      if (fcmToken) {
+        payload = { ...payload, fcmToken, deviceType };
+      }
       const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signIn',
         parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;

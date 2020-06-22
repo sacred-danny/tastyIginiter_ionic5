@@ -1,11 +1,8 @@
 export interface LoginRequest {
   email: string;
   password: string;
-}
-
-export interface Notification {
-  token: string;
-  phoneType: string;
+  fcmToken?: string;
+  deviceType?: string;
 }
 
 export interface SignUpRequest {
