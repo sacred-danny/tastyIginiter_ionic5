@@ -32,6 +32,7 @@
     "@types/node": "^8.0.0",
     "bootstrap": "^4.4.1",
     "cordova-android": "^8.1.0",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-facebook4": "^6.4.0",
     "cordova-plugin-fcm-with-dependecy-updated": "^6.4.3",
     "cordova-plugin-ionic-webview": "^5.0.0",
@@ -83,7 +84,9 @@
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-facebook4": {
         "APP_ID": "651535838729441",
-        "APP_NAME": "Grubs Up"
+        "APP_NAME": "Grubs Up",
+        "FACEBOOK_HYBRID_APP_EVENTS": "false",
+        "FACEBOOK_ANDROID_SDK_VERSION": "5.13.0"
       },
       "cordova-plugin-fcm-with-dependecy-updated": {
         "FCM_VERSION": "19.0.0",
@@ -94,7 +97,8 @@
       }
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
