@@ -14,9 +14,9 @@ import { keysToCamel } from '../utils/dto.util';
 export class MenuResolver implements Resolve<Menu> {
 
   constructor(
-    private menuService: MenuService,
-    private authService: AuthService,
-    private commonService: CommonService
+    public menuService: MenuService,
+    public authService: AuthService,
+    public commonService: CommonService
   ) {
   }
 

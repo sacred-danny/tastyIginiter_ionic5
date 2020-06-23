@@ -6,7 +6,7 @@ import { Facebook } from '@ionic-native/facebook/ngx';
 import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
 import { LoginRequest, LoginResponse, SignUpRequest } from '../../../core/models/auth';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 import { emailIsValid } from '../../../core/utils/dto.util';
 
 @Component({
@@ -23,11 +23,11 @@ export class LoginPage implements OnInit {
   serverConfig = environment;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private commonService: CommonService,
-    private router: Router,
-    private fb: Facebook,
+    public formBuilder: FormBuilder,
+    public authService: AuthService,
+    public commonService: CommonService,
+    public router: Router,
+    public fb: Facebook,
   ) {
   }
 

@@ -45,12 +45,12 @@ export class MenuPage implements OnInit {
   categoryPositions: any;
 
   constructor(
-    private menuService: MenuService,
-    private commonService: CommonService,
-    private authService: AuthService,
-    private navController: NavController,
-    private platform: Platform,
-    private router: Router
+    public menuService: MenuService,
+    public commonService: CommonService,
+    public authService: AuthService,
+    public navController: NavController,
+    public platform: Platform,
+    public router: Router
   ) {
   }
 

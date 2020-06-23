@@ -23,13 +23,13 @@ export class AuthService {
   token: string;
 
   constructor(
-    private http: HttpClient,
-    private storage: Storage,
-    private router: Router,
-    private  commonService: CommonService,
-    private menuService: MenuService,
-    private fb: Facebook,
-    private platform: Platform
+    public http: HttpClient,
+    public storage: Storage,
+    public router: Router,
+    public  commonService: CommonService,
+    public menuService: MenuService,
+    public fb: Facebook,
+    public platform: Platform
   ) {
   }
 

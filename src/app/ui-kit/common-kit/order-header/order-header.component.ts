@@ -17,7 +17,7 @@ export class OrderHeaderComponent implements OnInit {
   @Input() main: string;
 
   constructor(
-    private navController: NavController,
+    public navController: NavController,
   ) {
   }
 

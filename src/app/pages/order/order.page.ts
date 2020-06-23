@@ -21,10 +21,10 @@ export class OrderPage implements OnInit {
   orders: any;
 
   constructor(
-    private commonService: CommonService,
-    private menuService: MenuService,
-    private authService: AuthService,
-    private navController: NavController
+    public commonService: CommonService,
+    public menuService: MenuService,
+    public authService: AuthService,
+    public navController: NavController
   ) {
   }
 

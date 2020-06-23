@@ -20,11 +20,11 @@ export class SetLocationPage implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private commonService: CommonService,
-    private router: Router,
-    private navController: NavController
+    public formBuilder: FormBuilder,
+    public authService: AuthService,
+    public commonService: CommonService,
+    public router: Router,
+    public navController: NavController
   ) {
   }
 

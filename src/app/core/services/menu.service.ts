@@ -19,10 +19,10 @@ export class MenuService {
   order: Order;
 
   constructor(
-    private http: HttpClient,
-    private commonService: CommonService,
-    private storage: Storage,
-    private navController: NavController
+    public http: HttpClient,
+    public commonService: CommonService,
+    public storage: Storage,
+    public navController: NavController
   ) {
   }
 

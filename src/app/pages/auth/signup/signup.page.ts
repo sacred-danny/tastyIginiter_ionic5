@@ -6,7 +6,7 @@ import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
 
 import { SignUpRequest } from '../../../core/models/auth';
-import { environment } from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment.prod';
 import { emailIsValid } from '../../../core/utils/dto.util';
 
 @Component({
@@ -40,10 +40,10 @@ export class SignupPage implements OnInit {
   backGroundColor = environment.baseColors.pistachio;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private commonService: CommonService,
-    private router: Router,
+    public formBuilder: FormBuilder,
+    public authService: AuthService,
+    public commonService: CommonService,
+    public router: Router,
   ) {
   }
 

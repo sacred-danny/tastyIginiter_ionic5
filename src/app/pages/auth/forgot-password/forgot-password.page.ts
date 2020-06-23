@@ -18,10 +18,10 @@ export class ForgotPasswordPage implements OnInit {
   });
 
   constructor(
-    private formBuilder: FormBuilder,
-    private commonService: CommonService,
-    private authService: AuthService,
-    private navController: NavController
+    public formBuilder: FormBuilder,
+    public commonService: CommonService,
+    public authService: AuthService,
+    public navController: NavController
   ) {
   }
 

@@ -30,13 +30,13 @@ export class MenuDeatilPage implements OnInit {
   isOrder = false;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private menuService: MenuService,
-    private authService: AuthService,
-    private commonService: CommonService,
-    private navController: NavController,
-    private router: Router,
-    private storage: Storage
+    public activatedRoute: ActivatedRoute,
+    public menuService: MenuService,
+    public authService: AuthService,
+    public commonService: CommonService,
+    public navController: NavController,
+    public router: Router,
+    public storage: Storage
   ) {
   }
 

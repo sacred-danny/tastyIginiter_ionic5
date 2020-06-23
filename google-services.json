@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "399631360839",
+    "firebase_url": "https://tasty-food-app-d471b.firebaseio.com",
+    "project_id": "tasty-food-app-d471b",
+    "storage_bucket": "tasty-food-app-d471b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:399631360839:android:ac6697cfd62193b211e262",
+        "android_client_info": {
+          "package_name": "com.grubsup.foodapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "399631360839-j4ebvfoqsv5001i7gtser7qpf0kjqpev.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfd_0G5SGrCac_MYb8NGUvR3QWBA6e4YU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "399631360839-j4ebvfoqsv5001i7gtser7qpf0kjqpev.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -26,11 +26,11 @@ export class YourOrderPage implements OnInit {
   discountCode = '';
 
   constructor(
-    private menuService: MenuService,
-    private storage: Storage,
-    private navController: NavController,
-    private commonService: CommonService,
-    private router: Router
+    public menuService: MenuService,
+    public storage: Storage,
+    public navController: NavController,
+    public commonService: CommonService,
+    public router: Router
   ) {
   }
 

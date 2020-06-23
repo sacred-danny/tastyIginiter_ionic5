@@ -16,8 +16,8 @@ export class TermsPage implements OnInit {
   content = '';
 
   constructor(
-    private commonService: CommonService,
-    private menuService: MenuService
+    public commonService: CommonService,
+    public menuService: MenuService
   ) {
   }
 

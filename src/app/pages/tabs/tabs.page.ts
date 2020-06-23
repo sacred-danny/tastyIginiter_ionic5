@@ -12,10 +12,10 @@ import { Router } from '@angular/router';
 export class TabsPage implements OnInit {
 
   constructor(
-    private menuService: MenuService,
-    private navController: NavController,
-    private commonService: CommonService,
-    private router: Router
+    public menuService: MenuService,
+    public navController: NavController,
+    public commonService: CommonService,
+    public router: Router
   ) {
   }
 

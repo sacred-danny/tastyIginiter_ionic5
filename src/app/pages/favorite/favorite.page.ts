@@ -22,11 +22,11 @@ export class FavoritePage implements OnInit {
   isDeleting = false;
 
   constructor(
-    private commonService: CommonService,
-    private authService: AuthService,
-    private menuService: MenuService,
-    private navController: NavController,
-    private router: Router
+    public commonService: CommonService,
+    public authService: AuthService,
+    public menuService: MenuService,
+    public navController: NavController,
+    public router: Router
   ) {
   }
 

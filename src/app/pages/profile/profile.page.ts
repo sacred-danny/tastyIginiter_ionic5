@@ -54,9 +54,9 @@ export class ProfilePage implements OnInit {
   ];
 
   constructor(
-    private commonService: CommonService,
-    private authService: AuthService,
-    private router: Router
+    public commonService: CommonService,
+    public authService: AuthService,
+    public router: Router
   ) {
   }
 

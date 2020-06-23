@@ -10,9 +10,9 @@ import { CommonService } from '../services/common.service';
 export class AuthGuard implements CanActivate {
 
   constructor(
-    private authService: AuthService,
-    private commonService: CommonService,
-    private router: Router,
+    public authService: AuthService,
+    public commonService: CommonService,
+    public router: Router,
   ) {
   }
 

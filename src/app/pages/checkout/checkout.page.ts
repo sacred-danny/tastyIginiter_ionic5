@@ -53,13 +53,13 @@ export class CheckoutPage implements OnInit {
   };
 
   constructor(
-    private router: Router,
-    private commonService: CommonService,
-    private authService: AuthService,
-    private menuService: MenuService,
-    private navController: NavController,
-    private storage: Storage,
-    private platform: Platform
+    public router: Router,
+    public commonService: CommonService,
+    public authService: AuthService,
+    public menuService: MenuService,
+    public navController: NavController,
+    public storage: Storage,
+    public platform: Platform
   ) {
   }
 

@@ -8,7 +8,7 @@ import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError,
 
 import { CommonService } from './core/services/common.service';
 import { AuthService } from './core/services/auth.service';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 
 @Component({
   selector: 'app-root',
@@ -20,14 +20,14 @@ export class AppComponent {
   loading = false;
 
   constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private fcm: FCM,
-    private router: Router,
-    private storage: Storage,
-    private commonService: CommonService,
-    private authService: AuthService
+    public platform: Platform,
+    public splashScreen: SplashScreen,
+    public statusBar: StatusBar,
+    public fcm: FCM,
+    public router: Router,
+    public storage: Storage,
+    public commonService: CommonService,
+    public authService: AuthService
   ) {
     this.initializeApp();
     this.router.events.subscribe((e: RouterEvent) => {

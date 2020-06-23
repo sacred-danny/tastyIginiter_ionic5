@@ -31,7 +31,6 @@
     "@ionic/storage": "^2.2.0",
     "@types/node": "^8.0.0",
     "bootstrap": "^4.4.1",
-    "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
     "cordova-plugin-facebook4": "^6.4.0",
     "cordova-plugin-fcm-with-dependecy-updated": "^6.4.3",
@@ -97,7 +96,6 @@
       }
     },
     "platforms": [
-      "android",
       "ios"
     ]
   }

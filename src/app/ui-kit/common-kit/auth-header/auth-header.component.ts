@@ -15,7 +15,7 @@ export class AuthHeaderComponent implements OnInit {
   @Input() isSignIn: boolean;
 
   constructor(
-    private navController: NavController
+    public navController: NavController
   ) {
   }
 

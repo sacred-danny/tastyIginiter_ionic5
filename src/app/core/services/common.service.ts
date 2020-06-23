@@ -12,9 +12,9 @@ export class CommonService {
   isInit = false;
 
   constructor(
-    private toastController: ToastController,
-    private alertController: AlertController,
-    private loadingController: LoadingController,
+    public toastController: ToastController,
+    public alertController: AlertController,
+    public loadingController: LoadingController,
   ) {
   }
 
