@@ -50,9 +50,7 @@ export class AppComponent {
     });
   }
 
-  async notificationSetup() {
-    const w: any = window;
-    await w.FCMPlugin.requestPushPermissionIOS();
+  showNotification() {
     this.fcm.getToken().then(async (token) => {
       console.log('firebaseToken:', token);
       await this.storage.set(environment.storage.notificationToken, token);
@@ -71,6 +69,19 @@ export class AppComponent {
         await this.commonService.presentAlert(data.title, data.body);
       }
     });
+  }
+
+  notificationSetup() {
+    if (this.platform.is('ios')) {
+      const selfWindow: any = window;
+      selfWindow.FCMPlugin.requestPushPermissionIOS(() => {
+        this.showNotification();
+      }, (e) => {
+        console.log('push permissions failed', e);
+      });
+    } else {
+      this.showNotification();
+    }
   }
 
   navigationInterceptor(event: RouterEvent): void {
