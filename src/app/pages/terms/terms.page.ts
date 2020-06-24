@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { CommonService } from '../../core/services/common.service';
-import { MenuService} from '../../core/services/menu.service';
+import { MenuService } from '../../core/services/menu.service';
 import { environment } from '../../../environments/environment';
-import { associateArrayToArray, keysToCamel } from '../../core/utils/dto.util';
 
 @Component({
   selector: 'app-terms',

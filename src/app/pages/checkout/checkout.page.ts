@@ -11,6 +11,7 @@ import { MenuService } from '../../core/services/menu.service';
 import { keysToUnderScore } from '../../core/utils/dto.util';
 
 import { ElementsOptions } from 'ngx-stripe';
+
 declare var Stripe: any;
 
 @Component({
@@ -216,7 +217,10 @@ export class CheckoutPage implements OnInit {
     this.isDeleting = true;
     const loading = await this.commonService.showLoading('Please wait...');
     try {
-      const savedCards = await this.menuService.deleteCard({ user: this.authService.user, paymentMethodId: item.id }).toPromise();
+      const savedCards = await this.menuService.deleteCard({
+        user: this.authService.user,
+        paymentMethodId: item.id
+      }).toPromise();
       this.savedCards = JSON.parse(JSON.stringify(savedCards));
       Object.keys(this.savedCards.data).forEach(i => {
         this.savedCards.data[i] = { ...this.savedCards.data[i], isChecked: false };

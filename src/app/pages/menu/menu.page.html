@@ -29,7 +29,8 @@
                 <ion-slide (click)="goDetail(special.menu)" *ngFor="let special of specials;"
                            [class.mx-0]="platform.is('android')" [class.ml-10]="platform.is('ios')">
                     <div class="menu-image">
-                        <ion-img [src]="special.menu.menuImageUrl == null ? menuBlankImage : special.menu.menuImageUrl"></ion-img>
+                        <ion-img
+                                [src]="special.menu.menuImageUrl == null ? menuBlankImage : special.menu.menuImageUrl"></ion-img>
                     </div>
                     <h2 class="font-15 color-shark font-weight-bold text-left mt-2 mb-0">{{special.menu.menuName}}</h2>
                     <h2 class="font-15 color-french-gray font-weight-bold text-left mb-0">{{special.menu.menuPrice | currency:'GBP'}}</h2>

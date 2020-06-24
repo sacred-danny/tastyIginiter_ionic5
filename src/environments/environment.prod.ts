@@ -8,6 +8,9 @@ export const environment = {
   serverURL: 'https://www.grubsupdev.com/',
   apiURL: 'https://www.grubsupdev.com/api/v1',
 
+  // serverURL: 'http://192.168.108.123/grubsupdev/',
+  // apiURL: 'http://192.168.108.123/grubsupdev/api/v1',
+
   stripeApiKey: 'pk_test_KGSgL4Ccd2oGEKsSYXBF4SD600LfoqUiWa',
 
   debitCardURL: 'assets/media/debitcards/',

@@ -27,6 +27,8 @@ ion-tab-button {
 ion-fab {
   position: absolute;
   bottom: 5px;
+  margin-bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
+  margin-bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
   padding: 7px;
   background: white;
   border-radius: 50%;

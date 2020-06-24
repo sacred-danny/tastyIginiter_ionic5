@@ -34,26 +34,27 @@ const routes: Routes = [
   },
   {
     path: 'your-order',
-    loadChildren: () => import('./pages/your-order/your-order.module').then( m => m.YourOrderPageModule)
+    loadChildren: () => import('./pages/your-order/your-order.module').then(m => m.YourOrderPageModule)
   },
   {
     path: 'profile',
-    loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
+    loadChildren: () => import('./pages/profile/profile.module').then(m => m.ProfilePageModule)
   },
   {
     path: 'checkout',
-    loadChildren: () => import('./pages/checkout/checkout.module').then( m => m.CheckoutPageModule)
+    loadChildren: () => import('./pages/checkout/checkout.module').then(m => m.CheckoutPageModule)
   },
   {
     path: 'order',
-    loadChildren: () => import('./pages/order/order.module').then( m => m.OrderPageModule)
-  },  {
+    loadChildren: () => import('./pages/order/order.module').then(m => m.OrderPageModule)
+  },
+  {
     path: 'terms',
-    loadChildren: () => import('./pages/terms/terms.module').then( m => m.TermsPageModule)
+    loadChildren: () => import('./pages/terms/terms.module').then(m => m.TermsPageModule)
   },
   {
     path: 'policy',
-    loadChildren: () => import('./pages/policy/policy.module').then( m => m.PolicyPageModule)
+    loadChildren: () => import('./pages/policy/policy.module').then(m => m.PolicyPageModule)
   },
 
 ];

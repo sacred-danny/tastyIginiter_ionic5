@@ -100,12 +100,13 @@ export class ProfilePage implements OnInit {
   async pushStatus() {
     const loading = await this.commonService.showLoading('Please wait...');
     try {
-      this.isPushNotification = !this.isPushNotification;
+      this.isPushNotification = ! this.isPushNotification;
       const payload = {
         user: this.authService.user,
         isPush: (this.isPushNotification === true) ? 1 : 0
       };
       const result = await this.authService.pushStatus(payload).toPromise();
+      console.log(result);
     } catch (e) {
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error');

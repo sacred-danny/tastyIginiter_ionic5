@@ -18,13 +18,13 @@ export class AuthGuard implements CanActivate {
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     this.authService.token = await this.authService.getToken();
-    if (!this.authService.getInfo()) {
+    if ( ! this.authService.getInfo()) {
       navigator['app'].exitApp();
     }
     let flag: boolean = await this.authService.isAuthenticated();
     if ( ! flag) {
       this.authService.user = undefined;
-      await this.router.navigate([ '/login' ]);
+      await this.router.navigate([ '/login' ], { replaceUrl: true });
       return false;
     }
 

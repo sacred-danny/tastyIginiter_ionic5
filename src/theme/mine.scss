@@ -32,30 +32,37 @@ ion-refresher ion-refresher-content {
 
 ion-label {
   font-family: 'SF-UI-Display-Heavy' !important;
+  --ion-font-family: 'SF-UI-Display-Heavy' !important;
 }
 
 h2 {
   font-family: 'SF-UI-Display-Bold' !important;
+  --ion-font-family: 'SF-UI-Display-Bold' !important;
 }
 
 p {
   font-family: 'SF-UI-Display-Regular' !important;
+  --ion-font-family: 'SF-UI-Display-Regular' !important;
 }
 
 input {
   font-family: 'SF-UI-Display-Regular' !important;
+  --ion-font-family: 'SF-UI-Display-Regular' !important;
 }
 
 button {
   font-family: 'SF-UI-Display-Semibold' !important;
+  --ion-font-family: 'SF-UI-Display-Semibold' !important;
 }
 
 h3 {
   font-family: 'SF-UI-Display-Semibold' !important;
+  --ion-font-family: 'SF-UI-Display-Semibold' !important;
 }
 
 ion-list-header {
   font-family: 'SF-UI-Display-Bold' !important;
+  --ion-font-family: 'SF-UI-Display-Bold' !important;
 }
 
 .alert-radio-group {
@@ -131,3 +138,8 @@ ion-item {
   --border-color: black;
 }
 
+.ios body {
+  -webkit-font-smoothing: subpixel-antialiased !important;
+  text-rendering: auto !important;
+  letter-spacing: -0.7px;
+}

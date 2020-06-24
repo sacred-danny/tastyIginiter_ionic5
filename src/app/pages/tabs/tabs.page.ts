@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../core/services/menu.service';
-import { CommonService } from '../../core/services/common.service';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+
+import { MenuService } from '../../core/services/menu.service';
+import { CommonService } from '../../core/services/common.service';
 
 @Component({
   selector: 'app-tabs',

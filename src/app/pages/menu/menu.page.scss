@@ -10,13 +10,17 @@
 
   ion-slide {
     width: 185px;
+
     &:first-child {
-      margin-left:7px !important;
+      margin-left: 7px !important;
     }
+
     display: inline-grid;
+
     .menu-image {
       width: 170px;
       height: 103px;
+
       ion-img {
         height: 100%;
         object-fit: cover;
@@ -24,6 +28,7 @@
     }
   }
 }
+
 .categories {
   position: -webkit-sticky;
   position: sticky;
@@ -62,18 +67,23 @@
       color: $burning-orange;
       font-weight: 700;
     }
+
     ion-item {
       --border-color: #efeff4;
+
       ion-avatar {
         width: 60px;
         height: 60px;
+
         img {
           border-radius: 8px;
         }
       }
+
       .main {
         .description {
           width: calc(100% - 55px);
+
           p {
             line-height: 15px;
             height: 45px;
@@ -81,6 +91,7 @@
           }
         }
       }
+
       .price {
         position: absolute;
         top: 29px;

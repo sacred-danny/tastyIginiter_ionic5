@@ -4,7 +4,14 @@ import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Event as RouterEvent, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import {
+  Event as RouterEvent,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router
+} from '@angular/router';
 
 import { CommonService } from './core/services/common.service';
 import { AuthService } from './core/services/auth.service';
@@ -43,7 +50,9 @@ export class AppComponent {
     });
   }
 
-  notificationSetup() {
+  async notificationSetup() {
+    const w: any = window;
+    await w.FCMPlugin.requestPushPermissionIOS();
     this.fcm.getToken().then(async (token) => {
       console.log('firebaseToken:', token);
       await this.storage.set(environment.storage.notificationToken, token);

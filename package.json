@@ -55,7 +55,6 @@
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "codelyzer": "^5.0.0",
-    "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
@@ -77,10 +76,8 @@
     "plugins": {
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
-      "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-ionic-webview": {},
       "cordova-plugin-facebook4": {
         "APP_ID": "651535838729441",
         "APP_NAME": "Grubs Up",
@@ -93,7 +90,8 @@
         "GOOGLE_SERVICES_VERSION": "4.3.3",
         "SUPPORT_LIBRARY_VERSION": "28.0.0",
         "ANDROID_DEFAULT_NOTIFICATION_ICON": "@mipmap/ic_launcher"
-      }
+      },
+      "cordova-plugin-ionic-webview": {}
     },
     "platforms": [
       "ios"

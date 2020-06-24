@@ -32,7 +32,7 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(duplicate).pipe(
       catchError(error => {
         if (error.status === 401) {
-          this.router.navigate([ '/login' ]).then();
+          this.router.navigate([ '/login' ], { replaceUrl: true }).then();
         }
         return throwError(error);
       })

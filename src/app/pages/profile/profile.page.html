@@ -13,7 +13,8 @@
         </div>
     </div>
     <div class="bottom-sign ion-justify-content-center ion-align-items-center">
-        <h2 class="font-18 color-torch-red font-weight-bold m-0 text-overflow" (click)="authService.logout()">Sign Out</h2>
+        <h2 class="font-18 color-torch-red font-weight-bold m-0 text-overflow" (click)="authService.logout()">Sign
+            Out</h2>
     </div>
 </div>
 <div class="profile-list shadow mt-20 mx-15 pt-15 pl-15">
@@ -35,7 +36,8 @@
                 <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
                 <ion-toggle color="success" [checked]="isPushNotification" (ionChange)="pushStatus()"></ion-toggle>
             </ion-item>
-            <ion-item (click)="goDetail(item)" *ngIf="item.title !== 'Push Notifications' && item.title !== 'Address' && i > 0">
+            <ion-item (click)="goDetail(item)"
+                      *ngIf="item.title !== 'Push Notifications' && item.title !== 'Address' && i > 0">
                 <ion-icon [name]="item.icon" [style.color]="item.color"
                           [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
                 <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>

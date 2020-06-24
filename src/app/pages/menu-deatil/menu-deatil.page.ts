@@ -7,7 +7,7 @@ import { MenuService } from '../../core/services/menu.service';
 import { CommonService } from '../../core/services/common.service';
 import { AuthService } from '../../core/services/auth.service';
 import { environment } from '../../../environments/environment';
-import { ExtraOption, Item, MenuDetailOption, MenuOptionValue } from '../../core/models/menu';
+import { Item, MenuDetailOption, MenuOptionValue } from '../../core/models/menu';
 import { associateArrayToArray, keysToCamel } from '../../core/utils/dto.util';
 
 @Component({
@@ -58,7 +58,10 @@ export class MenuDeatilPage implements OnInit {
           if (key === 'optionValues') {
             this.menuDetail.options[i][key] = associateArrayToArray(this.menuDetail.options[i][key]);
             Object.keys(this.menuDetail.options[i][key]).forEach(subkey => {
-              this.menuDetail.options[i][key][subkey] = {...this.menuDetail.options[i][key][subkey],  isChecked: false};
+              this.menuDetail.options[i][key][subkey] = {
+                ...this.menuDetail.options[i][key][subkey],
+                isChecked: false
+              };
             });
           }
         });
@@ -70,7 +73,7 @@ export class MenuDeatilPage implements OnInit {
         }
       }, 1);
     } catch (e) {
-      await this.navController.pop();
+      await this.router.navigate([ '/login' ], { replaceUrl: true });
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error');
       } else {
