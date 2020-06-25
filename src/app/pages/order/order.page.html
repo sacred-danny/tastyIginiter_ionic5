@@ -10,21 +10,22 @@
     </ion-refresher>
     <div class="container d-flex flex-column p-15">
         <ng-container *ngIf="orders !== undefined && orders.length > 0">
-            <div *ngFor="let order of orders;" class="total shadow mb-10">
+            <div *ngFor="let order of orders;" class="total shadow mb-25">
                 <div class="sub-total">
                     <p class="font-17 font-weight-light color-shark m-0 left">Order Number</p>
-                    <p class="font-17 color-french-gray m-0 right">{{order.orderId}}</p>
+                    <p class="font-17 color-shark font-weight-bold m-0 right">{{order.orderId}}</p>
                 </div>
                 <div class="discount">
                     <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
                     <p class="font-17 color-french-gray m-0 right">{{order.date}}</p>
                 </div>
                 <div class="delivery">
-                    <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
+                    <p class="font-17 font-weight-light color-shark m-0 left">Total</p>
                     <p class="font-17 color-french-gray m-0 right">{{order.orderTotal | currency:'GBP'}}</p>
                 </div>
-                <div class="div-total py-10 item-align-center">
-                    <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">{{order.statusName}}</h3>
+                <div class="div-total py-10 item-align-center" [class.complete-total]="order.statusName.indexOf('Complete') >= 0"
+                     [class.other-total]="order.statusName.indexOf('Complete') < 0">
+                    <h3 class="font-24 font-weight-bold color-white m-0 left p-0">{{order.statusName}}</h3>
                 </div>
             </div>
         </ng-container>

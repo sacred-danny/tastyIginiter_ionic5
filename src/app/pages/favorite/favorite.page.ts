@@ -42,6 +42,9 @@ export class FavoritePage implements OnInit {
     try {
       const res = await this.menuService.getFavorite({ user: this.authService.user }).toPromise();
       this.favorites = associateArrayToArray(keysToCamel(res));
+      if (this.favorites.length === 0) {
+        await this.commonService.presentAlert('Warning', 'You don’t have any favourite items added.');
+      }
     } catch (e) {
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error');

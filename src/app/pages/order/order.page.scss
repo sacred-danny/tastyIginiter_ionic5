@@ -1,7 +1,7 @@
 @import "../../../theme";
 
 .total {
-  height: 175px;
+  height: 160px;
   border-radius: 10px;
   background: white;
 
@@ -22,6 +22,18 @@
   .div-total {
     height: 50px;
     display: flex;
-    border-top: solid 2px $french-gray;
+    border-color: $burning-orange;
+    z-index: 1000;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: solid 1px $french-gray;
+  }
+
+  .complete-total {
+    background: $pistachio;
+  }
+
+  .other-total {
+    background: $burning-orange;
   }
 }

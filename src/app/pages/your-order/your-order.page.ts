@@ -87,6 +87,7 @@ export class YourOrderPage implements OnInit {
     Object.keys(this.coupons).forEach(i => {
       if (this.coupons[i].code === this.discountCode) {
         found = true;
+        this.commonService.presentAlert('Success', 'Your discount has been applied.');
         this.discountType = this.coupons[i].type;
         this.discount = this.coupons[i].discount;
         this.calcPrice();
@@ -96,7 +97,7 @@ export class YourOrderPage implements OnInit {
       this.discount = 0;
       this.discountType = '';
       await this.calcPrice();
-      // await this.commonService.presentAlert('Warning', 'Please enter a valid discount code. ');
+      await this.commonService.presentAlert('We’re Sorry', 'Your discount code has expired or is invalid.');
       return;
     }
   }

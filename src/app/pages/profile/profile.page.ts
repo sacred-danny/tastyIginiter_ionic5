@@ -13,7 +13,7 @@ import { AuthService } from '../../core/services/auth.service';
 export class ProfilePage implements OnInit {
 
   menuBlankImage = environment.menuBlankImage;
-  isPushNotification = false;
+  isPushNotification = true;
 
   profileItems = [
     {

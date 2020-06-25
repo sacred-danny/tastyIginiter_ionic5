@@ -41,6 +41,9 @@ export class OrderPage implements OnInit {
       const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise();
       const orders = keysToCamel(result.orders);
       this.orders = associateArrayToArray(orders);
+      if (this.orders.length === 0) {
+        await this.commonService.presentAlert('Warning', 'You don’t have any previous orders.');
+      }
     } catch (e) {
       await this.navController.pop();
       if (e.status === 500) {

@@ -12,10 +12,11 @@
 }
 
 .main {
-  border-radius: 10px 10px 0px 0px;
-  height: calc(100% - 245px);
+  border-radius: 10px;
   margin-top: -90px;
-  overflow: auto;
+  border: solid 2px $burning-orange;
+  //height: calc(100% - 245px);
+  //overflow: auto;
 
   .mode {
     display: flex;
@@ -121,12 +122,6 @@
       margin-bottom: 0px;
     }
   }
-}
-
-.bottom {
-  width: 100%;
-  position: absolute;
-  bottom: 0px;
 
   .pay {
     height: 50px;
