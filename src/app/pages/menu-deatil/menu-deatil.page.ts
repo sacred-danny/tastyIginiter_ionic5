@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent, NavController } from '@ionic/angular';
+import { IonContent, NavController, Platform } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 
@@ -36,6 +36,7 @@ export class MenuDeatilPage implements OnInit {
     public commonService: CommonService,
     public navController: NavController,
     public router: Router,
+    public platform: Platform,
     public storage: Storage
   ) {
   }
@@ -156,8 +157,8 @@ export class MenuDeatilPage implements OnInit {
   }
 
   async goComment() {
-    const y = document.getElementById('comment').offsetTop;
-    await this.myContent.scrollToPoint(0, y, 700);
+    const container = document.getElementById('container');
+    await container.scrollTo(0, container.scrollHeight);
   }
 
   async addOrder() {
@@ -199,12 +200,11 @@ export class MenuDeatilPage implements OnInit {
       });
       this.menuService.order.items.push(item);
       await this.storage.set(environment.storage.order, this.menuService.order);
-      await this.navController.pop();
+      await this.back();
     }
   }
 
   async back() {
-    await this.router.navigate([ '/tabs/menu' ], { replaceUrl: true });
+    await this.navController.pop();
   }
-
 }

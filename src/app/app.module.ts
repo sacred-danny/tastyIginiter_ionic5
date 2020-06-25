@@ -14,6 +14,7 @@ import { InputModule } from './ui-kit/input/input.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
+import { pageTransition } from './core/utils/transition.util';
 
 @NgModule({
   declarations: [ AppComponent ],
@@ -21,7 +22,8 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({ navAnimation: pageTransition }),
+    // IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     CommonKitModule,

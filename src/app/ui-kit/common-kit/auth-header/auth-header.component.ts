@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-auth-header',
@@ -15,7 +15,8 @@ export class AuthHeaderComponent implements OnInit {
   @Input() isSignIn: boolean;
 
   constructor(
-    public navController: NavController
+    public navController: NavController,
+    public platform: Platform
   ) {
   }
 

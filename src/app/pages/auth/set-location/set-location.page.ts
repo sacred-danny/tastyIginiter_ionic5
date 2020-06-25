@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 
 import { CommonService } from '../../../core/services/common.service';
 import { AuthService } from '../../../core/services/auth.service';
@@ -24,7 +24,8 @@ export class SetLocationPage implements OnInit {
     public authService: AuthService,
     public commonService: CommonService,
     public router: Router,
-    public navController: NavController
+    public navController: NavController,
+    public platform: Platform
   ) {
   }
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 
 import { AuthService } from '../../../core/services/auth.service';
 import { environment } from '../../../../environments/environment.prod';
@@ -22,7 +22,8 @@ export class TabHeaderComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    public navController: NavController
+    public navController: NavController,
+    public platform: Platform
   ) {
   }
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-order-header',
@@ -18,6 +18,7 @@ export class OrderHeaderComponent implements OnInit {
 
   constructor(
     public navController: NavController,
+    public platform: Platform
   ) {
   }
 

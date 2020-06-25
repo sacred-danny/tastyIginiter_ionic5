@@ -89,7 +89,6 @@ export class AppComponent {
       if (event.id === 1 && event.url === '/') {
         this.loading = true;
       }
-      // this.loading = true;
     }
     if (event instanceof NavigationEnd) {
       this.loading = false;

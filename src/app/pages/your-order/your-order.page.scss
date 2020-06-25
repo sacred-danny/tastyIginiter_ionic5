@@ -1,84 +1,90 @@
 @import "../../../theme";
-
-.total {
-  height: 175px;
-  border-radius: 10px;
-  background: white;
-  margin-top: -130px;
-
-  div {
-    padding: 0 15px 10px 15px;
-    display: flex;
-
-    .right {
-      position: absolute;
-      right: 30px;
-    }
-
-    &:first-child {
-      padding-top: 15px;
-    }
-  }
-
-  .div-total {
-    height: 50px;
-    display: flex;
-    border-top: solid 2px $french-gray;
-  }
-}
-
-.discount-code {
-  display: flex;
-  height: 40px;
-  background: white;
-  border: solid 2px $burning-orange;
-  border-radius: 7px;
-
-  ion-input {
-    --padding-start: 10px;
-    --padding-top: 6px;
-    --padding-bottom: 6px;
-    width: 70%;
-    height: 100%;
-  }
-
-  button {
-    width: 30%;
-    height: 100%;
-    border-radius: 4px;
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-  }
-}
-
 ion-content {
-  ion-list {
-    ion-item {
-      --border-color: #efeff4;
-      padding-left: 10px;
+  .total {
+    height: 175px;
+    border-radius: 10px;
+    background: white;
+    margin-top: -130px;
 
-      ion-avatar {
-        width: 60px;
-        height: 60px;
+    div {
+      padding: 0 15px 10px 15px;
+      display: flex;
 
-        img {
-          border-radius: 8px;
+      .right {
+        position: absolute;
+        right: 30px;
+      }
+
+      &:first-child {
+        padding-top: 15px;
+      }
+    }
+
+    .div-total {
+      height: 50px;
+      display: flex;
+      border-top: solid 2px $french-gray;
+    }
+  }
+
+  .discount-code {
+    display: flex;
+    height: 40px;
+    background: white;
+    border: solid 2px $burning-orange;
+    border-radius: 7px;
+
+    ion-input {
+      --padding-start: 10px;
+      --padding-top: 6px;
+      --padding-bottom: 6px;
+      width: 70%;
+      height: 100%;
+    }
+
+    button {
+      width: 30%;
+      height: 100%;
+      border-radius: 4px;
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+  }
+
+  .container {
+    height: calc(100% - 440px);
+    overflow: auto;
+
+    ion-list {
+      ion-item {
+        --border-color: #efeff4;
+        padding-left: 10px;
+
+        ion-avatar {
+          width: 60px;
+          height: 60px;
+
+          img {
+            border-radius: 8px;
+          }
+        }
+
+        .description {
+          width: calc(100% - 30px);
         }
       }
-
-      .description {
-        width: calc(100% - 30px);
-      }
     }
   }
-}
 
-.bottom {
-  height: 100px;
-  width: 100%;
+  .bottom {
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
 
-  .check-out {
-    height: 50px;
-    border-radius: 10px;
+    .check-out {
+      height: 50px;
+      border-radius: 10px;
+    }
   }
 }

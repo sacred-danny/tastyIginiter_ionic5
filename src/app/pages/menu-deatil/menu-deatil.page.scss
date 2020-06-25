@@ -32,6 +32,9 @@ ion-content {
 }
 
 .container {
+  height: calc(100% - 315px);
+  overflow: auto;
+
   ion-list {
     background: white;
     margin-top: -15px;
@@ -87,6 +90,8 @@ ion-content {
 
   .special {
     display: inline-block;
+    position: absolute;
+    bottom: 81px;
   }
 
   .order-count {
@@ -167,7 +172,3 @@ ion-content {
     }
   }
 }
-
-
-
-

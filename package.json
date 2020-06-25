@@ -36,6 +36,7 @@
     "cordova-plugin-fcm-with-dependecy-updated": "^6.4.3",
     "cordova-plugin-ionic-webview": "^5.0.0",
     "core-js": "^2.5.4",
+    "ionic-angular": "^3.9.10-202005061940",
     "ngx-mask": "^9.0.2",
     "ngx-stripe": "^9.0.2",
     "rxjs": "~6.5.1",
