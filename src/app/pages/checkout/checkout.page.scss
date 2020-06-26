@@ -13,11 +13,8 @@
 
 .main {
   border-radius: 10px;
-  margin-top: -90px;
   border: solid 2px $burning-orange;
-  //height: calc(100% - 245px);
-  //overflow: auto;
-
+  
   .mode {
     display: flex;
     border: solid 3px $burning-orange;

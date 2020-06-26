@@ -38,12 +38,12 @@ export class OrderPage implements OnInit {
     this.commonService.activeIcon(2);
     const loading = await this.commonService.showLoading('Please wait...');
     try {
-      const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise();
-      const orders = keysToCamel(result.orders);
+      const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise(); const orders = keysToCamel(result.orders);
       this.orders = associateArrayToArray(orders);
-      if (this.orders.length === 0) {
-        await this.commonService.presentAlert('Warning', 'You don’t have any previous orders.');
-      }
+
+      // if (this.orders.length === 0) {
+      //   await this.commonService.presentAlert('Warning', 'You don’t have any previous orders.');
+      // }
     } catch (e) {
       await this.navController.pop();
       if (e.status === 500) {

@@ -1,5 +1,5 @@
-<app-tab-header [backGroundColor]="serverConfig.baseColors.burningOrange" subTitle="Orders"></app-tab-header>
 <ion-content>
+    <app-tab-header [backGroundColor]="serverConfig.baseColors.burningOrange" subTitle="Orders"></app-tab-header>
     <ion-refresher #refresherRef (ionRefresh)="doRefresh()" slot="fixed">
         <ion-refresher-content
                 pullingIcon="chevron-down-circle-outline"
@@ -28,6 +28,9 @@
                     <h3 class="font-24 font-weight-bold color-white m-0 left p-0">{{order.statusName}}</h3>
                 </div>
             </div>
+        </ng-container>
+        <ng-container *ngIf="orders !== undefined && orders.length === 0">
+            <h3 class="font-15 color-shark font-weight-bold">You don’t have any previous orders.</h3>
         </ng-container>
     </div>
 </ion-content>
