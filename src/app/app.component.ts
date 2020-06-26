@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
 import {
   Event as RouterEvent,
   NavigationCancel,
@@ -33,6 +34,7 @@ export class AppComponent {
     public fcm: FCM,
     public router: Router,
     public storage: Storage,
+    public keyboard: Keyboard,
     public commonService: CommonService,
     public authService: AuthService
   ) {
@@ -47,6 +49,26 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.notificationSetup();
+      if (this.platform.is('ios') || this.platform.is('android')) {
+        this.keyboard.onKeyboardShow().subscribe((e) => {
+          const activeEle: any = document.activeElement;
+          let offsetTop = activeEle.getBoundingClientRect().top + document.documentElement.scrollTop;
+          if (activeEle.type === 'textarea') {
+            offsetTop += 70;
+          } else {
+            offsetTop += 50;
+          }
+          console.log('keyboard show');
+          if (offsetTop > window.innerHeight - e.keyboardHeight) {
+            document.body.style.marginTop = (0 - e.keyboardHeight) + 'px';
+          }
+        });
+        this.keyboard.onKeyboardHide().subscribe(e => {
+          console.log('keyboard hide');
+          document.body.style.marginTop = '0px';
+        });
+      }
+      this.keyboard.hideFormAccessoryBar(false);
     });
   }
 
