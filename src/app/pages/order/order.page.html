@@ -1,5 +1,5 @@
+<app-tab-header [backGroundColor]="serverConfig.baseColors.burningOrange" subTitle="Orders"></app-tab-header>
 <ion-content>
-    <app-tab-header [backGroundColor]="serverConfig.baseColors.burningOrange" subTitle="Orders"></app-tab-header>
     <ion-refresher #refresherRef (ionRefresh)="doRefresh()" slot="fixed">
         <ion-refresher-content
                 pullingIcon="chevron-down-circle-outline"

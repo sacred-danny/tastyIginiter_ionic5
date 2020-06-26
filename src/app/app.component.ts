@@ -49,7 +49,7 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.notificationSetup();
-      if (this.platform.is('ios') || this.platform.is('android')) {
+      if (this.platform.is('ios')) {
         this.keyboard.onKeyboardShow().subscribe((e) => {
           const activeEle: any = document.activeElement;
           let offsetTop = activeEle.getBoundingClientRect().top + document.documentElement.scrollTop;
