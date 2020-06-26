@@ -75,16 +75,16 @@ ion-content {
       }
     }
   }
+}
 
-  .bottom {
-    height: 100px;
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
+.bottom {
+  height: 100px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
 
-    .check-out {
-      height: 50px;
-      border-radius: 10px;
-    }
+  .check-out {
+    height: 50px;
+    border-radius: 10px;
   }
 }
