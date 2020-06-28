@@ -11,9 +11,12 @@
     </ion-refresher>
     <div class="container d-flex flex-column p-0">
         <div class="deliveryOpen mt-15 px-15">
-            <div class="delivery float-left">
+            <div class="delivery float-left" *ngIf="this.menuService.menu.delivery !== ''">
                 <h2 class="font-15 color-shark font-weight-bold text-left mb-0">Delivery</h2>
                 <p class="font-15 color-shark text-left">{{this.menuService.menu.delivery}}</p>
+            </div>
+            <div class="delivery float-left" *ngIf="this.menuService.menu.delivery === ''">
+                <h2 class="font-15 color-shark font-weight-bold text-left mb-0">Collection Only</h2>
             </div>
             <div class="open float-right">
                 <h2 class="font-15 font-weight-bold text-left mb-0"

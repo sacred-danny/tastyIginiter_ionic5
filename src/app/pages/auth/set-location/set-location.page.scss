@@ -1,22 +1,9 @@
-:host ::ng-deep ion-back-button {
-  --color: black;
+@import "../../../../theme";
+
+.location-header {
+  background: $burning-orange;
 }
 
-.location-container {
-  display: block;
-  width: 100%;
-  height: 200px;
-
-  .location {
-    position: relative;
-    height: 100%;
-    width: 53%;
-    left: 23.5%;
-
-    ion-img {
-      width: 100%;
-      height: 100%;
-    }
-  }
+.container {
+  background: $burning-orange;
 }
-

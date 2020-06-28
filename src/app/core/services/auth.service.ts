@@ -52,7 +52,7 @@ export class AuthService {
   isLocationExist(): Promise<boolean> {
     return new Promise<boolean>((resolve) => {
       this.getUser().then(user => {
-        if (user.areaId == null || user.areaId === '') {
+        if (user.locationId == null || user.locationId === '') {
           resolve(false);
         } else {
           resolve(true);

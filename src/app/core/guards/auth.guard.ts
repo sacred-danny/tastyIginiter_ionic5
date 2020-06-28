@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
     this.authService.user = await this.authService.getUser();
     flag = await this.authService.isLocationExist();
     if ( ! flag) {
-      await this.router.navigate([ '/set-location' ]);
+      await this.router.navigate([ '/set-address' ]);
     }
     return flag;
   }

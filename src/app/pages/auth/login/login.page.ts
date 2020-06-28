@@ -81,7 +81,7 @@ export class LoginPage implements OnInit {
         };
         const result: LoginResponse = await this.authService.signup(payload);
         if (result.user.deliveryAddress === '') {
-          await this.router.navigate([ '/set-location' ]);
+          await this.router.navigate([ '/set-address' ]);
         } else {
           await this.router.navigate([ '' ], { replaceUrl: true });
         }

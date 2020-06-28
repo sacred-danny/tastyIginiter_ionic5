@@ -94,7 +94,7 @@ export class ProfilePage implements OnInit {
   }
 
   async goSetLocation() {
-    await this.router.navigate([ '/set-location' ]);
+    await this.router.navigate([ '/set-address' ]);
   }
 
   async pushStatus() {

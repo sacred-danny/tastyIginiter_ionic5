@@ -24,7 +24,6 @@ import { pageTransition } from './core/utils/transition.util';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot({ navAnimation: pageTransition }),
-    // IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     CommonKitModule,

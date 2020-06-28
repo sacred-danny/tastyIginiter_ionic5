@@ -100,7 +100,7 @@ export class SignupPage implements OnInit {
       };
       await this.authService.signup(payload);
       if (this.user.userId === '') {
-        await this.router.navigate([ '/set-location' ], { replaceUrl: true });
+        await this.router.navigate([ '/set-address' ], { replaceUrl: true });
         await this.commonService.showToast('Thanks for Signing Up.');
       } else {
         await this.router.navigate([ '' ], { replaceUrl: true });

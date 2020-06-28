@@ -18,10 +18,10 @@ const routes: Routes = [
     path: 'signup',
     loadChildren: () => import('./pages/auth/signup/signup.module').then(m => m.SignupPageModule)
   },
-  {
-    path: 'set-location',
-    loadChildren: () => import('./pages/auth/set-location/set-location.module').then(m => m.SetLocationPageModule)
-  },
+  // {
+  //   path: 'set-address',
+  //   loadChildren: () => import('./pages/auth/set-address/set-address.module').then(m => m.SetAddressPageModule)
+  // },
   {
     path: '',
     loadChildren: () => import('./pages/tabs/tabs.module').then(m => m.TabsPageModule),
@@ -56,6 +56,11 @@ const routes: Routes = [
     path: 'policy',
     loadChildren: () => import('./pages/policy/policy.module').then(m => m.PolicyPageModule)
   },
+  // {
+  //   path: 'set-location',
+  //   loadChildren: () => import('./pages/auth/set-location/set-location.module').then( m => m.SetLocationPageModule)
+  // },
+
 
 ];
 
