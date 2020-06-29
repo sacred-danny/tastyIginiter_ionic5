@@ -53,7 +53,7 @@ export class YourOrderPage implements OnInit {
 
   async checkOut() {
     if (this.currentPrice === 0) {
-      await this.commonService.presentAlert('Warning', 'Please, add some menus before you checkout!');
+      await this.commonService.presentAlert('Warning', 'Your cart is empty.');
       return;
     }
     this.menuService.order.delivery = this.delivery;

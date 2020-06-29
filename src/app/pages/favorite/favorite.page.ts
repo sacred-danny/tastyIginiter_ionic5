@@ -19,6 +19,7 @@ export class FavoritePage implements OnInit {
   backGroundColor = environment.baseColors.burningOrange;
   menuBlankImage = environment.menuBlankImage;
   favorites: Array<MenuDetail> = [];
+  isLoading = true;
   isDeleting = false;
 
   constructor(
@@ -37,14 +38,12 @@ export class FavoritePage implements OnInit {
   }
 
   async ionViewWillEnter() {
+    this.isLoading = true;
     this.commonService.activeIcon(1);
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       const res = await this.menuService.getFavorite({ user: this.authService.user }).toPromise();
       this.favorites = associateArrayToArray(keysToCamel(res));
-      // if (this.favorites.length === 0) {
-      //   await this.commonService.presentAlert('Warning', 'You don’t have any favourite items added.');
-      // }
     } catch (e) {
       if (e.status === 500) {
         await this.commonService.presentAlert('Warning', 'Internal Server Error');
@@ -52,6 +51,7 @@ export class FavoritePage implements OnInit {
         await this.commonService.presentAlert('Warning', e.error.message);
       }
     } finally {
+      this.isLoading = false;
       await loading.dismiss();
     }
   }

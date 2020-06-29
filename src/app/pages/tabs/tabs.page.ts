@@ -28,7 +28,7 @@ export class TabsPage implements OnInit {
       await this.router.navigate([ 'your-order' ]);
       // this.navController.navigateForward('your-order');
     } else {
-      await this.commonService.presentAlert('Warning', 'Please, add some menus before you checkout!');
+      await this.commonService.presentAlert('Warning', 'Your cart is empty.');
     }
   }
 
