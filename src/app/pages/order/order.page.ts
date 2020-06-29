@@ -38,7 +38,8 @@ export class OrderPage implements OnInit {
     this.commonService.activeIcon(2);
     const loading = await this.commonService.showLoading('Please wait...');
     try {
-      const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise(); const orders = keysToCamel(result.orders);
+      const result = await this.menuService.getOrders({ user: this.authService.user }).toPromise();
+      const orders = keysToCamel(result.orders);
       this.orders = associateArrayToArray(orders);
 
       // if (this.orders.length === 0) {

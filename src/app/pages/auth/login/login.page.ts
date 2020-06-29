@@ -80,8 +80,8 @@ export class LoginPage implements OnInit {
           isFacebook: true,
         };
         const result: LoginResponse = await this.authService.signup(payload);
-        if (result.user.deliveryAddress === '') {
-          await this.router.navigate([ '/set-address' ]);
+        if (result.user.locationId === '') {
+          await this.router.navigate([ '/set-location' ]);
         } else {
           await this.router.navigate([ '' ], { replaceUrl: true });
         }

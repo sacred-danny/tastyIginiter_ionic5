@@ -210,6 +210,6 @@ export class MenuDeatilPage implements OnInit {
   }
 
   async back() {
-    await this.navController.pop();
+    await this.router.navigate([ '' ], { replaceUrl: true });
   }
 }

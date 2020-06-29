@@ -18,7 +18,7 @@
                     </div>
                 </ng-container>
             </ng-container>
-            <ng-container *ngIf="favorites.length === 0">
+            <ng-container *ngIf="favorites.length === 0 && isLoading === false">
                 <div class="col">
                     <h3 class="font-15 color-shark font-weight-bold">You don’t have any favourite items added.</h3>
                 </div>

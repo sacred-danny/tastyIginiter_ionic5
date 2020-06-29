@@ -60,11 +60,12 @@ export class SetLocationPage implements OnInit {
       const loading = await this.commonService.showLoading('Please wait...');
       try {
         const res = await this.authService.setLocation(this.authService.user.locationId);
+        this.authService.user.areaId = '';
+        this.authService.user.deliveryAddress = '';
+        await this.storage.set(environment.storage.user, this.authService.user);
         if (res.offerDelivery === true) {
           await this.router.navigate([ '/set-address' ]);
         } else if (res.offerDelivery === false && res.offerCollection === true) {
-          this.authService.user.areaId = '';
-          await this.storage.set(environment.storage.user, this.authService.user);
           await this.router.navigate([ '' ], { replaceUrl: true });
         } else {
           await this.commonService.presentAlert('Warning', 'This store is not currently taking orders.');
