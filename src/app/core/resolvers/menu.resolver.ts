@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { Menu } from '../models/menu';
@@ -16,24 +16,24 @@ export class MenuResolver implements Resolve<Menu> {
   constructor(
     public menuService: MenuService,
     public authService: AuthService,
-    public commonService: CommonService
+    public commonService: CommonService,
+    public router: Router
   ) {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Menu> | Promise<Menu> | Menu {
     this.menuService.getOrder();
-    if (this.menuService.menu && this.menuService.menu.locationId === this.authService.user.locationId) {
-      return this.menuService.menu;
-    } else {
-      return new Promise(async (resolve) => {
-        const payload = {
-          user: this.authService.user
-        };
-        const res = await this.menuService.getMenu(payload).toPromise();
-        this.menuService.menu = keysToCamel(res);
-        resolve(res);
-      });
-    }
+    return new Promise(async (resolve) => {
+      const payload = {
+        user: this.authService.user
+      };
+      const res = await this.menuService.getMenu(payload).toPromise();
+      this.menuService.menu = keysToCamel(res);
+      if (this.menuService.menu.offerCollection === false && this.menuService.menu.offerDelivery === false) {
+        await this.router.navigate([ '/set-location' ], { replaceUrl: true });
+      }
+      resolve(res);
+    });
   }
 
 }

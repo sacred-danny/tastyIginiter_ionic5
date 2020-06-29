@@ -4,6 +4,18 @@
   background: $burning-orange;
 }
 
-.container {
+.location-container {
+  height: 100%;
   background: $burning-orange;
+}
+
+.logo {
+  height: 35px;
+  width: 150px;
+  background: url(../../../../assets/images/logo.png) 0 0/100% 100% no-repeat;
+}
+
+ion-select {
+  background: white;
+  border-radius: 10px;
 }

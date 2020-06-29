@@ -87,6 +87,10 @@ export class MenuPage implements OnInit {
         };
         const res = await this.menuService.getMenu(payload).toPromise();
         this.menuService.menu = keysToCamel(res);
+        if (this.menuService.menu.offerCollection === false && this.menuService.menu.offerDelivery === false) {
+          await this.router.navigate([ '/set-location' ], { replaceUrl: true });
+          return;
+        }
         this.setData();
         this.categoryPositions = [];
         for (let i = 0; i < this.categoryDetails.length; i ++) {

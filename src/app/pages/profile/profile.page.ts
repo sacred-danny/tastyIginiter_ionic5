@@ -24,6 +24,13 @@ export class ProfilePage implements OnInit {
       color: '#70e2a5'
     },
     {
+      icon: 'home',
+      title: 'Store Location',
+      message: 'Change your store location',
+      url: '',
+      color: '#a139ea'
+    },
+    {
       icon: 'help-circle',
       title: 'Delivery Support',
       message: '',
@@ -93,8 +100,12 @@ export class ProfilePage implements OnInit {
     }
   }
 
-  async goSetLocation() {
+  async goSetAddress() {
     await this.router.navigate([ '/set-address' ]);
+  }
+
+  async goSetLocation() {
+    await this.router.navigate([ '/set-location' ]);
   }
 
   async pushStatus() {

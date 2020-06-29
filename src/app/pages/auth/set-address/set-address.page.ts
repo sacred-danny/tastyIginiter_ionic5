@@ -31,14 +31,14 @@ export class SetAddressPage implements OnInit {
   ngOnInit() {
   }
 
-  async setLocation() {
+  async setAddress() {
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       const payload: PrepareLocationRequest = {
         postcode: this.form.value.postcode,
         houseName: this.form.value.houseName
       };
-      await this.authService.setLocation(payload);
+      await this.authService.setAddress(payload);
       await this.router.navigate([ '' ], { replaceUrl: true });
     } catch (e) {
       if (e.url.indexOf('https://api.getaddress.io/find') >= 0) {

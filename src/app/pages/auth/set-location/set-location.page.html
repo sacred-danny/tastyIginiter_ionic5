@@ -1,10 +1,25 @@
-<div class="header-type-2 location-header">
+<div class="location-container d-flex flex-column">
   <ion-back-button (click)="back()" text="Back"></ion-back-button>
-</div>
-<ion-content>
-  <div class="container d-flex flex-column">
-    <div class="location-container">
-
+  <div class="mt-150">
+    <h2 class="font-34 color-white font-weight-bold text-center m-0">Select your nearest</h2>
+  </div>
+  <div class="row mx-0 mt-10 ion-justify-content-center ion-align-items-center">
+    <div class="logo"></div>
+  </div>
+  <div class="row mt-50">
+    <div class="col">
+      <div class="px-40">
+        <ion-select [(ngModel)]="selectLocationId" multiple="false" name="selectCode"
+                    placeholder="Tap to select.." required>
+          <ion-select-option *ngFor="let location of authService.locations; let i = index;" [value]="location.locationId">
+            {{location.locationName}}
+          </ion-select-option>
+        </ion-select>
+      </div>
+      <div class="px-35 mt-190">
+        <button class="btn btn-outline-burning-organge w-100 mb-10 font-weight-bold font-17 color-white" (click)="continue()">Continue
+        </button>
+      </div>
     </div>
   </div>
-</ion-content>
+</div>

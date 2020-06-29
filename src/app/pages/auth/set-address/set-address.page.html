@@ -11,10 +11,10 @@
         <div class="px-20">
             <h2 class="font-34 color-shark font-weight-bold text-center">Enter your address</h2>
         </div>
-        <form (ngSubmit)="setLocation()" [formGroup]="form" class="px-20 mt-25">
+        <form (ngSubmit)="setAddress()" [formGroup]="form" class="px-20 mt-25">
             <app-text-input formControlName="houseName" placeholder="House Name/Number" type="text"></app-text-input>
             <app-text-input formControlName="postcode" placeholder="Postcode" type="text"></app-text-input>
-            <div class="mt-40 ">
+            <div class="mt-40">
                 <button [disabled]="!form.valid"
                         class="btn btn-outline-burning-organge-invert w-100 mb-10 font-weight-bold font-17">Continue
                 </button>

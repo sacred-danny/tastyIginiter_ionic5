@@ -36,6 +36,8 @@ export class YourOrderPage implements OnInit {
 
   async ngOnInit() {
     this.coupons = associateArrayToArray(this.menuService.menu.coupons);
+    this.discount = this.menuService.order.discount;
+    this.discountType = this.menuService.order.discountType;
     if (this.menuService.menu.deliveryTotal === 0 || this.menuService.order.totalPrice === 0 && this.menuService.order.totalCount === 0) {
       this.delivery = 0;
     } else {
@@ -50,6 +52,10 @@ export class YourOrderPage implements OnInit {
   }
 
   async checkOut() {
+    if (this.currentPrice === 0) {
+      await this.commonService.presentAlert('Warning', 'Please, add some menus before you checkout!');
+      return;
+    }
     this.menuService.order.delivery = this.delivery;
     this.menuService.order.currentPrice = this.currentPrice;
     await this.storage.set(environment.storage.order, this.menuService.order);
@@ -57,9 +63,12 @@ export class YourOrderPage implements OnInit {
   }
 
   async calcPrice() {
+    if (this.menuService.order.totalPrice === 0) {
+      this.currentPrice = 0;
+      return ;
+    }
     if (this.discountType === 'P') {
-      this.menuService.order.totalPrice = this.menuService.order.totalPrice / 100 * (100 - this.discount);
-      this.currentPrice = this.menuService.order.totalPrice + this.delivery;
+      this.currentPrice = this.menuService.order.totalPrice / 100 * (100 - this.discount) + this.delivery;
     } else {
       if (this.discountType === 'F') {
         if (this.menuService.order.totalPrice - this.discount + this.delivery < 0) {
@@ -68,13 +77,11 @@ export class YourOrderPage implements OnInit {
           this.discount = 0;
           return;
         } else {
-          this.menuService.order.totalPrice -= this.discount;
-          this.currentPrice = this.menuService.order.totalPrice + this.delivery;
+          this.currentPrice = this.menuService.order.totalPrice - this.discount + this.delivery;
         }
       } else {
         if (this.menuService.order.totalPrice - this.discount + this.delivery > 0) {
-          this.menuService.order.totalPrice -= this.discount;
-          this.currentPrice = this.menuService.order.totalPrice + this.delivery;
+          this.currentPrice = this.menuService.order.totalPrice - this.discount + this.delivery;
         } else {
           this.currentPrice = 0;
         }
@@ -83,6 +90,17 @@ export class YourOrderPage implements OnInit {
   }
 
   async couponApply() {
+    if (this.discountCode === '') {
+      this.discount = 0;
+      this.discountType = '';
+      this.menuService.order.discount = this.discount;
+      this.menuService.order.discountType = this.discountType;
+      await this.storage.set(environment.storage.order, this.menuService.order);
+      await this.calcPrice();
+      await this.commonService.presentAlert('Warning', 'Please set your discount code.');
+      return;
+    }
+
     let found = false;
     Object.keys(this.coupons).forEach(i => {
       if (this.coupons[i].code === this.discountCode) {
@@ -90,12 +108,18 @@ export class YourOrderPage implements OnInit {
         this.commonService.presentAlert('Success', 'Your discount has been applied.');
         this.discountType = this.coupons[i].type;
         this.discount = this.coupons[i].discount;
+        this.menuService.order.discount = this.discount;
+        this.menuService.order.discountType = this.discountType;
+        this.storage.set(environment.storage.order, this.menuService.order);
         this.calcPrice();
       }
     });
     if ( ! found) {
       this.discount = 0;
       this.discountType = '';
+      this.menuService.order.discount = this.discount;
+      this.menuService.order.discountType = this.discountType;
+      await this.storage.set(environment.storage.order, this.menuService.order);
       await this.calcPrice();
       await this.commonService.presentAlert('We’re Sorry', 'Your discount code has expired or is invalid.');
       return;
@@ -105,8 +129,8 @@ export class YourOrderPage implements OnInit {
   async delete(index) {
     Object.keys(this.menuService.order.items).forEach(i => {
       if (Number(i) === index) {
-        this.menuService.order.totalPrice -= this.menuService.order.items[i].price;
-        this.menuService.order.totalCount -= this.menuService.order.items[i].count;
+        this.menuService.order.totalPrice -= this.menuService.order.items[i].price * this.menuService.order.items[i].quantity;
+        this.menuService.order.totalCount -= this.menuService.order.items[i].quantity;
       }
     });
     const items: Array<Item> = [];

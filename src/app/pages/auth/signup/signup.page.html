@@ -1,6 +1,6 @@
+<app-auth-header [backGroundColor]="serverConfig.baseColors.pistachio" [signUp]="title"
+                 backUrl="/login"></app-auth-header>
 <ion-content>
-    <app-auth-header [backGroundColor]="serverConfig.baseColors.pistachio" [signUp]="title"
-                     backUrl="/login"></app-auth-header>
     <div class="container d-flex flex-column">
         <form (ngSubmit)="signup()" [formGroup]="form" class="mt-35 px-20">
             <app-text-input [(ngModel)]="user.firstName" formControlName="firstName" placeholder="First Name"

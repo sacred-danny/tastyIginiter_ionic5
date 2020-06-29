@@ -22,12 +22,14 @@ declare var Stripe: any;
 export class CheckoutPage implements OnInit {
 
   backGroundColor = environment.baseColors.burningOrange;
-  isSelected = 'delivery';
+  isSelected = '';
   pickupTimes: Array<CheckOutTime>;
   deliveryTimes: Array<CheckOutTime>;
   savedCards: any;
   serverConfig = environment;
   isDeleting = false;
+  offerDelivery = false;
+  offerCollection = false;
   comment = '';
 
   stripe = Stripe(environment.stripeApiKey);
@@ -75,9 +77,26 @@ export class CheckoutPage implements OnInit {
     try {
       const checkOutTime = await this.menuService.getCheckOutTime({ user: this.authService.user }).toPromise();
       this.deliveryTimes = checkOutTime.delivery;
+      this.offerDelivery = checkOutTime.offerDelivery;
+      this.offerCollection = checkOutTime.offerCollection;
       this.pickupTimes = checkOutTime.pickup;
       this.clientSecret = checkOutTime.clientSecret;
       this.savedCards = checkOutTime.savedCards;
+      if (this.offerDelivery === true && this.offerCollection === true) {
+        this.isSelected = 'delivery';
+      } else if (this.offerDelivery === true && this.offerCollection === false) {
+        this.isSelected = 'delivery';
+      } else if (this.offerDelivery === false && this.offerCollection === true) {
+        this.isSelected = 'collection';
+      } else {
+        this.isSelected = '';
+      }
+
+      if (this.isSelected === '') {
+        await this.commonService.presentAlert('Warning', 'This store is not currently taking orders.');
+        await this.navController.pop();
+      }
+
       Object.keys(this.savedCards.data).forEach(i => {
         this.savedCards.data[i] = { ...this.savedCards.data[i], isChecked: false };
         if (Number(i) === 0) {
@@ -85,8 +104,12 @@ export class CheckoutPage implements OnInit {
           this.paymentMethodId = this.savedCards.data[i].id;
         }
       });
-      this.setTime(this.deliveryTime, this.deliveryTimes, 0);
-      this.setTime(this.pickupTime, this.pickupTimes, 0);
+      if (this.deliveryTimes.length > 0) {
+        this.setTime(this.deliveryTime, this.deliveryTimes, 0);
+      }
+      if (this.pickupTimes.length > 0) {
+        this.setTime(this.pickupTime, this.pickupTimes, 0);
+      }
       await this.setupStripe();
     } catch (e) {
       await this.navController.pop();
@@ -237,18 +260,48 @@ export class CheckoutPage implements OnInit {
     }
   }
 
-  delivery() {
+  async delivery() {
     this.isSelected = 'delivery';
+    await this.calcPrice();
   }
 
-  pickup() {
+  async pickup() {
     this.isSelected = 'collection';
+    await this.calcPrice();
+  }
+
+  async calcPrice() {
+    let delivery = 0;
+    if (this.isSelected === 'delivery') {
+      delivery = this.menuService.order.delivery;
+    }
+    if (this.menuService.order.discountType === 'P') {
+      this.menuService.order.currentPrice = this.menuService.order.totalPrice / 100 * (100 - this.menuService.order.discount) + delivery;
+    } else {
+      if (this.menuService.order.discountType === 'F') {
+        if (this.menuService.order.totalPrice - this.menuService.order.discount + delivery < 0) {
+          const discount = this.menuService.order.discount;
+          await this.commonService.presentAlert('Warning', 'Your discount code can not be applied on orders below £' + discount);
+          this.menuService.order.discount = 0;
+          return;
+        } else {
+          this.menuService.order.currentPrice = this.menuService.order.totalPrice - this.menuService.order.discount + delivery;
+        }
+      } else {
+        if (this.menuService.order.totalPrice - this.menuService.order.discount + delivery > 0) {
+          this.menuService.order.currentPrice = this.menuService.order.totalPrice - this.menuService.order.discount + delivery;
+        } else {
+          this.menuService.order.currentPrice = 0;
+        }
+      }
+    }
   }
 
   async verifyPayment() {
     let payload = {
       customerId: this.authService.user.id,
       totalItems: this.menuService.order.totalCount,
+      locationId: this.authService.user.locationId,
       comment: this.comment,
       payment: 'stripe',
       orderType: this.isSelected,
@@ -269,9 +322,11 @@ export class CheckoutPage implements OnInit {
       if (result) {
         this.menuService.order = {
           totalCount: 0,
-          delivery: 0,
           currentPrice: 0,
           totalPrice: 0,
+          delivery: 0,
+          discount: 0,
+          discountType: '',
           items: [],
         };
         await this.storage.set(environment.storage.order, this.menuService.order);
@@ -291,6 +346,10 @@ export class CheckoutPage implements OnInit {
   }
 
   async pay() {
+    if (this.isSelected === 'delivery' && this.authService.user.deliveryAddress === '') {
+      await this.commonService.presentAlert('Warning', 'You have to set the delivery address');
+      return;
+    }
     if (this.card._empty && this.paymentMethodId !== '') {
       console.log('Payment Method is already selected');
     } else {
@@ -299,6 +358,7 @@ export class CheckoutPage implements OnInit {
         return;
       }
     }
+
     const loading = await this.commonService.showLoading('Please wait...');
     try {
       const paymentIntent = await this.menuService.makePaymentIntent({
@@ -333,6 +393,10 @@ export class CheckoutPage implements OnInit {
     } finally {
       await loading.dismiss();
     }
+  }
+
+  async setDeliveryAddress() {
+    await this.router.navigate([ '/set-address' ]);
   }
 
 }

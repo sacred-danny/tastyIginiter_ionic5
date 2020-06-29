@@ -2,7 +2,7 @@
                   subTitle="Checkout"></app-order-header>
 <div #main class="main shadow bg-color-white mx-15 p-20">
     <div class="row mx-0">
-        <div class="mode">
+        <div class="mode" *ngIf="this.offerDelivery === true && this.offerCollection === true">
             <button (click)="delivery()" [class.active]="isSelected === 'delivery'" class="btn delivery p-0">
                 <span class="item-align-center">DELIVERY</span>
             </button>
@@ -10,12 +10,22 @@
                 <span class="item-align-center">PICK-UP</span>
             </button>
         </div>
+        <ng-container *ngIf="this.offerDelivery === true && this.offerCollection === false">
+            <button (click)="delivery()" style="border-radius: 15px;" [class.active]="isSelected === 'delivery'" class="btn delivery p-0">
+                <span class="item-align-center">DELIVERY</span>
+            </button>
+        </ng-container>
+        <ng-container *ngIf="this.offerDelivery === false && this.offerCollection === true">
+            <button (click)="pickup()" style="border-radius: 15px;" [class.active]="isSelected === 'collection'" class="btn pickup p-0">
+                <span class="item-align-center">PICK-UP</span>
+            </button>
+        </ng-container>
     </div>
     <div *ngIf="isSelected === 'delivery'" class="row mx-0 mt-15">
         <div class="w-100 row m-0">
             <p class="font-15 color-french-gray text-left mb-5">Select Delivery Day / Time</p>
         </div>
-        <div *ngIf="deliveryTimes !== undefined" class="w-100 row m-0">
+        <div *ngIf="deliveryTimes.length > 0" class="w-100 row m-0">
             <ion-select (ionChange)="deliveryDateChanged()" [(ngModel)]="deliveryTime.displayDate"
                         [selectedText]="deliveryTime.displayDate"
                         class="mr-10" multiple="false" name="selectCode"
@@ -38,7 +48,7 @@
         <div class="w-100 row m-0">
             <p class="font-15 color-french-gray text-left mb-5">Select Pickup Day / Time</p>
         </div>
-        <div *ngIf="pickupTimes !== undefined" class="w-100 row m-0">
+        <div *ngIf="pickupTimes.length > 0" class="w-100 row m-0">
             <ion-select (ionChange)="pickupDateChanged()" [(ngModel)]="pickupTime.displayDate"
                         [selectedText]="pickupTime.displayDate"
                         class="mr-10" multiple="false" name="selectCode"
@@ -61,7 +71,7 @@
         <div class="w-100 row m-0">
             <h2 class="font-15 font-weight-bold color-shark text-left mb-5">DELIVERY ADDRESS</h2>
         </div>
-        <div class="w-100 row m-0 p-10 delivery-address">
+        <div class="w-100 row m-0 p-10 delivery-address" *ngIf="authService.user.deliveryAddress !== ''">
             <div class="w-100 row m-0">
                 <h3 class="font-13 color-burning-orange text-left mb-5">ADDRESS #1</h3>
             </div>
@@ -69,12 +79,16 @@
                 <p class="font-17 color-shark text-left mb-5">{{authService.user.deliveryAddress}}</p>
             </div>
         </div>
+        <div class="m-0 p-5 delivery-address" *ngIf="authService.user.deliveryAddress === ''">
+            <p class="font-15 color-burning-orange text-left m-0" (click)="setDeliveryAddress()">ADD ADDRESS</p>
+        </div>
     </div>
     <div class="row mx-0 mt-15">
-        <ion-textarea [(ngModel)]="comment" [placeholder]="isSelected === 'delivery' ? 'Add Delivery Note' : 'Add Pick-Up Note'"></ion-textarea>
+        <ion-textarea [(ngModel)]="comment" *ngIf="isSelected === 'delivery'" placeholder="Add Delivery Note"></ion-textarea>
+        <ion-textarea [(ngModel)]="comment" *ngIf="isSelected === 'collection'" placeholder="Add Pick-Up Note"></ion-textarea>
     </div>
     <div class="row mx-0 mt-15">
-        <div class="w-100 row m-0">
+        <div class="w-100 row m-0" *ngIf="isSelected !== ''">
             <h2 class="font-15 font-weight-bold color-shark text-left mb-5">PAYMENT</h2>
         </div>
         <div *ngIf="this.savedCards !== undefined" class="w-100 row mx-0 mb-10">

@@ -11,11 +11,11 @@
     </ion-refresher>
     <div class="container d-flex flex-column p-0">
         <div class="deliveryOpen mt-15 px-15">
-            <div class="delivery float-left" *ngIf="this.menuService.menu.delivery !== ''">
+            <div class="delivery float-left" *ngIf="this.menuService.menu.offerDelivery">
                 <h2 class="font-15 color-shark font-weight-bold text-left mb-0">Delivery</h2>
                 <p class="font-15 color-shark text-left">{{this.menuService.menu.delivery}}</p>
             </div>
-            <div class="delivery float-left" *ngIf="this.menuService.menu.delivery === ''">
+            <div class="delivery float-left" *ngIf="this.menuService.menu.offerCollection === true && this.menuService.menu.offerDelivery === false">
                 <h2 class="font-15 color-shark font-weight-bold text-left mb-0">Collection Only</h2>
             </div>
             <div class="open float-right">
@@ -65,7 +65,7 @@
                                 <h2 class="font-15 color-shark font-weight-bold mt-5 mb-0 text-overflow">{{menu.menuName}}</h2>
                             </div>
                             <div class="description">
-                                <p class="font-12 color-french-gray mt-5 mb-0">{{menu.menuDescription}}</p>
+                                <p class="font-14 font-weight-bold color-french-gray mt-5 mb-0">{{menu.menuDescription}}</p>
                             </div>
                         </div>
                         <h2 class="price font-15 color-burning-orange font-weight-bold text-overflow m-0">{{menu.menuPrice | currency:'GBP'}}</h2>

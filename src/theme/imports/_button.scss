@@ -14,6 +14,7 @@
   &.btn-outline-burning-organge {
     color: white;
     background: $burning-orange;
+    border: solid 2px white;
     border-radius: 8px;
 
     &:focus, &:active, &:hover {
@@ -25,8 +26,7 @@
   &.btn-outline-burning-organge-invert {
     color: $burning-orange;
     background: white;
-    border: solid 2px;
-    border-color: $burning-orange;
+    border: solid 2px $burning-orange;
     border-radius: 8px;
 
     &:focus, &:active, &:hover {

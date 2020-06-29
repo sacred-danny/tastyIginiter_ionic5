@@ -7,8 +7,9 @@ import { Storage } from '@ionic/storage';
 
 import { environment } from '../../../environments/environment';
 import { Menu, Order } from '../models/menu';
+import { Location } from '../models/auth';
 import { CommonService } from './common.service';
-import { NavController } from '@ionic/angular';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,6 @@ export class MenuService {
     public http: HttpClient,
     public commonService: CommonService,
     public storage: Storage,
-    public navController: NavController
   ) {
   }
 
@@ -31,7 +31,11 @@ export class MenuService {
       if (val === null) {
         this.order = {
           totalCount: 0,
+          currentPrice: 0,
           totalPrice: 0,
+          delivery: 0,
+          discount: 0,
+          discountType: '',
           items: [],
         };
       } else {

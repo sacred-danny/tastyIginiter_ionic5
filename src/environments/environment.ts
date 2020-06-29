@@ -26,6 +26,7 @@ export const environment = {
     token: 'token',
     user: 'user',
     order: 'order',
+    locations: 'locations',
     notificationToken: 'notificationToken'
   },
   baseColors: {

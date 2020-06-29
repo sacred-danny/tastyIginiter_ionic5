@@ -22,9 +22,17 @@ export interface PrepareLocationRequest {
   postcode: string;
 }
 
+export interface Location {
+  locationId: string;
+  locationName: string;
+  offerDelivery: boolean;
+  offerCollection: boolean;
+}
+
 export interface LoginResponse {
   token: string;
   user: User;
+  locations: Array<Location>;
 }
 
 export interface User {

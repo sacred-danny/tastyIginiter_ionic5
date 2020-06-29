@@ -1,32 +1,32 @@
 @import "../../../theme";
-ion-content {
-  .total {
-    height: 175px;
-    border-radius: 10px;
-    background: white;
-    margin-top: -130px;
+.total {
+  height: 175px;
+  border-radius: 10px;
+  background: white;
+  margin-top: -130px;
 
-    div {
-      padding: 0 15px 10px 15px;
-      display: flex;
+  div {
+    padding: 0 15px 10px 15px;
+    display: flex;
 
-      .right {
-        position: absolute;
-        right: 30px;
-      }
-
-      &:first-child {
-        padding-top: 15px;
-      }
+    .right {
+      position: absolute;
+      right: 30px;
     }
 
-    .div-total {
-      height: 50px;
-      display: flex;
-      border-top: solid 2px $french-gray;
+    &:first-child {
+      padding-top: 15px;
     }
   }
 
+  .div-total {
+    height: 50px;
+    display: flex;
+    border-top: solid 2px $french-gray;
+  }
+}
+
+ion-content {
   .discount-code {
     display: flex;
     height: 40px;
@@ -52,7 +52,7 @@ ion-content {
   }
 
   .container {
-    height: calc(100% - 440px);
+    height: calc(100% - 155px);
     overflow: auto;
 
     ion-list {
@@ -75,16 +75,16 @@ ion-content {
       }
     }
   }
+}
 
-  .bottom {
-    height: 100px;
-    width: 100%;
-    position: absolute;
-    bottom: 0px;
+.bottom {
+  height: 100px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
 
-    .check-out {
-      height: 50px;
-      border-radius: 10px;
-    }
+  .check-out {
+    height: 50px;
+    border-radius: 10px;
   }
 }

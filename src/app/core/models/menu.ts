@@ -93,6 +93,8 @@ export interface Menu {
   categoryDetails: Array<CategoryDetail>;
   deliveryAmount: number;
   deliveryTotal: number;
+  offerDelivery: boolean;
+  offerCollection: boolean;
   coupons: Array<Coupon>;
 }
 
@@ -123,6 +125,8 @@ export interface Order {
   totalPrice: number;
   totalCount: number;
   delivery?: number;
+  discount: number;
+  discountType: string;
   currentPrice?: number;
   items: Array<Item>;
 }
@@ -140,5 +144,3 @@ export interface SelectTime {
   orderTime: string;
   showTime: string;
 }
-
-

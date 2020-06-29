@@ -162,6 +162,11 @@ export class MenuDeatilPage implements OnInit {
   }
 
   async addOrder() {
+
+    if (this.menuService.menu.offerDelivery === false && this.menuService.menu.offerCollection === false) {
+      await this.commonService.presentAlert('Warning', 'This store is not currently taking orders.');
+      return;
+    }
     if (this.isOrder === false) {
       this.isOrder = true;
       this.menuService.order.totalCount += this.count;

@@ -11,8 +11,9 @@ import { MenuService } from './menu.service';
 import { parseToPayload } from '../utils/dto.util';
 import { anonParam } from '../utils/api.util';
 
-import { LoginRequest, LoginResponse, PrepareLocationRequest, SignUpRequest, User } from '../models/auth';
+import { LoginRequest, LoginResponse, PrepareLocationRequest, SignUpRequest, User, Location } from '../models/auth';
 import { Observable } from 'rxjs';
+import { Menu } from '../models/menu';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class AuthService {
 
   user: User;
   token: string;
+  locations: Array<Location>;
 
   constructor(
     public http: HttpClient,
@@ -31,6 +33,7 @@ export class AuthService {
     public fb: Facebook,
     public platform: Platform
   ) {
+    this.locations = [];
   }
 
   getToken(): Promise<string> {
@@ -39,6 +42,10 @@ export class AuthService {
 
   getUser(): Promise<User> {
     return this.storage.get(environment.storage.user);
+  }
+
+  getLocations(): Promise<Array<Location>> {
+    return this.storage.get(environment.storage.locations);
   }
 
   async isAuthenticated(): Promise<boolean> {
@@ -76,9 +83,7 @@ export class AuthService {
       } else if (this.platform.is('android')) {
         deviceType = 'android';
       }
-      if (fcmToken) {
-        payload = { ...payload, fcmToken, deviceType };
-      }
+      payload = { ...payload, fcmToken, deviceType };
       const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signIn',
         parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;
@@ -92,6 +97,8 @@ export class AuthService {
         currentPrice: 0,
         totalPrice: 0,
         delivery: 0,
+        discount: 0,
+        discountType: '',
         items: [],
       };
       await this.storage.set(environment.storage.order, this.menuService.order);
@@ -110,9 +117,7 @@ export class AuthService {
       } else if (this.platform.is('android')) {
         deviceType = 'android';
       }
-      if (fcmToken) {
-        payload = { ...payload, fcmToken, deviceType };
-      }
+      payload = { ...payload, fcmToken, deviceType };
       const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signUp',
         parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;
@@ -125,6 +130,9 @@ export class AuthService {
         totalCount: 0,
         currentPrice: 0,
         totalPrice: 0,
+        delivery: 0,
+        discount: 0,
+        discountType: '',
         items: [],
       };
       await this.storage.set(environment.storage.order, this.menuService.order);
@@ -149,7 +157,7 @@ export class AuthService {
     }
   }
 
-  async setLocation(beforePayload: PrepareLocationRequest) {
+  async setAddress(beforePayload: PrepareLocationRequest) {
     try {
       const url = 'https://api.getAddress.io/find/' + beforePayload.postcode + '/' + beforePayload.houseName +
         '?expand=true&api-key=' + environment.addressKey;
@@ -165,7 +173,7 @@ export class AuthService {
           countryId: (addressInfo.addresses[0].country === 'England') ? '222' : addressInfo.addresses[0].country
         }
       };
-      const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/setLocation', payload).toPromise();
+      const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/setAddress', payload).toPromise();
       this.user = res.user;
       this.token = res.token;
       // save token to the storage
@@ -173,6 +181,28 @@ export class AuthService {
       await this.storage.set(environment.storage.user, res.user);
       return res;
 
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  async setLocation(locationId) {
+    try {
+      const payload = {
+        user: this.user,
+        locationId
+      };
+      const res = await this.http.post<Location>(environment.apiURL + '/auth/setLocation', payload).toPromise();
+      await this.storage.set(environment.storage.locations, res);
+      return res;
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  getLocation(): Observable<Array<Location>> {
+    try {
+      return this.http.get<Array<Location>>(environment.apiURL + '/auth/getLocation');
     } catch (e) {
       throw e;
     }

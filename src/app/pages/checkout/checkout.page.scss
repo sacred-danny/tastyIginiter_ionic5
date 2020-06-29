@@ -22,49 +22,49 @@
     border: solid 3px $burning-orange;
     border-radius: 10px;
     width: 184px;
+  }
 
-    .delivery {
-      width: 92px;
-      height: 28px;
-      border-radius: 0px;
-      border-top-left-radius: 5px;
-      border-bottom-left-radius: 5px;
-      background: white;
+  .delivery {
+    width: 92px;
+    height: 28px;
+    border-radius: 0px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background: white;
 
-      span {
-        font-size: 15px;
-        color: $burning-orange;
-        height: 100%;
-        position: relative;
-      }
+    span {
+      font-size: 15px;
+      color: $burning-orange;
+      height: 100%;
+      position: relative;
     }
+  }
 
-    .pickup {
-      width: 92px;
-      height: 28px;
-      border-radius: 0px;
-      border-top-right-radius: 5px;
-      border-bottom-right-radius: 5px;
-      background: white;
+  .pickup {
+    width: 92px;
+    height: 28px;
+    border-radius: 0px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: white;
 
-      span {
-        font-size: 15px;
-        color: $burning-orange;
-        height: 100%;
-        position: relative;
-      }
+    span {
+      font-size: 15px;
+      color: $burning-orange;
+      height: 100%;
+      position: relative;
     }
+  }
 
-    .active {
-      z-index: 1000;
-      background: $burning-orange;
+  .active {
+    z-index: 1000;
+    background: $burning-orange;
 
-      span {
-        font-size: 15px;
-        color: white;
-        height: 100%;
-        position: relative;
-      }
+    span {
+      font-size: 15px;
+      color: white;
+      height: 100%;
+      position: relative;
     }
   }
 
