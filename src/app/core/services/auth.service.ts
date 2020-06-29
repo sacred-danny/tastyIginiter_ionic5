@@ -83,7 +83,9 @@ export class AuthService {
       } else if (this.platform.is('android')) {
         deviceType = 'android';
       }
-      payload = { ...payload, fcmToken, deviceType };
+      if (fcmToken) {
+        payload = { ...payload, fcmToken, deviceType };
+      }
       const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signIn',
         parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;
@@ -117,7 +119,9 @@ export class AuthService {
       } else if (this.platform.is('android')) {
         deviceType = 'android';
       }
-      payload = { ...payload, fcmToken, deviceType };
+      if (fcmToken) {
+        payload = { ...payload, fcmToken, deviceType };
+      }
       const res: LoginResponse = await this.http.post<LoginResponse>(environment.apiURL + '/auth/signUp',
         parseToPayload(payload), { params: anonParam() }).toPromise();
       this.user = res.user;
