@@ -73,9 +73,11 @@ export class MenuPage implements OnInit {
   async ionViewWillEnter() {
     this.commonService.activeIcon(0);
     this.categoryPositions = [];
-    for (let i = 0; i < this.categoryDetails.length; i ++) {
-      this.categoryPositions.push(document.getElementById('category_' + i).offsetTop - 20);
-    }
+    setTimeout(() => {
+      for (let i = 0; i < this.categoryDetails.length; i ++) {
+        this.categoryPositions.push(document.getElementById('category_' + i).offsetTop - 20);
+      }
+    }, 500);
   }
 
   doRefresh() {
@@ -94,9 +96,11 @@ export class MenuPage implements OnInit {
         }
         this.setData();
         this.categoryPositions = [];
-        for (let i = 0; i < this.categoryDetails.length; i ++) {
-          this.categoryPositions.push(document.getElementById('category_' + i).offsetTop - 20);
-        }
+        setTimeout(() => {
+          for (let i = 0; i < this.categoryDetails.length; i ++) {
+            this.categoryPositions.push(document.getElementById('category_' + i).offsetTop - 20);
+          }
+        }, 500);
       } catch (e) {
         await this.navController.pop();
         if (e.status === 500) {
