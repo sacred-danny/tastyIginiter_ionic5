@@ -17,11 +17,11 @@
                 </div>
                 <div class="discount">
                     <p class="font-17 font-weight-light color-shark m-0 left">Date</p>
-                    <p class="font-17 color-french-gray m-0 right">{{order.date}}</p>
+                    <p class="font-17 color-approx m-0 right">{{order.date}}</p>
                 </div>
                 <div class="delivery">
                     <p class="font-17 font-weight-light color-shark m-0 left">Total</p>
-                    <p class="font-17 color-french-gray m-0 right">{{order.orderTotal | currency:'GBP'}}</p>
+                    <p class="font-17 color-approx m-0 right">{{order.orderTotal | currency:'GBP'}}</p>
                 </div>
                 <div class="div-total py-10 item-align-center" [class.complete-total]="order.statusName.indexOf('Complete') >= 0"
                      [class.other-total]="order.statusName.indexOf('Complete') < 0">

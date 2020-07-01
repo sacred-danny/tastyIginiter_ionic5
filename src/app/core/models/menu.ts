@@ -116,6 +116,7 @@ export interface Item {
   extras: Array<ExtraOption>;
   extrasTitle: string;
   price: number;
+  itemPrice: number;
   subtotal: number;
   comment: string;
   photo: string;

@@ -25,7 +25,7 @@
   .main-avatar {
     height: 100px;
     display: flex;
-    border-bottom: solid 1px $french-gray;
+    border-bottom: solid 1px $approx;
 
     .image {
       width: 60px;
@@ -52,7 +52,7 @@
   background: white;
 
   .address {
-    border-bottom: solid 1px $french-gray;
+    border-bottom: solid 1px $approx;
     position: relative;
 
     span {
@@ -67,7 +67,7 @@
   }
 
   ion-item {
-    --border-color: #C8C7CC;
+    --border-color: #5F5F5F;
 
     ion-icon {
       width: 40px;

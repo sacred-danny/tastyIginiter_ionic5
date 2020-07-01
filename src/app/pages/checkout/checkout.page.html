@@ -23,7 +23,7 @@
     </div>
     <div *ngIf="isSelected === 'delivery'" class="row mx-0 mt-15">
         <div class="w-100 row m-0">
-            <p class="font-15 color-french-gray text-left mb-5">Select Delivery Day / Time</p>
+            <p class="font-15 color-approx text-left mb-5">Select Delivery Day / Time</p>
         </div>
         <div *ngIf="deliveryTimes.length > 0" class="w-100 row m-0">
             <ion-select (ionChange)="deliveryDateChanged()" [(ngModel)]="deliveryTime.displayDate"
@@ -46,7 +46,7 @@
     </div>
     <div *ngIf="isSelected === 'collection'" class="row mx-0 mt-15">
         <div class="w-100 row m-0">
-            <p class="font-15 color-french-gray text-left mb-5">Select Pickup Day / Time</p>
+            <p class="font-15 color-approx text-left mb-5">Select Pickup Day / Time</p>
         </div>
         <div *ngIf="pickupTimes.length > 0" class="w-100 row m-0">
             <ion-select (ionChange)="pickupDateChanged()" [(ngModel)]="pickupTime.displayDate"

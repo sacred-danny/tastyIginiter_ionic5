@@ -3,15 +3,15 @@
 <div class="total shadow mx-15" [style]="menuService.menu.offerDelivery ? 'height: 175px;' : 'height: 135px;'">
     <div class="sub-total">
         <p class="font-17 font-weight-light color-shark m-0 left">Subtotal</p>
-        <p class="font-17 color-french-gray m-0 right">{{menuService.order.totalPrice | currency:'GBP'}}</p>
+        <p class="font-17 color-approx m-0 right">{{menuService.order.totalPrice | currency:'GBP'}}</p>
     </div>
     <div class="discount">
         <p class="font-17 font-weight-light color-shark m-0 left">Discount</p>
-        <p class="font-17 color-french-gray m-0 right">{{discountType === 'P' ? discount + '%' : discount | currency:'GBP'}}</p>
+        <p class="font-17 color-approx m-0 right">{{discountType === 'P' ? discount + '%' : discount | currency:'GBP'}}</p>
     </div>
     <div class="delivery" *ngIf="menuService.menu.offerDelivery">
         <p class="font-17 font-weight-light color-shark m-0 left">Delivery</p>
-        <p class="font-17 color-french-gray m-0 right">{{delivery === 0 ? 'free' : delivery | currency: 'GBP'}}</p>
+        <p class="font-17 color-approx m-0 right">{{delivery === 0 ? 'free' : delivery | currency: 'GBP'}}</p>
     </div>
     <div class="div-total py-10">
         <h3 class="font-24 font-weight-bold color-shark m-0 left p-0">Total</h3>
@@ -35,8 +35,11 @@
                     <div class="description">
                         <h2 class="font-15 color-shark font-weight-bold mt-10 mb-0 text-overflow m-0">{{item.quantity}}
                             X {{item.name}}</h2>
-                        <p class="font-12 color-french-gray my-5 text-overflow m-0">{{item.extrasTitle}}</p>
-                        <h3 class="font-15 color-burning-orange font-weight-bold text-overflow mb-10">{{item.price | currency:'GBP'}}</h3>
+                        <p class="font-12 color-approx my-5 text-overflow m-0">{{item.extrasTitle}}</p>
+                        <div class="d-flex mb-10">
+                            <h3 class="font-15 color-burning-orange font-weight-bold text-decoration-middle-line">{{item.price | currency:'GBP'}}</h3>
+                            <h3 class="font-15 color-burning-orange font-weight-bold text-overflow">&nbsp;->&nbsp;{{item.itemPrice | currency:'GBP'}}</h3>
+                        </div>
                     </div>
                     <ion-icon name="trash" [size]="30" (click)="delete(i)"></ion-icon>
                 </ion-item>

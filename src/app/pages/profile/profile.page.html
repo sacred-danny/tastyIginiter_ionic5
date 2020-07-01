@@ -9,7 +9,7 @@
         </div>
         <div class="user-info">
             <h2 class="font-17 color-shark font-weight-bold mt-10 mb-0 text-overflow">{{authService.user.firstName + ' ' + authService.user.lastName}}</h2>
-            <p class="font-15 color-french-gray mt-5 text-overflow">{{authService.user.email}}</p>
+            <p class="font-15 color-approx mt-5 text-overflow">{{authService.user.email}}</p>
         </div>
     </div>
     <div class="bottom-sign ion-justify-content-center ion-align-items-center">
@@ -25,18 +25,18 @@
                       [style.font-size]="profileItems[0].icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
             <div>
                 <h3 class="font-15 color-shark font-weight-bold mb-5 text-overflow">{{profileItems[0].title}}</h3>
-                <p class="font-15 color-french-gray mb-5 text-overflow">{{profileItems[0].message}}</p>
+                <p class="font-15 color-approx mb-5 text-overflow">{{profileItems[0].message}}</p>
             </div>
-            <span class="font-20 color-french-gray font-weight-light"> > </span>
+            <span class="font-20 color-approx font-weight-light"> > </span>
         </ion-item>
         <ion-item class="mt-5" (click)="goSetLocation()">
             <ion-icon [name]="profileItems[1].icon" [style.color]="profileItems[1].color"
                       [style.font-size]="profileItems[1].icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
             <div>
                 <h3 class="font-15 color-shark font-weight-bold mb-5 text-overflow">{{profileItems[1].title}}</h3>
-                <p class="font-15 color-french-gray mb-5 text-overflow">{{profileItems[1].message}}</p>
+                <p class="font-15 color-approx mb-5 text-overflow">{{profileItems[1].message}}</p>
             </div>
-            <span class="font-20 color-french-gray font-weight-light"> > </span>
+            <span class="font-20 color-approx font-weight-light"> > </span>
         </ion-item>
         <ng-container *ngFor="let item of profileItems; let i = index;">
             <ion-item *ngIf="item.title === 'Push Notifications'">
@@ -50,7 +50,7 @@
                 <ion-icon [name]="item.icon" [style.color]="item.color"
                           [style.font-size]="item.icon === 'help-circle' ? '35px' : '30px'"></ion-icon>
                 <h3 class="font-15 color-shark font-weight-bold mb-0 text-overflow">{{item.title}}</h3>
-                <span class="font-20 color-french-gray font-weight-light"> > </span>
+                <span class="font-20 color-approx font-weight-light"> > </span>
             </ion-item>
         </ng-container>
     </ion-list>

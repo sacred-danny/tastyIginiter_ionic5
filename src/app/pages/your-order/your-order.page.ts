@@ -129,7 +129,7 @@ export class YourOrderPage implements OnInit {
   async delete(index) {
     Object.keys(this.menuService.order.items).forEach(i => {
       if (Number(i) === index) {
-        this.menuService.order.totalPrice -= this.menuService.order.items[i].price * this.menuService.order.items[i].quantity;
+        this.menuService.order.totalPrice -= this.menuService.order.items[i].itemPrice * this.menuService.order.items[i].quantity;
         this.menuService.order.totalCount -= this.menuService.order.items[i].quantity;
       }
     });

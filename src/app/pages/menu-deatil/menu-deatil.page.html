@@ -11,7 +11,7 @@
             <p class="font-30 color-shark font-weight-bold text-left mb-0">{{menuDetail.menu.menuName}}</p>
         </div>
         <div class="mt-10">
-            <p class="font-15 color-french-gray font-weight-light text-left mb-0">{{menuDetail.menu.menuDescription}}</p>
+            <p class="font-15 color-approx font-weight-light text-left mb-0">{{menuDetail.menu.menuDescription}}</p>
         </div>
         <ng-container *ngFor="let option of menuDetail.options;">
             <div class="option-header mt-15 mb-15">
@@ -23,7 +23,7 @@
                               (click)="radioClick(item, option.optionValues)">
                         <ion-label class="m-0">
                             <h2 class="font-15 color-shark text-left mb-0 text-overflow">{{item.value}}</h2>
-                            <h2 class="font-14 color-french-gray text-left mb-0 ml-10 text-overflow">
+                            <h2 class="font-14 color-approx text-left mb-0 ml-10 text-overflow">
                                 +{{item.price | currency:'GBP'}}</h2>
                             <ion-checkbox color="light" class="m-0"
                                           [checked]="item.isChecked === true"></ion-checkbox>
@@ -36,7 +36,7 @@
                     <ion-item *ngFor="let item of option.optionValues" (click)="checkboxClick(item)">
                         <ion-label class="m-0">
                             <h2 class="font-15 color-shark text-left mb-0 text-overflow">{{item.value}}</h2>
-                            <h2 class="font-14 color-french-gray text-left mb-0 ml-10 text-overflow">
+                            <h2 class="font-14 color-approx text-left mb-0 ml-10 text-overflow">
                                 +{{item.price | currency:'GBP'}}</h2>
                             <ion-checkbox color="light" class="m-0"
                                           [checked]="item.isChecked === true"></ion-checkbox>

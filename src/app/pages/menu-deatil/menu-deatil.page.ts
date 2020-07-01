@@ -176,6 +176,7 @@ export class MenuDeatilPage implements OnInit {
         menuId: this.menuDetail.menu.menuId,
         quantity: this.count,
         price: this.menuDetail.menu.menuPrice,
+        itemPrice: this.onePrice,
         subtotal: this.price,
         comment: this.comment,
         photo: this.menuDetail.menu.menuImageUrl,

@@ -10,7 +10,7 @@
                             </ion-img>
                         </div>
                         <h3 class="font-15 color-shark font-weight-bold text-left text-overflow mt-5 mx-5 mb-0">{{favorite.menuName}}</h3>
-                        <p class="font-13 color-french-gray text-overflow mt-5 mx-5 mb-0">{{favorite.menuDescription}}</p>
+                        <p class="font-13 color-approx text-overflow mt-5 mx-5 mb-0">{{favorite.menuDescription}}</p>
                         <h3 class="font-15 color-shark font-weight-bold text-left ion-float-right mx-5 mt-10 mb-0">{{favorite.menuPrice | currency:'GBP'}}</h3>
                         <div (click)="removeFavorite(favorite)" class="icon">
                             <ion-icon [color]="favorite.isFavorite ? 'success' : 'dark'" name="star"></ion-icon>

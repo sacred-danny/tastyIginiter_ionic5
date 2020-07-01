@@ -138,6 +138,11 @@ ion-back-button {
   overflow: hidden;
 }
 
+.text-decoration-middle-line {
+  text-decoration: line-through;
+  text-decoration-color: black;
+}
+
 ion-item {
   --inner-padding-start: 0px;
   --inner-padding-end: 0px;
@@ -149,5 +154,5 @@ ion-item {
 .ios body {
   -webkit-font-smoothing: subpixel-antialiased !important;
   text-rendering: auto !important;
-  letter-spacing: -0.7px;
+  letter-spacing: 0.0px;
 }
