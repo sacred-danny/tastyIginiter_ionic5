@@ -13,15 +13,15 @@ ion-tab-button {
   --background-selected: #fc6c35;
   background: white;
   height: 80%;
-  border-top: solid 2px transparent;
+  //border-top: solid 2px transparent;
 
   ion-label {
     font-size: 13px;
   }
 
-  &:focus, &:active, &:hover {
-    border-top: solid 2px #fc6c35;
-  }
+  //&:focus, &:active, &:hover {
+  //  border-top: solid 2px #fc6c35;
+  //}
 }
 
 ion-fab {

@@ -81,6 +81,7 @@ export class MenuPage implements OnInit {
   doRefresh() {
     setTimeout(async () => {
       try {
+        this.commonService.activeIcon(0);
         await this.menuService.getOrder();
         const payload = {
           user: this.authService.user
@@ -105,6 +106,7 @@ export class MenuPage implements OnInit {
         }
       } finally {
         this.refresherRef.complete();
+        this.commonService.activeIcon(0);
       }
     }, 10);
   }

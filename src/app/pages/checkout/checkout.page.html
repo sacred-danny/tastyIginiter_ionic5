@@ -2,7 +2,7 @@
                   subTitle="Checkout"></app-order-header>
 <div #main class="main shadow bg-color-white mx-15 p-20">
     <div class="row mx-0">
-        <div class="mode" *ngIf="this.offerDelivery === true && this.offerCollection === true">
+        <div class="mode" *ngIf="offerDelivery === true && offerCollection === true">
             <button (click)="delivery()" [class.active]="isSelected === 'delivery'" class="btn delivery p-0">
                 <span class="item-align-center">DELIVERY</span>
             </button>
@@ -10,12 +10,12 @@
                 <span class="item-align-center">PICK-UP</span>
             </button>
         </div>
-        <ng-container *ngIf="this.offerDelivery === true && this.offerCollection === false">
+        <ng-container *ngIf="offerDelivery === true && offerCollection === false">
             <button (click)="delivery()" style="border-radius: 15px;" [class.active]="isSelected === 'delivery'" class="btn delivery p-0">
                 <span class="item-align-center">DELIVERY</span>
             </button>
         </ng-container>
-        <ng-container *ngIf="this.offerDelivery === false && this.offerCollection === true">
+        <ng-container *ngIf="offerDelivery === false && offerCollection === true">
             <button (click)="pickup()" style="border-radius: 15px;" [class.active]="isSelected === 'collection'" class="btn pickup p-0">
                 <span class="item-align-center">PICK-UP</span>
             </button>
@@ -91,9 +91,9 @@
         <div class="w-100 row m-0" *ngIf="isSelected !== ''">
             <h2 class="font-15 font-weight-bold color-shark text-left mb-5">PAYMENT</h2>
         </div>
-        <div *ngIf="this.savedCards !== undefined" class="w-100 row mx-0 mb-10">
+        <div *ngIf="savedCards !== undefined" class="w-100 row mx-0 mb-10">
             <ion-list class="row p-0 m-0 w-100">
-                <ion-item (click)="selectCard(item)" *ngFor="let item of this.savedCards.data;" class="w-100">
+                <ion-item (click)="selectCard(item)" *ngFor="let item of savedCards.data;" class="w-100">
                     <div class="row w-100 m-0 main">
                         <div>
                             <ion-img

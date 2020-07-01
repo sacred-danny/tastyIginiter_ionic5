@@ -53,6 +53,7 @@ export class FavoritePage implements OnInit {
     } finally {
       this.isLoading = false;
       await loading.dismiss();
+      this.commonService.activeIcon(1);
     }
   }
 

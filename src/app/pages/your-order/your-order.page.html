@@ -1,6 +1,6 @@
 <app-order-header [backGroundColor]="serverConfig.baseColors.burningOrange" title="Your Order"
                   close="Close"></app-order-header>
-<div class="total shadow mx-15" [style]="menuService.menu.offerDelivery ? 'height: 175px;' : 'height: 135px;'">
+<div class="total shadow mx-15" [style]="menuService.menu.offerDelivery === true ? 'height: 175px;' : 'height: 135px;'">
     <div class="sub-total">
         <p class="font-17 font-weight-light color-shark m-0 left">Subtotal</p>
         <p class="font-17 color-approx m-0 right">{{menuService.order.totalPrice | currency:'GBP'}}</p>
