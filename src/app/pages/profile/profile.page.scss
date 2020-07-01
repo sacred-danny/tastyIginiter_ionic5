@@ -64,10 +64,11 @@
 
   ion-list {
     width: calc(100% - 2px);
+    background: transparent;
   }
 
   ion-item {
-
+    --background: transparent;
     ion-icon {
       width: 40px;
       margin-right: 10px;
