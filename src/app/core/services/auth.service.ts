@@ -13,7 +13,6 @@ import { anonParam } from '../utils/api.util';
 
 import { LoginRequest, LoginResponse, PrepareLocationRequest, SignUpRequest, User, Location } from '../models/auth';
 import { Observable } from 'rxjs';
-import { Menu } from '../models/menu';
 
 @Injectable({
   providedIn: 'root'
@@ -99,6 +98,8 @@ export class AuthService {
         currentPrice: 0,
         totalPrice: 0,
         delivery: 0,
+        couponId: 0,
+        discountAmount: 0,
         discount: 0,
         discountType: '',
         items: [],
@@ -135,6 +136,8 @@ export class AuthService {
         currentPrice: 0,
         totalPrice: 0,
         delivery: 0,
+        couponId: 0,
+        discountAmount: 0,
         discount: 0,
         discountType: '',
         items: [],
@@ -213,6 +216,7 @@ export class AuthService {
   }
 
   async logout() {
+    await this.storage.clear();
     if (this.user.isFacebook === true) {
       this.fb.logout()
         .then(() => {
@@ -224,7 +228,6 @@ export class AuthService {
           this.router.navigate([ '/login' ], { replaceUrl: true });
         });
     } else {
-      await this.storage.clear();
       this.user = await this.getUser();
       await this.router.navigate([ '/login' ], { replaceUrl: true });
     }

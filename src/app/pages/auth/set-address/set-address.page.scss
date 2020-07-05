@@ -9,14 +9,11 @@
 
   .location {
     position: relative;
-    height: 100%;
-    width: 53%;
-    left: 23.5%;
-
-    ion-img {
-      width: 100%;
-      height: 100%;
-    }
+    height: 210px;
+    width: 180px;
+    left: calc(50% - 90px);
+    background: url(../../../../assets/images/location.png) 0 0/100% 100% no-repeat;
   }
+
 }
 

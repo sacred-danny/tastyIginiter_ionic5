@@ -132,7 +132,7 @@ export class MenuDeatilPage implements OnInit {
     }
     if (item.isChecked) {
       Object.keys(optionsValues).forEach(i => {
-        if (optionsValues[i].price !== item.price) {
+        if (optionsValues[i].optionValueId !== item.optionValueId) {
           optionsValues[i].isChecked = false;
         }
       });

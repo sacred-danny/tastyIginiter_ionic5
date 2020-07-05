@@ -306,6 +306,9 @@ export class CheckoutPage implements OnInit {
       payment: 'stripe',
       orderType: this.isSelected,
       orderTotal: this.menuService.order.currentPrice,
+      couponId: this.menuService.order.couponId,
+      discount: this.menuService.order.discount,
+      discountAmount: this.menuService.order.discountAmount.toFixed(2),
       statusId: 1,
       order: this.menuService.order
     };
@@ -325,6 +328,8 @@ export class CheckoutPage implements OnInit {
           currentPrice: 0,
           totalPrice: 0,
           delivery: 0,
+          couponId: 0,
+          discountAmount: 0,
           discount: 0,
           discountType: '',
           items: [],

@@ -32,7 +32,6 @@ export class MenuResolver implements Resolve<Menu> {
       if (this.menuService.menu.offerCollection === false && this.menuService.menu.offerDelivery === false) {
         await this.router.navigate([ '/set-location' ], { replaceUrl: true });
       }
-      this.commonService.activeIcon(0);
       resolve(res);
     });
   }

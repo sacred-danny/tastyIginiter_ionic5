@@ -86,11 +86,15 @@
       .main {
         .description {
           width: calc(100% - 55px);
+          height: 50px;
 
           p {
             line-height: 15px;
-            height: 45px;
-            white-space: pre-line;
+            height: 30px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
           }
         }
       }

@@ -37,8 +37,7 @@
                             X {{item.name}}</h2>
                         <p class="font-12 color-approx my-5 text-overflow m-0">{{item.extrasTitle}}</p>
                         <div class="d-flex mb-10">
-                            <h3 class="font-15 color-burning-orange font-weight-bold" [class.text-decoration-middle-line]="item.itemPrice !== item.price">{{item.price | currency:'GBP'}}</h3>
-                            <h3 *ngIf="item.itemPrice !== item.price" class="font-15 color-burning-orange font-weight-bold text-overflow">&nbsp;->&nbsp;{{item.itemPrice | currency:'GBP'}}</h3>
+                            <h3 class="font-15 color-burning-orange font-weight-bold text-overflow">{{item.itemPrice | currency:'GBP'}}</h3>
                         </div>
                     </div>
                     <ion-icon name="trash" [size]="30" (click)="delete(i)"></ion-icon>

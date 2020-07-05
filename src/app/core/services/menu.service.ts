@@ -34,6 +34,8 @@ export class MenuService {
           currentPrice: 0,
           totalPrice: 0,
           delivery: 0,
+          couponId: 0,
+          discountAmount: 0,
           discount: 0,
           discountType: '',
           items: [],

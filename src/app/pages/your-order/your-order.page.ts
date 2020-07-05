@@ -65,9 +65,11 @@ export class YourOrderPage implements OnInit {
   async calcPrice() {
     if (this.menuService.order.totalPrice === 0) {
       this.currentPrice = 0;
+      this.menuService.order.discountAmount = 0;
       return ;
     }
     if (this.discountType === 'P') {
+      this.menuService.order.discountAmount = this.menuService.order.totalPrice / 100 * this.discount;
       this.currentPrice = this.menuService.order.totalPrice / 100 * (100 - this.discount) + this.delivery;
     } else {
       if (this.discountType === 'F') {
@@ -75,14 +77,18 @@ export class YourOrderPage implements OnInit {
           const discount = this.discount;
           await this.commonService.presentAlert('Warning', 'Your discount code can not be applied on orders below £' + discount);
           this.discount = 0;
+          this.menuService.order.discountAmount = 0;
           return;
         } else {
           this.currentPrice = this.menuService.order.totalPrice - this.discount + this.delivery;
+          this.menuService.order.discountAmount = this.discount;
         }
       } else {
         if (this.menuService.order.totalPrice - this.discount + this.delivery > 0) {
+          this.menuService.order.discountAmount = this.discount;
           this.currentPrice = this.menuService.order.totalPrice - this.discount + this.delivery;
         } else {
+          this.menuService.order.discountAmount = 0;
           this.currentPrice = 0;
         }
       }
@@ -93,6 +99,8 @@ export class YourOrderPage implements OnInit {
     if (this.discountCode === '') {
       this.discount = 0;
       this.discountType = '';
+      this.menuService.order.couponId = 0;
+      this.menuService.order.discountAmount = 0;
       this.menuService.order.discount = this.discount;
       this.menuService.order.discountType = this.discountType;
       await this.storage.set(environment.storage.order, this.menuService.order);
@@ -110,6 +118,7 @@ export class YourOrderPage implements OnInit {
         this.discount = this.coupons[i].discount;
         this.menuService.order.discount = this.discount;
         this.menuService.order.discountType = this.discountType;
+        this.menuService.order.couponId = this.coupons[i].couponId;
         this.storage.set(environment.storage.order, this.menuService.order);
         this.calcPrice();
       }
@@ -119,6 +128,7 @@ export class YourOrderPage implements OnInit {
       this.discountType = '';
       this.menuService.order.discount = this.discount;
       this.menuService.order.discountType = this.discountType;
+      this.menuService.order.couponId = 0;
       await this.storage.set(environment.storage.order, this.menuService.order);
       await this.calcPrice();
       await this.commonService.presentAlert('We’re Sorry', 'Your discount code has expired or is invalid.');

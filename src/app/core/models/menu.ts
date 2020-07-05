@@ -76,6 +76,7 @@ export interface Special {
 }
 
 export interface Coupon {
+  couponId: number;
   code: string;
   type: string;
   discount: number;
@@ -127,6 +128,8 @@ export interface Order {
   totalCount: number;
   delivery?: number;
   discount: number;
+  couponId: number;
+  discountAmount: number;
   discountType: string;
   currentPrice?: number;
   items: Array<Item>;
