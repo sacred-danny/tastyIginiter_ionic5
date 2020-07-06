@@ -39,8 +39,8 @@ export class YourOrderPage implements OnInit {
 
   async ngOnInit() {
     this.coupons = associateArrayToArray(this.menuService.menu.coupons);
-    this.discount = this.menuService.order.discount;
-    this.discountType = this.menuService.order.discountType;
+    // this.discount = this.menuService.order.discount;
+    // this.discountType = this.menuService.order.discountType;
     if (this.menuService.menu.deliveryTotal === 0 || this.menuService.order.totalPrice === 0 && this.menuService.order.totalCount === 0) {
       this.delivery = 0;
     } else {
@@ -79,7 +79,9 @@ export class YourOrderPage implements OnInit {
         if (this.menuService.order.totalPrice - this.discount + this.delivery < 0) {
           const discount = this.discount;
           this.discountApplied = false;
-          await this.commonService.presentAlert('Warning', 'Your discount code can not be applied on orders below £' + discount);
+          if (this.discountCode !== '') {
+            await this.commonService.presentAlert('Warning', 'Your discount code can not be applied on orders below £' + discount);
+          }
           this.discount = 0;
           this.menuService.order.discountAmount = 0;
           return;
