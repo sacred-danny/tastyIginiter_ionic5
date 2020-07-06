@@ -25,6 +25,7 @@ export class YourOrderPage implements OnInit {
   currentPrice = 0;
   coupons: Array<Coupon>;
   discountCode = '';
+  discountApplied = false;
 
   constructor(
     public menuService: MenuService,
@@ -77,6 +78,7 @@ export class YourOrderPage implements OnInit {
       if (this.discountType === 'F') {
         if (this.menuService.order.totalPrice - this.discount + this.delivery < 0) {
           const discount = this.discount;
+          this.discountApplied = false;
           await this.commonService.presentAlert('Warning', 'Your discount code can not be applied on orders below £' + discount);
           this.discount = 0;
           this.menuService.order.discountAmount = 0;
@@ -128,7 +130,7 @@ export class YourOrderPage implements OnInit {
           couponId: coupon.couponId
         };
         const res: boolean = await this.menuService.validateCoupon(payload).toPromise();
-        await this.commonService.presentAlert('Success', 'Your discount has been applied.');
+        this.discountApplied = true;
         this.discountType = coupon.type;
         this.discount = coupon.discount;
         this.menuService.order.discount = this.discount;
@@ -136,6 +138,9 @@ export class YourOrderPage implements OnInit {
         this.menuService.order.couponId = coupon.couponId;
         await this.storage.set(environment.storage.order, this.menuService.order);
         await this.calcPrice();
+        if (this.discountApplied) {
+          await this.commonService.presentAlert('Success', 'Your discount has been applied.');
+        }
       } catch (e) {
         if (e.status === 500) {
           await this.commonService.presentAlert('Warning', 'Internal Server Error');
