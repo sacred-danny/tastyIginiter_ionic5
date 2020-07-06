@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 import { MenuService } from '../../core/services/menu.service';
+import { AuthService } from '../../core/services/auth.service';
 import { CommonService } from '../../core/services/common.service';
 import { Coupon, Item } from '../../core/models/menu';
 import { environment } from '../../../environments/environment';
@@ -27,6 +28,7 @@ export class YourOrderPage implements OnInit {
 
   constructor(
     public menuService: MenuService,
+    public authService: AuthService,
     public storage: Storage,
     public navController: NavController,
     public commonService: CommonService,
@@ -66,7 +68,7 @@ export class YourOrderPage implements OnInit {
     if (this.menuService.order.totalPrice === 0) {
       this.currentPrice = 0;
       this.menuService.order.discountAmount = 0;
-      return ;
+      return;
     }
     if (this.discountType === 'P') {
       this.menuService.order.discountAmount = this.menuService.order.totalPrice / 100 * this.discount;
@@ -110,20 +112,40 @@ export class YourOrderPage implements OnInit {
     }
 
     let found = false;
+    let coupon: Coupon;
     Object.keys(this.coupons).forEach(i => {
       if (this.coupons[i].code === this.discountCode) {
         found = true;
-        this.commonService.presentAlert('Success', 'Your discount has been applied.');
-        this.discountType = this.coupons[i].type;
-        this.discount = this.coupons[i].discount;
-        this.menuService.order.discount = this.discount;
-        this.menuService.order.discountType = this.discountType;
-        this.menuService.order.couponId = this.coupons[i].couponId;
-        this.storage.set(environment.storage.order, this.menuService.order);
-        this.calcPrice();
+        coupon = this.coupons[i];
       }
     });
-    if ( ! found) {
+
+    if (found) {
+      const loading = await this.commonService.showLoading('Please wait...');
+      try {
+        const payload = {
+          userId: this.authService.user.id,
+          couponId: coupon.couponId
+        };
+        const res: boolean = await this.menuService.validateCoupon(payload).toPromise();
+        await this.commonService.presentAlert('Success', 'Your discount has been applied.');
+        this.discountType = coupon.type;
+        this.discount = coupon.discount;
+        this.menuService.order.discount = this.discount;
+        this.menuService.order.discountType = this.discountType;
+        this.menuService.order.couponId = coupon.couponId;
+        await this.storage.set(environment.storage.order, this.menuService.order);
+        await this.calcPrice();
+      } catch (e) {
+        if (e.status === 500) {
+          await this.commonService.presentAlert('Warning', 'Internal Server Error');
+        } else {
+          await this.commonService.presentAlert('Warning', e.error.message);
+        }
+      } finally {
+        await loading.dismiss();
+      }
+    } else {
       this.discount = 0;
       this.discountType = '';
       this.menuService.order.discount = this.discount;

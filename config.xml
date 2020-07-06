@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.grubsup.foodapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.grubsup.foodapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Grubs Up</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -30,16 +30,22 @@
     <preference name="WKWebViewOnly" value="true" />
     <platform name="android">
         <access origin="*" />
-        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application android:networkSecurityConfig="@xml/network_security_config" />
             <application android:usesCleartextTraffic="true" />
         </edit-config>
         <resource-file src="resources/android/xml/network_security_config.xml" target="app/src/main/res/xml/network_security_config.xml" />
         <allow-intent href="market:*" />
-        <resource-file src="resources/android/notification/drawable-mdpi/icon.png" target="app/src/main/res/drawable-mdpi/icon.png" />
-        <resource-file src="resources/android/notification/drawable-hdpi/icon.png" target="app/src/main/res/drawable-hdpi/icon.png" />
-        <resource-file src="resources/android/notification/drawable-xhdpi/icon.png" target="app/src/main/res/drawable-xhdpi/icon.png" />
-        <resource-file src="resources/android/notification/drawable-xxxhdpi/icon.png" target="app/src/main/res/drawable-xxxhdpi/icon.png" />
+        <resource-file src="resources/android/notification/drawable-xhdpi/fcm_push_icon.png" target="app/src/main/res/drawable/fcm_push_icon.png" />
+        <resource-file src="resources/android/notification/drawable-hdpi/fcm_push_icon.png" target="platforms/android/res/drawable-hdpi/fcm_push_icon.png" />
+        <resource-file src="resources/android/notification/drawable-mdpi/fcm_push_icon.png" target="platforms/android/res/drawable-mdpi/fcm_push_icon.png" />
+        <resource-file src="resources/android/notification/drawable-xhdpi/fcm_push_icon.png" target="platforms/android/res/drawable-xhdpi/fcm_push_icon.png" />
+        <resource-file src="resources/android/notification/drawable-xxhdpi/fcm_push_icon.png" target="platforms/android/res/drawable-xxhdpi/fcm_push_icon.png" />
+        <resource-file src="resources/android/notification/drawable-xxxhdpi/fcm_push_icon.png" target="platforms/android/res/drawable-xxxhdpi/fcm_push_icon.png" />
+        <resource-file src="colors.xml" target="app/src/main/res/values/colors.xml" />
+        <config-file parent="/manifest/application/" target="app/src/main/AndroidManifest.xml">
+            <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/colorPrimary" />
+        </config-file>
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="resources/android/icon/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="resources/android/icon/drawable-hdpi-icon.png" />

@@ -197,8 +197,21 @@ export class AuthService {
     try {
       const payload = {
         user: this.user,
-        locationId
+        locationId,
+        fcmToken: '',
+        deviceType: ''
       };
+      const fcmToken = await this.storage.get(environment.storage.notificationToken);
+      let deviceType = '';
+      if (this.platform.is('ios')) {
+        deviceType = 'ios';
+      } else if (this.platform.is('android')) {
+        deviceType = 'android';
+      }
+      if (fcmToken) {
+        payload.fcmToken = fcmToken;
+        payload.deviceType = deviceType;
+      }
       const res = await this.http.post<Location>(environment.apiURL + '/auth/setLocation', payload).toPromise();
       await this.storage.set(environment.storage.locations, res);
       return res;

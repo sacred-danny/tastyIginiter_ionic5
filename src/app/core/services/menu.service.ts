@@ -50,6 +50,10 @@ export class MenuService {
     return this.http.post<Menu>(environment.apiURL + '/home/menu', payload);
   }
 
+  validateCoupon(payload): Observable<boolean> {
+    return this.http.post<boolean>(environment.apiURL + '/home/validateCoupon', payload);
+  }
+
   getDeatail(payload): Observable<any> {
     return this.http.post<any>(environment.apiURL + '/home/menuDetail', payload).catch((error: any) => {
       throw error;
